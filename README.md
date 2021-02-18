@@ -5,6 +5,8 @@ Until now only preregistration and LAMP as model is supported!
 
 It is important, that in the first row in Excel is a name. 
 The programm starts processing entries at A2.
+You can enter as much items you want. 
+The software creates an XML node for each item.
 
 You can use the source.xlsx as template.
 
