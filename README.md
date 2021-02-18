@@ -9,7 +9,7 @@ The programm starts processing entries at A2.
 You can use the source.xlsx as template.
 
 Release 1.0.1
-. LogFile
-. BugFixes
-. Waiting Cursor
-. Save File Dialog imporved
+- LogFile
+- BugFixes
+- Waiting Cursor
+- Save File Dialog imporved
