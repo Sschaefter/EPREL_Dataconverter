@@ -54,7 +54,7 @@ Public Class Form1
             If state = True Then
                 Exit Sub
             End If
-            'PREREGISTRATION()
+            PREREGISTRATION()
             If state = True Then
                 Exit Sub
             End If
@@ -121,12 +121,11 @@ Public Class Form1
         Dim decl As XDeclaration = New XDeclaration(encoding:="UTF-8", standalone:="yes", version:="1.0")
         doc.Declaration = decl
 
-
-
         Dim REGISTRATION As XElement = <ns3:ProductModelRegistrationRequest xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" REQUEST_ID="nothing"/>
 
         Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
         REQUEST_ID.Value = Txt_Request.Text
+
         '-product Operation
         Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
         REGISTRATION.Add(productOperation)
@@ -469,67 +468,68 @@ Public Class Form1
     'End Sub
 
 
-    'Private Sub PREREGISTRATION()
+    Private Sub PREREGISTRATION()
 
-    '    'SELECT_INPUT()
+        'SELECT_INPUT()
 
-    '    Dim decl As XmlDeclaration
-    '    decl = doc.CreateXmlDeclaration("1.0", Nothing, Nothing)
-    '    decl.Encoding = "UTF-8"
-    '    decl.Standalone = "yes"
+        Dim decl As XDeclaration = New XDeclaration(encoding:="UTF-8", standalone:="yes", version:="1.0")
+        doc.Declaration = decl
 
 
-    '    Dim ProductModelRegistrationRequest As XmlNode = doc.CreateNode(XmlNodeType.Element, "ns3", "ProductModelRegistrationRequest", "http://eprel.ener.ec.europa.eu/services/productModelService/modelRegistrationService/v2")
-    '    doc.AppendChild(ProductModelRegistrationRequest)
 
-    '    doc.InsertBefore(decl, ProductModelRegistrationRequest)
+        Dim REGISTRATION As XElement = <ns3:ProductModelRegistrationRequest xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" REQUEST_ID="nothing"/>
 
-    '    Dim REQUEST_ID As XmlAttribute = doc.CreateAttribute("REQUEST_ID")
-    '    REQUEST_ID.Value = Txt_Request.Text
-    '    doc.DocumentElement.SetAttributeNode(REQUEST_ID)
+        Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
+        REQUEST_ID.Value = Txt_Request.Text
 
-    '    For i = 0 To dummy - 2
-    '        Dim productOperation As XmlNode = doc.CreateNode("element", "productOperation", "")
-    '        ProductModelRegistrationRequest.AppendChild(productOperation)
+        For i = 0 To dummy - 2
+            '-Product Operation
+            Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
+            REGISTRATION.Add(productOperation)
+            Dim OPERATION_TYPE As XAttribute = productOperation.Attribute("OPERATION_TYPE")
+            OPERATION_TYPE.Value = CB_OperationType.SelectedItem
+            Dim OPERATION_ID As XAttribute = productOperation.Attribute("OPERATION_ID")
+            OPERATION_ID.Value = i
 
-    '        Dim OPERATION_TYPE As XmlNode = doc.CreateNode(XmlNodeType.Attribute, "OPERATION_TYPE", "")
-    '        'OPERATION_TYPE.Value = Txt_OperationType.Text
-    '        OPERATION_TYPE.Value = CB_OperationType.SelectedItem
-    '        productOperation.Attributes.SetNamedItem(OPERATION_TYPE)
-    '        Dim OPERATION_ID As XmlNode = doc.CreateNode(XmlNodeType.Attribute, "OPERATION_ID", "")
-    '        OPERATION_ID.Value = i
-    '        productOperation.Attributes.SetNamedItem(OPERATION_ID)
+            '-Model Verion
+            Dim MODEL_VERSION As XElement = <MODEL_VERSION/>
+            productOperation.Add(MODEL_VERSION)
 
-    '        Dim MODEL_VERSION As XmlNode = doc.CreateNode("element", "MODEL_VERSION", "")
-    '        productOperation.AppendChild(MODEL_VERSION)
-    '        Dim MODEL_IDENTIFIER As XmlElement = doc.CreateElement("MODEL_IDENTIFIER")
-    '        MODEL_IDENTIFIER.InnerText = items(i)
-    '        MODEL_VERSION.AppendChild(MODEL_IDENTIFIER)
-    '        Dim TRADEMARK_REFERENCE As XmlElement = doc.CreateElement("TRADEMARK_REFERENCE")
-    '        TRADEMARK_REFERENCE.InnerText = Txt_TrademarkRef.Text
-    '        MODEL_VERSION.AppendChild(TRADEMARK_REFERENCE)
-    '        Dim DELEGATED_ACT As XmlElement = doc.CreateElement("DELEGATED_ACT")
-    '        DELEGATED_ACT.InnerText = "EU_2019_2015"
-    '        MODEL_VERSION.AppendChild(DELEGATED_ACT)
-    '        Dim PRODUCT_GROUP As XmlElement = doc.CreateElement("PRODUCT_GROUP")
-    '        PRODUCT_GROUP.InnerText = "LAMP"
-    '        MODEL_VERSION.AppendChild(PRODUCT_GROUP)
+            '-Model Identifier
+            Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
+            MODEL_IDENTIFIER.Value = items(i)
+            MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
-    '        productOperation.AppendChild(MODEL_VERSION)
+            '-Supplier
+            Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+            SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+            MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
 
-    '        Form2.LB_Log.Items.Add(MODEL_VERSION.InnerText + " - Success!")
+            '-Delegated Act
+            Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
+            DELEGATED_ACT.Value = "EU_2019_2015"
+            MODEL_VERSION.Add(DELEGATED_ACT)
 
+            '-Product Group
+            Dim PRODUCT_GROUP As XElement = <PRODUCT_GROUP/>
+            PRODUCT_GROUP.Value = "LAMP"
+            MODEL_VERSION.Add(PRODUCT_GROUP)
 
-    '    Next
-
-    '    Console.WriteLine("Display the modified XML...")
-    '    Console.WriteLine(doc)
-    '    doc.Save(Console.Out)
-
-    '    'OUTPUT()
+            Form2.LB_Log.Items.Add(MODEL_VERSION.Value + " - Success!")
 
 
-    'End Sub
+        Next
+
+        doc.Add(REGISTRATION)
+
+        Console.WriteLine("Display the modified XML...")
+        Console.WriteLine(doc)
+        doc.Save(Console.Out)
+
+        'OUTPUT()
+
+
+    End Sub
     Public Sub OUTPUT()
         ''------RELEASE!--------
         'Dim dir As String = Directory.GetCurrentDirectory
