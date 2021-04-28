@@ -30,11 +30,14 @@ Partial Class Form1
         Me.Txt_Request = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Txt_ContactRef = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.CB_ReasonChange = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.CheckB_Log = New System.Windows.Forms.CheckBox()
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.CB_ReasonChange = New System.Windows.Forms.ComboBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -92,6 +95,9 @@ Partial Class Form1
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.Controls.Add(Me.Txt_ContactRef)
+        Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.CB_ReasonChange)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.CheckB_Log)
@@ -103,13 +109,49 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(45, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(281, 226)
+        Me.Panel1.Size = New System.Drawing.Size(281, 239)
         Me.Panel1.TabIndex = 7
+        '
+        'Txt_ContactRef
+        '
+        Me.Txt_ContactRef.Location = New System.Drawing.Point(23, 180)
+        Me.Txt_ContactRef.Name = "Txt_ContactRef"
+        Me.Txt_ContactRef.Size = New System.Drawing.Size(221, 20)
+        Me.Txt_ContactRef.TabIndex = 12
+        Me.Txt_ContactRef.Text = "REF001"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(23, 164)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(97, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Contact Reference"
+        '
+        'CB_ReasonChange
+        '
+        Me.CB_ReasonChange.Enabled = False
+        Me.CB_ReasonChange.FormattingEnabled = True
+        Me.CB_ReasonChange.Items.AddRange(New Object() {"CORRECT_TYPO", "CHANGE_IN_STANDARDS", "LABEL_SCALE_RANGE_CHANGE", "CHANGE_REQUEST_BY_MSA", "ADDED_INFORMATION_NO_EFFECT_ON_DECLARATION", "REQUEST_CHANGE_BY_EXTERNAL_BODY"})
+        Me.CB_ReasonChange.Location = New System.Drawing.Point(23, 102)
+        Me.CB_ReasonChange.Name = "CB_ReasonChange"
+        Me.CB_ReasonChange.Size = New System.Drawing.Size(221, 21)
+        Me.CB_ReasonChange.TabIndex = 10
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(23, 86)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(99, 13)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Reason for Change"
         '
         'CheckB_Log
         '
         Me.CheckB_Log.AutoSize = True
-        Me.CheckB_Log.Location = New System.Drawing.Point(23, 168)
+        Me.CheckB_Log.Location = New System.Drawing.Point(23, 206)
         Me.CheckB_Log.Name = "CheckB_Log"
         Me.CheckB_Log.Size = New System.Drawing.Size(44, 17)
         Me.CheckB_Log.TabIndex = 8
@@ -136,24 +178,14 @@ Partial Class Form1
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "©Mario Planeck, 18.02.2021"
         '
-        'Label4
+        'Button2
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(23, 86)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(99, 13)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Reason for Change"
-        '
-        'CB_ReasonChange
-        '
-        Me.CB_ReasonChange.Enabled = False
-        Me.CB_ReasonChange.FormattingEnabled = True
-        Me.CB_ReasonChange.Items.AddRange(New Object() {"CORRECT_TYPO", "CHANGE_IN_STANDARDS", "LABEL_SCALE_RANGE_CHANGE", "CHANGE_REQUEST_BY_MSA", "ADDED_INFORMATION_NO_EFFECT_ON_DECLARATION", "REQUEST_CHANGE_BY_EXTERNAL_BODY"})
-        Me.CB_ReasonChange.Location = New System.Drawing.Point(23, 102)
-        Me.CB_ReasonChange.Name = "CB_ReasonChange"
-        Me.CB_ReasonChange.Size = New System.Drawing.Size(221, 21)
-        Me.CB_ReasonChange.TabIndex = 10
+        Me.Button2.Location = New System.Drawing.Point(169, 206)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 13
+        Me.Button2.Text = "Contact"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -195,4 +227,7 @@ Partial Class Form1
     Friend WithEvents CheckB_Log As CheckBox
     Friend WithEvents CB_ReasonChange As ComboBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents Txt_ContactRef As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Button2 As Button
 End Class

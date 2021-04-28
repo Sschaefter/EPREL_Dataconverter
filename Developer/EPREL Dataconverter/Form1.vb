@@ -71,7 +71,21 @@ Public Class Form1
     Public _LED_MLS_FLICKER_METRIC() As String
     Public _LED_MLS_STROBOSCOPIC_EFFECT_METRIC() As String
 
-    Public dummy As Integer
+    Structure _TECHNICAL_DOCUMENTATION
+        Public _TD_MODEL_IDENTIFIER As String
+        Public _TD_DESCRIPTION As String
+        Public _TD_LANGUAGE As String
+        Public _TD_ADDITIONAL_PART As Boolean
+        Public _TD_CALCULATIONS As Boolean
+        Public _TD_GENERAL_DESCRIPTION As Boolean
+        Public _TD_MESURED_TECHNICAL_PARAMETERS As Boolean
+        Public _TD_REFERENCES_TO_HARMONIZED_STANDARDS As Boolean
+        Public _TD_SPECIFIC_PRECAUTIONS As Boolean
+        Public _TD_FILE_NAME As String
+    End Structure
+    Public _TD() As _TECHNICAL_DOCUMENTATION
+
+    Public dummy, dummy2 As Integer
     'Public doc As XmlDocument = New XmlDocument()
     Public doc As XDocument = New XDocument()
     Public state As Boolean = False
@@ -91,6 +105,12 @@ Public Class Form1
         Cursor.Current = Cursors.WaitCursor
 
         If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Then
+            Select Case MsgBox("Please make shure, that all attachments are named liked in the source table and are located in one folder!", vbOKCancel)
+                Case MsgBoxResult.Cancel
+                    Exit Sub
+                Case MsgBoxResult.Ok
+                    Exit Select
+            End Select
             Form2.LB_Log.Items.Add("PREREGISTER_PRODUCT_MODEL")
             SELECT_INPUT()
             If state = True Then
@@ -215,24 +235,164 @@ Public Class Form1
             ON_MARKET_START_DATE.Value = _ON_MARKET_START_DATE(i)
             MODEL_VERSION.Add(ON_MARKET_START_DATE)
 
-            Dim TECHNICAL_DOCUMENTATION As XElement = <TECHNICAL_DOCUMENTATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TechnicalDocumentationDetail"/>
-            Dim DOCUMENT As XElement =
-            <DOCUMENT>
-                <ns2:DESCRIPTION>test conditions</ns2:DESCRIPTION>
-                <LANGUAGE>EN</LANGUAGE>
-                <TECHNICAL_PART>TESTING_CONDITIONS</TECHNICAL_PART>
-                <TECHNICAL_PART>CALCULATIONS</TECHNICAL_PART>
-                <TECHNICAL_PART>GENERAL_DESCRIPTION</TECHNICAL_PART>
-                <TECHNICAL_PART>MESURED_TECHNICAL_PARAMETERS</TECHNICAL_PART>
-                <TECHNICAL_PART>REFERENCES_TO_HARMONISED_STANDARDS</TECHNICAL_PART>
-                <TECHNICAL_PART>SPECIFIC_PRECAUTIONS</TECHNICAL_PART>
-                <FILE_PATH>/attachments/testConditions.docx</FILE_PATH>
-            </DOCUMENT>
+            Try
+                Dim flag As Boolean = False
+                Dim test As String = MODEL_IDENTIFIER.Value
+                Dim TECHNICAL_DOCUMENTATION As XElement = <TECHNICAL_DOCUMENTATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TechnicalDocumentationDetail"/>
+                For j = 0 To dummy2
+                    If _TD(j)._TD_MODEL_IDENTIFIER = test Then
+                        Dim DOCUMENT As XElement = <DOCUMENT/>
 
-            TECHNICAL_DOCUMENTATION.Add(DOCUMENT)
-            MODEL_VERSION.Add(TECHNICAL_DOCUMENTATION)
+                        Dim DESCRIPTION As XElement = <ns2:DESCRIPTION/>
+                        DESCRIPTION.Value = _TD(j)._TD_DESCRIPTION
+                        DOCUMENT.Add(DESCRIPTION)
 
-            '-Kontakt (optional)
+                        Dim lng As String = _TD(j)._TD_LANGUAGE
+
+                        For Each elmnt In lng.Split(";")
+                            Dim LANGUAGE As XElement = <LANGUAGE/>
+                            LANGUAGE.Value = elmnt
+                            DOCUMENT.Add(New XElement(LANGUAGE))
+                        Next
+
+                        Dim TECHNICAL_PART As XElement = <TECHNICAL_PART/>
+
+                        If _TD(j)._TD_ADDITIONAL_PART = True Then
+                            TECHNICAL_PART.Value = "ADDITIONAL_PART"
+                            DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                        End If
+
+                        If _TD(j)._TD_CALCULATIONS = True Then
+                            TECHNICAL_PART.Value = "CALCULATIONS"
+                            DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                        End If
+
+                        If _TD(j)._TD_GENERAL_DESCRIPTION = True Then
+                            TECHNICAL_PART.Value = "GENERAL_DESCRIPTION"
+                            DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                        End If
+
+                        If _TD(j)._TD_MESURED_TECHNICAL_PARAMETERS = True Then
+                            TECHNICAL_PART.Value = "MESURED_TECHNICAL_PARAMETERS"
+                            DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                        End If
+
+                        If _TD(j)._TD_REFERENCES_TO_HARMONIZED_STANDARDS = True Then
+                            TECHNICAL_PART.Value = "REFERENCES_TO_HARMONISED_STANDARDS"
+                            DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                        End If
+
+                        If _TD(j)._TD_SPECIFIC_PRECAUTIONS = True Then
+                            TECHNICAL_PART.Value = "SPECIFIC_PRECAUTIONS"
+                            DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                        End If
+
+                        Dim FILE_PATH As XElement = <FILE_PATH/>
+                        FILE_PATH.Value = "/attachments/" & _TD(j)._TD_FILE_NAME
+                        DOCUMENT.Add(FILE_PATH)
+
+                        TECHNICAL_DOCUMENTATION.Add(DOCUMENT)
+                        flag = True
+                    End If
+                Next
+                If flag = True Then
+                    MODEL_VERSION.Add(TECHNICAL_DOCUMENTATION)
+                End If
+            Finally
+
+            End Try
+
+
+
+            '-Kontakt
+
+            Select Case Form_Contact.CB_ContactDetails.Checked
+                Case False
+                    Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ContactByReference"/>
+                    Dim CONTACT_REFERENCE As XElement = <CONTACT_REFERENCE/>
+                    CONTACT_REFERENCE.Value = Txt_ContactRef.Text
+                    CONTACT_DETAILS.Add(CONTACT_REFERENCE)
+                    MODEL_VERSION.Add(CONTACT_DETAILS)
+                Case True
+                    Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ModelSpecificContactDetails"/>
+                    Dim CONTACT_NAME As XElement = <CONTACT_NAME/>
+                    CONTACT_NAME.Value = Form_Contact.TB_ContactName.Text
+                    CONTACT_DETAILS.Add(CONTACT_NAME)
+
+                    Dim FIRST_NAME As XElement = <FIRST_NAME/>
+                    FIRST_NAME.Value = Form_Contact.TB_FirstName.Text
+                    CONTACT_DETAILS.Add(FIRST_NAME)
+
+                    Dim LAST_NAME As XElement = <LAST_NAME/>
+                    LAST_NAME.Value = Form_Contact.TB_LastName.Text
+                    CONTACT_DETAILS.Add(LAST_NAME)
+
+                    Dim PHONE_NUMBER As XElement = <PHONE_NUMBER/>
+                    PHONE_NUMBER.Value = Form_Contact.TB_PhoneNumber.Text
+                    CONTACT_DETAILS.Add(PHONE_NUMBER)
+
+                    If Form_Contact.TB_Email.Text <> "" Then
+                        Dim EMAIL_ADDRESS As XElement = <EMAIL_ADDRESS/>
+                        EMAIL_ADDRESS.Value = Form_Contact.TB_Email.Text
+                        CONTACT_DETAILS.Add(EMAIL_ADDRESS)
+                    End If
+
+                    If Form_Contact.TB_URL.Text <> "" Then
+                        Dim URL As XElement = <URL/>
+                        URL.Value = Form_Contact.TB_URL.Text
+                        CONTACT_DETAILS.Add(URL)
+                    End If
+
+                    With Form_Contact
+                        If .TB_StreetName.Text <> "" Or .TB_Number.Text <> "" Or .TB_City.Text <> "" Or .TB_Municipality.Text <> "" Or .TB_Province.Text <> "" Or .TB_Postcode.Text <> "" Or .CBox_Country.SelectedItem <> "" Then
+                            Dim ADDRESS As XElement = <ADDRESS xsi.type="ns5:DetailedAddress"/>
+
+                            If .TB_StreetName.Text <> "" Then
+                                Dim STREET_NAME As XElement = <STREET_NAME/>
+                                STREET_NAME.Value = .TB_StreetName.Text
+                                ADDRESS.Add(STREET_NAME)
+                            End If
+
+                            If .TB_Number.Text <> "" Then
+                                Dim STREET_NUMBER As XElement = <STREET_NUMBER/>
+                                STREET_NUMBER.Value = .TB_Number.Text
+                                ADDRESS.Add(STREET_NUMBER)
+                            End If
+
+                            If .TB_City.Text <> "" Then
+                                Dim CITY As XElement = <CITY/>
+                                CITY.Value = .TB_City.Text
+                                ADDRESS.Add(CITY)
+                            End If
+
+                            If .TB_Municipality.Text <> "" Then
+                                Dim MUNICIPALITY As XElement = <MUNICIPALITY/>
+                                MUNICIPALITY.Value = .TB_Municipality.Text
+                                ADDRESS.Add(MUNICIPALITY)
+                            End If
+
+                            If .TB_Province.Text <> "" Then
+                                Dim PROVINCE As XElement = <PROVINCE/>
+                                PROVINCE.Value = .TB_Province.Text
+                                ADDRESS.Add(PROVINCE)
+                            End If
+
+                            If .TB_Postcode.Text <> "" Then
+                                Dim POSTCODE As XElement = <POSTCODE/>
+                                POSTCODE.Value = .TB_Postcode.Text
+                                ADDRESS.Add(POSTCODE)
+                            End If
+
+                            If .CBox_Country.SelectedItem <> "" Then
+                                Dim COUNTRY As XElement = <COUNTRY/>
+                                COUNTRY.Value = .CBox_Country.SelectedItem
+                                ADDRESS.Add(COUNTRY)
+                            End If
+                            CONTACT_DETAILS.Add(ADDRESS)
+                        End If
+                    End With
+                    MODEL_VERSION.Add(CONTACT_DETAILS)
+            End Select
 
             '-Product Group Detail
             Dim PRODUCT_GROUP_DETAIL As XElement = <PRODUCT_GROUP_DETAIL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/productModel/productGroups/lightsource/v1" xsi:type="ns5:LightSource"/>
@@ -300,18 +460,18 @@ Public Class Form1
                 Case "STEPS"
                     'Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
                     CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_1(i)
-                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                    PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
                     CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_2(i)
-                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                    PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
                     CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_3(i)
-                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                    PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
                     CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_4(i)
-                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                    PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
                 Case "RANGE"
                     CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_MIN(i)
-                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                    PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
                     CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_MAX(i)
-                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                    PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
             End Select
 
 
@@ -358,7 +518,7 @@ Public Class Form1
             PRODUCT_GROUP_DETAIL.Add(DIMENSION_DEPTH)
 
             Dim SPECTRAL_POWER_DISTRIBUTION_IMAGE As XElement = <SPECTRAL_POWER_DISTRIBUTION_IMAGE/>
-            SPECTRAL_POWER_DISTRIBUTION_IMAGE.Value = "./SPECTRAL/" & _SPECTRAL_POWER_DISTRIBUTION_IMAGE(i)
+            SPECTRAL_POWER_DISTRIBUTION_IMAGE.Value = "/attachments/" & _SPECTRAL_POWER_DISTRIBUTION_IMAGE(i)
             PRODUCT_GROUP_DETAIL.Add(SPECTRAL_POWER_DISTRIBUTION_IMAGE)
 
             Dim CLAIM_EQUIVALENT_POWER As XElement = <CLAIM_EQUIVALENT_POWER/>
@@ -428,60 +588,61 @@ Public Class Form1
 
         'For i = 0 To dummy - 2
         '-product Operation
+
         Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing" REASON_FOR_CHANGE="nothing"/>
-            REGISTRATION.Add(productOperation)
-            Dim OPERATION_TYPE As XAttribute = productOperation.Attribute("OPERATION_TYPE")
-            OPERATION_TYPE.Value = CB_OperationType.SelectedItem
-            Dim OPERATION_ID As XAttribute = productOperation.Attribute("OPERATION_ID")
-            OPERATION_ID.Value = "1"
-            Dim REASON_FOR_CHANGE As XAttribute = productOperation.Attribute("REASON_FOR_CHANGE")
-            REASON_FOR_CHANGE.Value = "CORRECT_TYPO"
+        REGISTRATION.Add(productOperation)
+        Dim OPERATION_TYPE As XAttribute = productOperation.Attribute("OPERATION_TYPE")
+        OPERATION_TYPE.Value = CB_OperationType.SelectedItem
+        Dim OPERATION_ID As XAttribute = productOperation.Attribute("OPERATION_ID")
+        OPERATION_ID.Value = "1"
+        Dim REASON_FOR_CHANGE As XAttribute = productOperation.Attribute("REASON_FOR_CHANGE")
+        REASON_FOR_CHANGE.Value = "CORRECT_TYPO"
 
 
-            '-Model Version
-            Dim MODEL_VERSION As XElement = <MODEL_VERSION/>
-            productOperation.Add(MODEL_VERSION)
+        '-Model Version
+        Dim MODEL_VERSION As XElement = <MODEL_VERSION/>
+        productOperation.Add(MODEL_VERSION)
 
-            '-EPREL_MODEL_REGISTRATION_NUMBER
-            Dim EPREL_MODEL_REGISTRATION_NUMBER As XElement = <EPREL_MODEL_REGISTRATION_NUMBER/>
-            EPREL_MODEL_REGISTRATION_NUMBER.Value = "12345"
-            MODEL_VERSION.Add(EPREL_MODEL_REGISTRATION_NUMBER)
+        '-EPREL_MODEL_REGISTRATION_NUMBER
+        Dim EPREL_MODEL_REGISTRATION_NUMBER As XElement = <EPREL_MODEL_REGISTRATION_NUMBER/>
+        EPREL_MODEL_REGISTRATION_NUMBER.Value = "12345"
+        MODEL_VERSION.Add(EPREL_MODEL_REGISTRATION_NUMBER)
 
-            '-Model Identifier
-            Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
-            MODEL_IDENTIFIER.Value = "Test"
-            MODEL_VERSION.Add(MODEL_IDENTIFIER)
+        '-Model Identifier
+        Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
+        MODEL_IDENTIFIER.Value = "Test"
+        MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
-            '-Supplier
-            Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-            SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-            MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+        '-Supplier
+        Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+        SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+        MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
 
-            '-Delegated Act
-            Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
-            DELEGATED_ACT.Value = "EU_2019_2015"
-            MODEL_VERSION.Add(DELEGATED_ACT)
+        '-Delegated Act
+        Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
+        DELEGATED_ACT.Value = "EU_2019_2015"
+        MODEL_VERSION.Add(DELEGATED_ACT)
 
-            '-Product Group
-            Dim PRODUCT_GROUP As XElement = <PRODUCT_GROUP/>
-            PRODUCT_GROUP.Value = "LAMP"
-            MODEL_VERSION.Add(PRODUCT_GROUP)
+        '-Product Group
+        Dim PRODUCT_GROUP As XElement = <PRODUCT_GROUP/>
+        PRODUCT_GROUP.Value = "LAMP"
+        MODEL_VERSION.Add(PRODUCT_GROUP)
 
-            '-Energy Label
-            Dim ENERGY_LABEL As XElement = <ENERGY_LABEL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" xsi:type="ns5:GeneratedEnergyLabel"/>
-            Dim CONSIDER_GENERATED_LABEL_AS_PROVIDED As XElement = <CONSIDER_GENERATED_LABEL_AS_PROVIDED/>
-            CONSIDER_GENERATED_LABEL_AS_PROVIDED.Value = "true"
-            ENERGY_LABEL.Add(CONSIDER_GENERATED_LABEL_AS_PROVIDED)
-            MODEL_VERSION.Add(ENERGY_LABEL)
+        '-Energy Label
+        Dim ENERGY_LABEL As XElement = <ENERGY_LABEL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" xsi:type="ns5:GeneratedEnergyLabel"/>
+        Dim CONSIDER_GENERATED_LABEL_AS_PROVIDED As XElement = <CONSIDER_GENERATED_LABEL_AS_PROVIDED/>
+        CONSIDER_GENERATED_LABEL_AS_PROVIDED.Value = "true"
+        ENERGY_LABEL.Add(CONSIDER_GENERATED_LABEL_AS_PROVIDED)
+        MODEL_VERSION.Add(ENERGY_LABEL)
 
 
-            '---Market Start Date YYYY-MM-DD
-            Dim ON_MARKET_START_DATE As XElement = <ON_MARKET_START_DATE/>
-            ON_MARKET_START_DATE.Value = "2021-05-01"
-            MODEL_VERSION.Add(ON_MARKET_START_DATE)
+        '---Market Start Date YYYY-MM-DD
+        Dim ON_MARKET_START_DATE As XElement = <ON_MARKET_START_DATE/>
+        ON_MARKET_START_DATE.Value = "2021-05-01"
+        MODEL_VERSION.Add(ON_MARKET_START_DATE)
 
-            Dim TECHNICAL_DOCUMENTATION As XElement = <TECHNICAL_DOCUMENTATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TechnicalDocumentationDetail"/>
-            Dim DOCUMENT As XElement =
+        Dim TECHNICAL_DOCUMENTATION As XElement = <TECHNICAL_DOCUMENTATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TechnicalDocumentationDetail"/>
+        Dim DOCUMENT As XElement =
             <DOCUMENT>
                 <ns2:DESCRIPTION>test conditions</ns2:DESCRIPTION>
                 <LANGUAGE>EN</LANGUAGE>
@@ -494,148 +655,148 @@ Public Class Form1
                 <FILE_PATH>/attachments/testConditions.docx</FILE_PATH>
             </DOCUMENT>
 
-            TECHNICAL_DOCUMENTATION.Add(DOCUMENT)
-            MODEL_VERSION.Add(TECHNICAL_DOCUMENTATION)
+        TECHNICAL_DOCUMENTATION.Add(DOCUMENT)
+        MODEL_VERSION.Add(TECHNICAL_DOCUMENTATION)
 
-            '-Kontakt (optional)
+        '-Kontakt (optional)
 
-            '-Product Group Detail
-            Dim PRODUCT_GROUP_DETAIL As XElement = <PRODUCT_GROUP_DETAIL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/productModel/productGroups/lightsource/v1" xsi:type="ns5:LightSource"/>
-            Dim LIGHTING_TECHNOLOGY As XElement = <LIGHTING_TECHNOLOGY/>
-            LIGHTING_TECHNOLOGY.Value = "LED"
-            PRODUCT_GROUP_DETAIL.Add(LIGHTING_TECHNOLOGY)
+        '-Product Group Detail
+        Dim PRODUCT_GROUP_DETAIL As XElement = <PRODUCT_GROUP_DETAIL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/productModel/productGroups/lightsource/v1" xsi:type="ns5:LightSource"/>
+        Dim LIGHTING_TECHNOLOGY As XElement = <LIGHTING_TECHNOLOGY/>
+        LIGHTING_TECHNOLOGY.Value = "LED"
+        PRODUCT_GROUP_DETAIL.Add(LIGHTING_TECHNOLOGY)
 
-            Dim CAP_TYPE As XElement = <CAP_TYPE/>
-            CAP_TYPE.Value = "mycaptype"
-            PRODUCT_GROUP_DETAIL.Add(CAP_TYPE)
+        Dim CAP_TYPE As XElement = <CAP_TYPE/>
+        CAP_TYPE.Value = "mycaptype"
+        PRODUCT_GROUP_DETAIL.Add(CAP_TYPE)
 
-            Dim DIRECTIONAL As XElement = <DIRECTIONAL/>
-            DIRECTIONAL.Value = "DLS"
-            PRODUCT_GROUP_DETAIL.Add(DIRECTIONAL)
+        Dim DIRECTIONAL As XElement = <DIRECTIONAL/>
+        DIRECTIONAL.Value = "DLS"
+        PRODUCT_GROUP_DETAIL.Add(DIRECTIONAL)
 
-            Dim MAINS As XElement = <MAINS/>
-            MAINS.Value = "MLS"
-            PRODUCT_GROUP_DETAIL.Add(MAINS)
+        Dim MAINS As XElement = <MAINS/>
+        MAINS.Value = "MLS"
+        PRODUCT_GROUP_DETAIL.Add(MAINS)
 
-            Dim CONNECTED_LIGHT_SOURCE As XElement = <CONNECTED_LIGHT_SOURCE/>
-            CONNECTED_LIGHT_SOURCE.Value = "true"
-            PRODUCT_GROUP_DETAIL.Add(CONNECTED_LIGHT_SOURCE)
+        Dim CONNECTED_LIGHT_SOURCE As XElement = <CONNECTED_LIGHT_SOURCE/>
+        CONNECTED_LIGHT_SOURCE.Value = "true"
+        PRODUCT_GROUP_DETAIL.Add(CONNECTED_LIGHT_SOURCE)
 
-            Dim COLOUR_TUNEABLE_LIGHT_SOURCE As XElement = <COLOUR_TUNEABLE_LIGHT_SOURCE/>
-            COLOUR_TUNEABLE_LIGHT_SOURCE.Value = "true"
-            PRODUCT_GROUP_DETAIL.Add(COLOUR_TUNEABLE_LIGHT_SOURCE)
+        Dim COLOUR_TUNEABLE_LIGHT_SOURCE As XElement = <COLOUR_TUNEABLE_LIGHT_SOURCE/>
+        COLOUR_TUNEABLE_LIGHT_SOURCE.Value = "true"
+        PRODUCT_GROUP_DETAIL.Add(COLOUR_TUNEABLE_LIGHT_SOURCE)
 
-            Dim HIGH_LUMINANCE_LIGHT_SOURCE As XElement = <HIGH_LUMINANCE_LIGHT_SOURCE/>
-            HIGH_LUMINANCE_LIGHT_SOURCE.Value = "true"
-            PRODUCT_GROUP_DETAIL.Add(HIGH_LUMINANCE_LIGHT_SOURCE)
+        Dim HIGH_LUMINANCE_LIGHT_SOURCE As XElement = <HIGH_LUMINANCE_LIGHT_SOURCE/>
+        HIGH_LUMINANCE_LIGHT_SOURCE.Value = "true"
+        PRODUCT_GROUP_DETAIL.Add(HIGH_LUMINANCE_LIGHT_SOURCE)
 
-            Dim ANTI_GLARE_SHIELD As XElement = <ANTI_GLARE_SHIELD/>
-            ANTI_GLARE_SHIELD.Value = "true"
-            PRODUCT_GROUP_DETAIL.Add(ANTI_GLARE_SHIELD)
+        Dim ANTI_GLARE_SHIELD As XElement = <ANTI_GLARE_SHIELD/>
+        ANTI_GLARE_SHIELD.Value = "true"
+        PRODUCT_GROUP_DETAIL.Add(ANTI_GLARE_SHIELD)
 
-            Dim DIMMABLE As XElement = <DIMMABLE/>
-            DIMMABLE.Value = "YES"
-            PRODUCT_GROUP_DETAIL.Add(DIMMABLE)
+        Dim DIMMABLE As XElement = <DIMMABLE/>
+        DIMMABLE.Value = "YES"
+        PRODUCT_GROUP_DETAIL.Add(DIMMABLE)
 
-            Dim ENERGY_CONS_ON_MODE As XElement = <ENERGY_CONS_ON_MODE/>
-            ENERGY_CONS_ON_MODE.Value = "1"
-            PRODUCT_GROUP_DETAIL.Add(ENERGY_CONS_ON_MODE)
+        Dim ENERGY_CONS_ON_MODE As XElement = <ENERGY_CONS_ON_MODE/>
+        ENERGY_CONS_ON_MODE.Value = "1"
+        PRODUCT_GROUP_DETAIL.Add(ENERGY_CONS_ON_MODE)
 
-            Dim ENERGY_CLASS As XElement = <ENERGY_CLASS/>
-            ENERGY_CLASS.Value = "A"
-            PRODUCT_GROUP_DETAIL.Add(ENERGY_CLASS)
+        Dim ENERGY_CLASS As XElement = <ENERGY_CLASS/>
+        ENERGY_CLASS.Value = "A"
+        PRODUCT_GROUP_DETAIL.Add(ENERGY_CLASS)
 
-            Dim LUMINOUS_FLUX As XElement = <LUMINOUS_FLUX/>
-            LUMINOUS_FLUX.Value = "100"
-            PRODUCT_GROUP_DETAIL.Add(LUMINOUS_FLUX)
+        Dim LUMINOUS_FLUX As XElement = <LUMINOUS_FLUX/>
+        LUMINOUS_FLUX.Value = "100"
+        PRODUCT_GROUP_DETAIL.Add(LUMINOUS_FLUX)
 
-            Dim BEAM_ANGLE_CORRESPONDENCE As XElement = <BEAM_ANGLE_CORRESPONDENCE/>
-            BEAM_ANGLE_CORRESPONDENCE.Value = "SPHERE_360"
-            PRODUCT_GROUP_DETAIL.Add(BEAM_ANGLE_CORRESPONDENCE)
+        Dim BEAM_ANGLE_CORRESPONDENCE As XElement = <BEAM_ANGLE_CORRESPONDENCE/>
+        BEAM_ANGLE_CORRESPONDENCE.Value = "SPHERE_360"
+        PRODUCT_GROUP_DETAIL.Add(BEAM_ANGLE_CORRESPONDENCE)
 
-            Dim CORRELATED_COLOUR_TEMP_TYPE As XElement = <CORRELATED_COLOUR_TEMP_TYPE/>
-            CORRELATED_COLOUR_TEMP_TYPE.Value = "SINGLE_VALUE"
-            PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP_TYPE)
+        Dim CORRELATED_COLOUR_TEMP_TYPE As XElement = <CORRELATED_COLOUR_TEMP_TYPE/>
+        CORRELATED_COLOUR_TEMP_TYPE.Value = "SINGLE_VALUE"
+        PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP_TYPE)
 
-            Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
-            CORRELATED_COLOUR_TEMP.Value = "1000"
-            PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+        Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
+        CORRELATED_COLOUR_TEMP.Value = "1000"
+        PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
 
-            Dim POWER_ON_MODE As XElement = <POWER_ON_MODE/>
-            POWER_ON_MODE.Value = "1.5"
-            PRODUCT_GROUP_DETAIL.Add(POWER_ON_MODE)
+        Dim POWER_ON_MODE As XElement = <POWER_ON_MODE/>
+        POWER_ON_MODE.Value = "1.5"
+        PRODUCT_GROUP_DETAIL.Add(POWER_ON_MODE)
 
-            Dim POWER_STANDBY As XElement = <POWER_STANDBY/>
-            POWER_STANDBY.Value = "0.4"
-            PRODUCT_GROUP_DETAIL.Add(POWER_STANDBY)
+        Dim POWER_STANDBY As XElement = <POWER_STANDBY/>
+        POWER_STANDBY.Value = "0.4"
+        PRODUCT_GROUP_DETAIL.Add(POWER_STANDBY)
 
-            Dim COLOUR_RENDERING_INDEX As XElement = <COLOUR_RENDERING_INDEX/>
-            COLOUR_RENDERING_INDEX.Value = "90"
-            PRODUCT_GROUP_DETAIL.Add(COLOUR_RENDERING_INDEX)
+        Dim COLOUR_RENDERING_INDEX As XElement = <COLOUR_RENDERING_INDEX/>
+        COLOUR_RENDERING_INDEX.Value = "90"
+        PRODUCT_GROUP_DETAIL.Add(COLOUR_RENDERING_INDEX)
 
-            Dim MIN_COLOUR_RENDERING_INDEX As XElement = <MIN_COLOUR_RENDERING_INDEX/>
-            MIN_COLOUR_RENDERING_INDEX.Value = "10"
-            PRODUCT_GROUP_DETAIL.Add(MIN_COLOUR_RENDERING_INDEX)
+        Dim MIN_COLOUR_RENDERING_INDEX As XElement = <MIN_COLOUR_RENDERING_INDEX/>
+        MIN_COLOUR_RENDERING_INDEX.Value = "10"
+        PRODUCT_GROUP_DETAIL.Add(MIN_COLOUR_RENDERING_INDEX)
 
-            Dim MAX_COLOUR_RENDERING_INDEX As XElement = <MAX_COLOUR_RENDERING_INDEX/>
-            MAX_COLOUR_RENDERING_INDEX.Value = "100"
-            PRODUCT_GROUP_DETAIL.Add(MAX_COLOUR_RENDERING_INDEX)
+        Dim MAX_COLOUR_RENDERING_INDEX As XElement = <MAX_COLOUR_RENDERING_INDEX/>
+        MAX_COLOUR_RENDERING_INDEX.Value = "100"
+        PRODUCT_GROUP_DETAIL.Add(MAX_COLOUR_RENDERING_INDEX)
 
-            Dim DIMENSION_HEIGHT As XElement = <DIMENSION_HEIGHT/>
-            DIMENSION_HEIGHT.Value = "10"
-            PRODUCT_GROUP_DETAIL.Add(DIMENSION_HEIGHT)
+        Dim DIMENSION_HEIGHT As XElement = <DIMENSION_HEIGHT/>
+        DIMENSION_HEIGHT.Value = "10"
+        PRODUCT_GROUP_DETAIL.Add(DIMENSION_HEIGHT)
 
-            Dim DIMENSION_WIDTH As XElement = <DIMENSION_WIDTH/>
-            DIMENSION_WIDTH.Value = "10"
-            PRODUCT_GROUP_DETAIL.Add(DIMENSION_WIDTH)
+        Dim DIMENSION_WIDTH As XElement = <DIMENSION_WIDTH/>
+        DIMENSION_WIDTH.Value = "10"
+        PRODUCT_GROUP_DETAIL.Add(DIMENSION_WIDTH)
 
-            Dim DIMENSION_DEPTH As XElement = <DIMENSION_DEPTH/>
-            DIMENSION_DEPTH.Value = "10"
-            PRODUCT_GROUP_DETAIL.Add(DIMENSION_DEPTH)
+        Dim DIMENSION_DEPTH As XElement = <DIMENSION_DEPTH/>
+        DIMENSION_DEPTH.Value = "10"
+        PRODUCT_GROUP_DETAIL.Add(DIMENSION_DEPTH)
 
-            Dim SPECTRAL_POWER_DISTRIBUTION_IMAGE As XElement = <SPECTRAL_POWER_DISTRIBUTION_IMAGE/>
-            SPECTRAL_POWER_DISTRIBUTION_IMAGE.Value = "./image.png"
-            PRODUCT_GROUP_DETAIL.Add(SPECTRAL_POWER_DISTRIBUTION_IMAGE)
+        Dim SPECTRAL_POWER_DISTRIBUTION_IMAGE As XElement = <SPECTRAL_POWER_DISTRIBUTION_IMAGE/>
+        SPECTRAL_POWER_DISTRIBUTION_IMAGE.Value = "./image.png"
+        PRODUCT_GROUP_DETAIL.Add(SPECTRAL_POWER_DISTRIBUTION_IMAGE)
 
         '-if cell empty default false
         Dim CLAIM_EQUIVALENT_POWER As XElement = <CLAIM_EQUIVALENT_POWER/>
-            CLAIM_EQUIVALENT_POWER.Value = "true"
-            PRODUCT_GROUP_DETAIL.Add(CLAIM_EQUIVALENT_POWER)
+        CLAIM_EQUIVALENT_POWER.Value = "true"
+        PRODUCT_GROUP_DETAIL.Add(CLAIM_EQUIVALENT_POWER)
 
-            Dim EQUIVALENT_POWER As XElement = <EQUIVALENT_POWER/>
-            EQUIVALENT_POWER.Value = "1"
-            PRODUCT_GROUP_DETAIL.Add(EQUIVALENT_POWER)
+        Dim EQUIVALENT_POWER As XElement = <EQUIVALENT_POWER/>
+        EQUIVALENT_POWER.Value = "1"
+        PRODUCT_GROUP_DETAIL.Add(EQUIVALENT_POWER)
         '---
 
         Dim CHROMATICITY_COORD_X As XElement = <CHROMATICITY_COORD_X/>
-            CHROMATICITY_COORD_X.Value = "0.111"
-            PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_X)
+        CHROMATICITY_COORD_X.Value = "0.111"
+        PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_X)
 
-            Dim CHROMATICITY_COORD_Y As XElement = <CHROMATICITY_COORD_Y/>
-            CHROMATICITY_COORD_Y.Value = "0.111"
-            PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_Y)
+        Dim CHROMATICITY_COORD_Y As XElement = <CHROMATICITY_COORD_Y/>
+        CHROMATICITY_COORD_Y.Value = "0.111"
+        PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_Y)
 
-            Dim R9_COLOUR_RENDERING_INDEX As XElement = <R9_COLOUR_RENDERING_INDEX/>
-            R9_COLOUR_RENDERING_INDEX.Value = "90"
-            PRODUCT_GROUP_DETAIL.Add(R9_COLOUR_RENDERING_INDEX)
+        Dim R9_COLOUR_RENDERING_INDEX As XElement = <R9_COLOUR_RENDERING_INDEX/>
+        R9_COLOUR_RENDERING_INDEX.Value = "90"
+        PRODUCT_GROUP_DETAIL.Add(R9_COLOUR_RENDERING_INDEX)
 
-            Dim SURVIVAL_FACTOR As XElement = <SURVIVAL_FACTOR/>
-            SURVIVAL_FACTOR.Value = "1.04"
-            PRODUCT_GROUP_DETAIL.Add(SURVIVAL_FACTOR)
+        Dim SURVIVAL_FACTOR As XElement = <SURVIVAL_FACTOR/>
+        SURVIVAL_FACTOR.Value = "1.04"
+        PRODUCT_GROUP_DETAIL.Add(SURVIVAL_FACTOR)
 
-            Dim LUMEN_MAINTENANCE_FACTOR As XElement = <LUMEN_MAINTENANCE_FACTOR/>
-            LUMEN_MAINTENANCE_FACTOR.Value = "1.09"
-            PRODUCT_GROUP_DETAIL.Add(LUMEN_MAINTENANCE_FACTOR)
+        Dim LUMEN_MAINTENANCE_FACTOR As XElement = <LUMEN_MAINTENANCE_FACTOR/>
+        LUMEN_MAINTENANCE_FACTOR.Value = "1.09"
+        PRODUCT_GROUP_DETAIL.Add(LUMEN_MAINTENANCE_FACTOR)
 
-            Dim FLICKER_METRIC As XElement = <FLICKER_METRIC/>
-            FLICKER_METRIC.Value = "102.8"
-            PRODUCT_GROUP_DETAIL.Add(FLICKER_METRIC)
+        Dim FLICKER_METRIC As XElement = <FLICKER_METRIC/>
+        FLICKER_METRIC.Value = "102.8"
+        PRODUCT_GROUP_DETAIL.Add(FLICKER_METRIC)
 
-            Dim STROBOSCOPIC_EFFECT_METRIC As XElement = <STROBOSCOPIC_EFFECT_METRIC/>
-            STROBOSCOPIC_EFFECT_METRIC.Value = "0.9"
-            PRODUCT_GROUP_DETAIL.Add(STROBOSCOPIC_EFFECT_METRIC)
+        Dim STROBOSCOPIC_EFFECT_METRIC As XElement = <STROBOSCOPIC_EFFECT_METRIC/>
+        STROBOSCOPIC_EFFECT_METRIC.Value = "0.9"
+        PRODUCT_GROUP_DETAIL.Add(STROBOSCOPIC_EFFECT_METRIC)
 
-            MODEL_VERSION.Add(PRODUCT_GROUP_DETAIL)
+        MODEL_VERSION.Add(PRODUCT_GROUP_DETAIL)
 
         '    Next
 
@@ -649,8 +810,6 @@ Public Class Form1
         'OUTPUT()
 
     End Sub
-
-
     Private Sub PREREGISTRATION()
 
         'SELECT_INPUT()
@@ -740,25 +899,38 @@ Public Class Form1
             MsgBox("Error!")
             Exit Sub
         End If
+        Try
+            If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Then
+Select_File:
+                Dim SPECTRAL As New FolderBrowserDialog
+                'Dim dmmy As String = Path.GetDirectoryName(ziel.FileName) & "\"
+                'SPECTRAL.RootFolder = dmmy
+                SPECTRAL.Description = "Please select folder with attachment data!"
 
-        'If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Then
-        '    Dim SPECTRAL As New FolderBrowserDialog
-        '    'Dim dmmy As String = Path.GetDirectoryName(ziel.FileName) & "\"
-        '    'SPECTRAL.RootFolder = dmmy
-        '    SPECTRAL.Description = "Please select folder with spectral data!"
-        '    SPECTRAL.ShowDialog()
+                SPECTRAL.ShowDialog()
 
-        '    Directory.CreateDirectory(start & "\SPECTRAL\")
-        '    Dim fle As String
-        '    Dim target As String = ""
+                Directory.CreateDirectory(start & "\attachments\")
+                Dim fle As String
+                Dim target As String = ""
 
 
-        '    For Each fle In Directory.GetFiles(SPECTRAL.SelectedPath)
-        '        target = start & "SPECTRAL\" & Path.GetFileName(fle)
-        '        File.Copy(fle, target)
-        '    Next
+                For Each fle In Directory.GetFiles(SPECTRAL.SelectedPath)
+                    target = start & "attachments\" & Path.GetFileName(fle)
+                    File.Copy(fle, target)
+                Next
 
-        'End If
+            End If
+        Catch
+
+            Select Case MsgBox("Are you shure you do not want to upload any files?", MsgBoxStyle.YesNo)
+                Case MsgBoxResult.Yes
+                    Exit Try
+                Case MsgBoxResult.No
+                    GoTo Select_File
+                Case Else
+                    GoTo Select_File
+            End Select
+        End Try
 
         ZipFile.CreateFromDirectory(start, ziel.FileName)
             '---------------DEBUG!--------------------
@@ -855,10 +1027,10 @@ Public Class Form1
         'PARSE_END
 
     End Sub
-
     Sub PARSE_REGISTER(quelle)
         Dim book = xlApp.Workbooks.Open(quelle.FileName)
         Dim xltab1 = book.Worksheets("REGISTER_PRODUCT_MODEL")
+        Dim xltab2 = book.Worksheets("attachments")
         Dim xlUP As Object = Excel.XlDirection.xlUp
         Dim lastentry As Object
 
@@ -919,13 +1091,11 @@ Public Class Form1
         Dim dmy1 As Date
         Dim dmy2 As Double
 
-
-
         For i = 1 To dummy - 1
             _MODEL_IDENTIFIER(i - 1) = xltab1.Range("A" & i + 1).Value
             _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i - 1) = xltab1.Range("B" & i + 1).Value
-            '_ON_MARKET_START_DATE(i - 1) = xltab1.Range("C" & i + 1).Value
             dmy1 = xltab1.Range("C" & i + 1).Value
+            '-Format date to yyyy-mm-dd+hh:mm
             _ON_MARKET_START_DATE(i - 1) = dmy1.ToString("yyyy") & "-" & dmy1.ToString("MM") & "-" & dmy1.ToString("dd") & dmy1.ToString("zzz")
             _VISIBLE_TO_UK_MSA(i - 1) = xltab1.Range("D" & i + 1).Value
             _LIGHTING_TECHNOLOGY(i - 1) = xltab1.Range("E" & i + 1).Value
@@ -942,23 +1112,32 @@ Public Class Form1
             _LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("Q" & i + 1).Value)
             _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("R" & i + 1).Value
             _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("S" & i + 1).Value
-            _CORRELATED_COLOUR_TEMP_SINGLE(i - 1) = String.Format("{00000}", xltab1.Range("T" & i + 1).Value)
-            _CORRELATED_COLOUR_TEMP_MIN(i - 1) = String.Format("{00000}", xltab1.Range("U" & i + 1).Value)
-            _CORRELATED_COLOUR_TEMP_MAX(i - 1) = String.Format("{00000}", xltab1.Range("V" & i + 1).Value)
-            _CORRELATED_COLOUR_TEMP_1(i - 1) = String.Format("{00000}", xltab1.Range("W" & i + 1).Value)
-            _CORRELATED_COLOUR_TEMP_2(i - 1) = String.Format("{00000}", xltab1.Range("X" & i + 1).Value)
-            _CORRELATED_COLOUR_TEMP_3(i - 1) = String.Format("{00000}", xltab1.Range("Y" & i + 1).Value)
-            _CORRELATED_COLOUR_TEMP_4(i - 1) = String.Format("{00000}", xltab1.Range("Z" & i + 1).Value)
+            dmy2 = Math.Ceiling(xltab1.Range("T" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_SINGLE(i - 1) = String.Format("{0000}", dmy2 * 100)
+            dmy2 = Math.Ceiling(xltab1.Range("U" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_MIN(i - 1) = String.Format("{00000}", dmy2 * 100)
+            dmy2 = Math.Ceiling(xltab1.Range("V" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_MAX(i - 1) = String.Format("{00000}", dmy2 * 100)
+            dmy2 = Math.Ceiling(xltab1.Range("W" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_1(i - 1) = String.Format("{00000}", dmy2 * 100)
+            dmy2 = Math.Ceiling(xltab1.Range("X" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_2(i - 1) = String.Format("{00000}", dmy2 * 100)
+            dmy2 = Math.Ceiling(xltab1.Range("Y" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_3(i - 1) = String.Format("{00000}", dmy2 * 100)
+            dmy2 = Math.Ceiling(xltab1.Range("Z" & i + 1).Value / 100)
+            _CORRELATED_COLOUR_TEMP_4(i - 1) = String.Format("{00000}", dmy2 * 100)
             dmy2 = xltab1.Range("AA" & i + 1).Value
-            _POWER_ON_MODE(i - 1) = String.Format(CultureInfo.CreateSpecificCulture("en-EN"), "{0:###0.0}", dmy2)
+            _POWER_ON_MODE(i - 1) = String.Format(provider, "{0:###0.0}", dmy2)
             dmy2 = xltab1.Range("AB" & i + 1).Value
-            _POWER_STANDBY(i - 1) = String.Format(CultureInfo.CreateSpecificCulture("en-EN"), "{0:0.00}", dmy2)
+            _POWER_STANDBY(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
             dmy2 = xltab1.Range("AC" & i + 1).Value
-            _POWER_STANDBY_NETWORKED(i - 1) = String.Format(CultureInfo.CreateSpecificCulture("en-EN"), "{0:0.00}", dmy2)
-            _POWER_STANDBY_NETWORKED(i - 1) = String.Format("{0,00}", _POWER_STANDBY_NETWORKED(i - 1))
-            _COLOUR_RENDERING_INDEX(i - 1) = xltab1.Range("AD" & i + 1).Value
-            _MIN_COLOUR_RENDERING_INDEX(i - 1) = xltab1.Range("AE" & i + 1).Value
-            _MAX_COLOUR_RENDERING_INDEX(i - 1) = xltab1.Range("AF" & i + 1).Value
+            _POWER_STANDBY_NETWORKED(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
+            dmy2 = xltab1.Range("AD" & i + 1).Value
+            _COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+            dmy2 = xltab1.Range("AE" & i + 1).Value
+            _MIN_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+            dmy2 = xltab1.Range("AF" & i + 1).Value
+            _MAX_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
             dmy2 = xltab1.Range("AG" & i + 1).Value
             _DIMENSION_HEIGHT(i - 1) = String.Format(provider, "{0:#####}", dmy2)
             dmy2 = xltab1.Range("AH" & i + 1).Value
@@ -970,10 +1149,14 @@ Public Class Form1
             _CHROMATICITY_COORD_X(i - 1) = String.Format(provider, "{0:0.000}", dmy2)
             dmy2 = xltab1.Range("AL" & i + 1).Value
             _CHROMATICITY_COORD_Y(i - 1) = String.Format(provider, "{0:0.000}", dmy2)
-            _DLS_PEAK_LUMINOUS_INTENSITY(i - 1) = xltab1.Range("AM" & i + 1).Value
-            _DLS_BEAM_ANGLE(i - 1) = xltab1.Range("AN" & i + 1).Value
-            _DLS_MIN_BEAM_ANGLE(i - 1) = xltab1.Range("AO" & i + 1).Value
-            _DLS_MAX_BEAM_ANGLE(i - 1) = xltab1.Range("AP" & i + 1).Value
+            dmy2 = xltab1.Range("AM" & i + 1).Value
+            _DLS_PEAK_LUMINOUS_INTENSITY(i - 1) = String.Format(provider, "{0:######}", dmy2)
+            dmy2 = xltab1.Range("AN" & i + 1).Value
+            _DLS_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
+            dmy2 = xltab1.Range("AO" & i + 1).Value
+            _DLS_MIN_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
+            dmy2 = xltab1.Range("AP" & i + 1).Value
+            _DLS_MAX_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
             dmy2 = xltab1.Range("AQ" & i + 1).Value
             _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
             dmy2 = xltab1.Range("AR" & i + 1).Value
@@ -993,9 +1176,28 @@ Public Class Form1
             _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i - 1) = String.Format(provider, "{0:0.0}", dmy2)
 
         Next
-        xlApp.Workbooks.Close()
-        xlApp.Quit()
 
+        dummy2 = book.Worksheets("attachments").Range("A" & xltab2.Rows.Count).End(xlUP).Row
+        lastentry = xltab2.Range("A1:A" & dummy2).Value
+
+        dummy2 = dummy2 - 2
+        ReDim _TD(dummy2)
+        For i = 0 To dummy2
+            _TD(i)._TD_MODEL_IDENTIFIER = xltab2.Range("A" & i + 2).Value
+            _TD(i)._TD_DESCRIPTION = xltab2.Range("B" & i + 2).Value
+            _TD(i)._TD_LANGUAGE = xltab2.Range("C" & i + 2).Value
+            _TD(i)._TD_ADDITIONAL_PART = xltab2.Range("D" & i + 2).Value
+            _TD(i)._TD_CALCULATIONS = xltab2.Range("E" & i + 2).Value
+            _TD(i)._TD_GENERAL_DESCRIPTION = xltab2.Range("F" & i + 2).Value
+            _TD(i)._TD_MESURED_TECHNICAL_PARAMETERS = xltab2.Range("G" & i + 2).Value
+            _TD(i)._TD_REFERENCES_TO_HARMONIZED_STANDARDS = xltab2.Range("H" & i + 2).Value
+            _TD(i)._TD_SPECIFIC_PRECAUTIONS = xltab2.Range("I" & i + 2).Value
+            _TD(i)._TD_FILE_NAME = xltab2.Range("J" & i + 2).Value
+        Next
+
+
+        xlApp.ActiveWorkbook.Close(False)
+        xlApp.Quit()
 
 
     End Sub
@@ -1008,6 +1210,10 @@ Public Class Form1
         System.Diagnostics.Process.Start("mailto:m.planeck@nimbus-group.com")
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Form_Contact.Show()
+    End Sub
+
     Private Sub CB_OperationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CB_OperationType.SelectedIndexChanged
         If CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
             CB_ReasonChange.Enabled = True
@@ -1016,4 +1222,6 @@ Public Class Form1
             CB_ReasonChange.Enabled = False
         End If
     End Sub
+
+
 End Class

@@ -51,3 +51,4 @@ C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\o
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.exe
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.xml
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.pdb
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form_Contact.resources
