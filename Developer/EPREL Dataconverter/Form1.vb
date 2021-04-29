@@ -228,11 +228,17 @@ Public Class Form1
                 MODEL_VERSION.Add(PRODUCT_GROUP)
 
                 '-Energy Label
-                Dim ENERGY_LABEL As XElement = <ENERGY_LABEL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" xsi:type="ns5:GeneratedEnergyLabel"/>
-                Dim CONSIDER_GENERATED_LABEL_AS_PROVIDED As XElement = <CONSIDER_GENERATED_LABEL_AS_PROVIDED/>
-                CONSIDER_GENERATED_LABEL_AS_PROVIDED.Value = _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i)
-                ENERGY_LABEL.Add(CONSIDER_GENERATED_LABEL_AS_PROVIDED)
-                MODEL_VERSION.Add(ENERGY_LABEL)
+                If _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i) <> "" Then
+                    Dim ENERGY_LABEL As XElement = <ENERGY_LABEL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" xsi:type="ns5:GeneratedEnergyLabel"/>
+                    Dim CONSIDER_GENERATED_LABEL_AS_PROVIDED As XElement = <CONSIDER_GENERATED_LABEL_AS_PROVIDED/>
+
+                    CONSIDER_GENERATED_LABEL_AS_PROVIDED.Value = _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i)
+                    ENERGY_LABEL.Add(CONSIDER_GENERATED_LABEL_AS_PROVIDED)
+                    MODEL_VERSION.Add(ENERGY_LABEL)
+                Else
+                    Form2.LB_Log.Items.Add("Energy Label for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    Throw New ArgumentException("Exception Occured")
+                End If
 
 
                 '---Market Start Date YYYY-MM-DD
