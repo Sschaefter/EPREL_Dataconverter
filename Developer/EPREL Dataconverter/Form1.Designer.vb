@@ -30,6 +30,7 @@ Partial Class Form1
         Me.Txt_Request = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Txt_ContactRef = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.CB_ReasonChange = New System.Windows.Forms.ComboBox()
@@ -37,7 +38,6 @@ Partial Class Form1
         Me.CheckB_Log = New System.Windows.Forms.CheckBox()
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -112,6 +112,15 @@ Partial Class Form1
         Me.Panel1.Size = New System.Drawing.Size(281, 239)
         Me.Panel1.TabIndex = 7
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(169, 206)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 13
+        Me.Button2.Text = "Contact"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Txt_ContactRef
         '
         Me.Txt_ContactRef.Location = New System.Drawing.Point(23, 180)
@@ -176,16 +185,7 @@ Partial Class Form1
         Me.LinkLabel1.Size = New System.Drawing.Size(144, 13)
         Me.LinkLabel1.TabIndex = 8
         Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "©Mario Planeck, 18.02.2021"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(169, 206)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 13
-        Me.Button2.Text = "Contact"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.LinkLabel1.Text = "©Mario Planeck, 29.04.2021"
         '
         'Form1
         '
@@ -197,6 +197,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "EPREL Dataconverter V1.0.1"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

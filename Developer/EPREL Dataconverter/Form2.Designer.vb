@@ -23,6 +23,7 @@ Partial Class Form2
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.LB_Log = New System.Windows.Forms.ListBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
         'LB_Log
@@ -30,14 +31,23 @@ Partial Class Form2
         Me.LB_Log.FormattingEnabled = True
         Me.LB_Log.Location = New System.Drawing.Point(25, 11)
         Me.LB_Log.Name = "LB_Log"
-        Me.LB_Log.Size = New System.Drawing.Size(486, 407)
+        Me.LB_Log.Size = New System.Drawing.Size(486, 95)
         Me.LB_Log.TabIndex = 0
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(25, 123)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(486, 299)
+        Me.RichTextBox1.TabIndex = 1
+        Me.RichTextBox1.Text = ""
         '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(531, 450)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.LB_Log)
         Me.Name = "Form2"
         Me.Text = "Log"
@@ -46,4 +56,5 @@ Partial Class Form2
     End Sub
 
     Friend WithEvents LB_Log As ListBox
+    Friend WithEvents RichTextBox1 As RichTextBox
 End Class
