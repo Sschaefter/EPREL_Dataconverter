@@ -39,7 +39,6 @@ Partial Class Form1
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -198,22 +197,11 @@ Partial Class Form1
         Me.Button3.Text = "Validate Zip"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'LinkLabel2
-        '
-        Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Location = New System.Drawing.Point(145, 294)
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(81, 13)
-        Me.LinkLabel2.TabIndex = 10
-        Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "Show Template"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(374, 346)
-        Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Panel1)
@@ -255,5 +243,4 @@ Partial Class Form1
     Friend WithEvents Label5 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
-    Friend WithEvents LinkLabel2 As LinkLabel
 End Class
