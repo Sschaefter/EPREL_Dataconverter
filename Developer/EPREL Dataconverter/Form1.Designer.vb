@@ -38,12 +38,14 @@ Partial Class Form1
         Me.CheckB_Log = New System.Windows.Forms.CheckBox()
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(152, 257)
+        Me.Button1.Location = New System.Drawing.Point(73, 257)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 0
@@ -180,18 +182,39 @@ Partial Class Form1
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(118, 298)
+        Me.LinkLabel1.Location = New System.Drawing.Point(113, 324)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(144, 13)
         Me.LinkLabel1.TabIndex = 8
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "©Mario Planeck, 29.04.2021"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(214, 257)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 9
+        Me.Button3.Text = "Validate Zip"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(145, 294)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(81, 13)
+        Me.LinkLabel2.TabIndex = 10
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "Show Template"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(374, 346)
+        Me.Controls.Add(Me.LinkLabel2)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button1)
@@ -231,4 +254,6 @@ Partial Class Form1
     Friend WithEvents Txt_ContactRef As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents LinkLabel2 As LinkLabel
 End Class

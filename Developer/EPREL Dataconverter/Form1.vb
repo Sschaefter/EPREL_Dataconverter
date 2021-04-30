@@ -93,11 +93,9 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        If CheckB_Log.Checked = True Then
-
-            Form2.Visible = True
-
-        End If
+        'If CheckB_Log.Checked = True Then
+        '    Form2.Visible = True
+        'End If
 
         Cursor.Current = Cursors.WaitCursor
 
@@ -157,7 +155,7 @@ Public Class Form1
             Save_Log_XML()
         End If
 
-        Close()
+        'Close()
     End Sub
     Private Sub Save_Log_XML()
 
@@ -171,7 +169,6 @@ Public Class Form1
             If filesave.FileName = "" Then
                 Exit Sub
             Else
-
                 IO.File.WriteAllLines(filesave.FileName, Form2.LB_Log.Items.Cast(Of String).ToArray)
             End If
 
@@ -243,10 +240,11 @@ Public Class Form1
 
                 '---Market Start Date YYYY-MM-DD
                 Dim ON_MARKET_START_DATE As XElement = <ON_MARKET_START_DATE/>
-                ON_MARKET_START_DATE.Value = _ON_MARKET_START_DATE(i)
-                MODEL_VERSION.Add(ON_MARKET_START_DATE)
+                    ON_MARKET_START_DATE.Value = _ON_MARKET_START_DATE(i)
+                    MODEL_VERSION.Add(ON_MARKET_START_DATE)
 
-                Try
+
+                    Try
                     Dim flag As Boolean = False
                     Dim test As String = MODEL_IDENTIFIER.Value
                     Dim TECHNICAL_DOCUMENTATION As XElement = <TECHNICAL_DOCUMENTATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TechnicalDocumentationDetail"/>
@@ -1148,6 +1146,12 @@ Select_File:
             state = True
             Exit Sub
         End If
+
+        If Txt_ContactRef.Text = "" And CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
+            MsgBox("Please fill Values!")
+            state = True
+            Exit Sub
+        End If
         '----------------------------Datei Auswählen und öffnen----------------------
         xlApp.Visible = False
         Dim quelle As New OpenFileDialog
@@ -1590,8 +1594,62 @@ Select_File:
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "EPREL Dataconverter " & My.Application.Info.Version.ToString
+        Form2.Show()
+        Form2.Hide()
     End Sub
 
+    Private Sub CheckB_Log_CheckedChanged(sender As Object, e As EventArgs) Handles CheckB_Log.CheckedChanged
+        Select Case CheckB_Log.Checked
+            Case True
+                Form2.Show()
+            Case False
+                Form2.Hide()
+        End Select
+    End Sub
+    Private Sub Validate_ZIP()
+        'Dim zip_File As File
+        Dim slct As New OpenFileDialog
+        slct.Filter = "EPREL Zip-File (*.zip)|*.zip"
+        slct.Title = "Select productModelRegistrationTable.zip for Validation"
+        slct.ShowDialog()
+
+        Dim valFile As String = ""
+
+        If slct.FileName <> "" Then
+            valFile = slct.FileName
+        End If
+
+#If DEBUG Then
+        Dim val As String = "cmd.exe /k java -jar ./EprelExchangeModel-2.7.10-SNAPSHOT.jar "
+        Dim strCMD As String
+        valFile = valFile + """"
+        strCMD = val & valFile
+        Dim p As New Process
+        Dim pi As New ProcessStartInfo
+        pi.FileName = "cmd.exe"
+        pi.CreateNoWindow = "false"
+        pi.Arguments = strCMD
+        p.StartInfo = pi
+        p.Start()
+        p.WaitForExit()
+#Else
+        Dim val As String = "cmd.exe /k java -jar ./EprelExchangeModel-2.7.10-SNAPSHOT.jar """
+        Dim strCMD As String
+        valFile = valFile + """"
+        strCMD = val & valFile
+        Dim p As New Process
+        Dim pi As New ProcessStartInfo
+        pi.FileName = "cmd.exe"
+        pi.CreateNoWindow = "false"
+        pi.Arguments = strCMD
+        p.StartInfo = pi
+        p.Start()
+        p.WaitForExit()
+#End If
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Validate_ZIP()
+    End Sub
     Private Sub CB_OperationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CB_OperationType.SelectedIndexChanged
         If CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
             CB_ReasonChange.Enabled = True
@@ -1600,6 +1658,4 @@ Select_File:
             CB_ReasonChange.Enabled = False
         End If
     End Sub
-
-
 End Class
