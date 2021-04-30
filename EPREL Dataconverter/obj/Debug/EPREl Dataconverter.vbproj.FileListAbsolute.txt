@@ -52,3 +52,24 @@ C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\o
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.xml
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.pdb
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\Developer\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form_Contact.resources
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\modelRegistrationService_v2.5.xsd
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.exe.config
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.exe.manifest
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.application
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.exe
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.pdb
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.xml
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbprojAssemblyReference.cache
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.ResolveComReference.cache
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form1.resources
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form2.resources
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form_Contact.resources
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Resources.resources
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.GenerateResource.cache
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.CoreCompileInputs.cache
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.TrustInfo.xml
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.exe.manifest
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.application
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.exe
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.xml
+C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.pdb
