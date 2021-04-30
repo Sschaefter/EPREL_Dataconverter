@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EPREL Dataconverter", "EPREl Dataconverter\EPREL Dataconverter.vbproj", "{5D16A33C-2CA7-48D1-9EC4-F4197238B2A3}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EPREL Dataconverter Setup", "EPREL Dataconverter Setup\EPREL Dataconverter Setup.vdproj", "{F687BC77-7090-49F0-9227-388FA70AD443}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D16A33C-2CA7-48D1-9EC4-F4197238B2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D16A33C-2CA7-48D1-9EC4-F4197238B2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D16A33C-2CA7-48D1-9EC4-F4197238B2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D16A33C-2CA7-48D1-9EC4-F4197238B2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F687BC77-7090-49F0-9227-388FA70AD443}.Debug|Any CPU.ActiveCfg = Debug
+		{F687BC77-7090-49F0-9227-388FA70AD443}.Debug|Any CPU.Build.0 = Debug
+		{F687BC77-7090-49F0-9227-388FA70AD443}.Release|Any CPU.ActiveCfg = Release
+		{F687BC77-7090-49F0-9227-388FA70AD443}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41AC710D-CA7D-4163-804A-B4C6AF2CDF82}
+	EndGlobalSection
+EndGlobal

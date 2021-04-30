@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://eprel.ener.ec.europa.eu/services/productModelService/modelRegistrationService/v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://eprel.ener.ec.europa.eu/services/productModelService/modelRegistrationService/v2" xmlns:RegistrationServV2="http://eprel.ener.ec.europa.eu/services/productModelService/modelRegistrationService/v2" xmlns:pmodelV2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" xmlns:baseV1="http://eprel.ener.ec.europa.eu/commonTypes/baseTypes/v1" xmlns:labelV2="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" version="1.0">
+	<xs:annotation>
+		<xs:documentation>Definition of the "Service actions" that must be implemented on EPREL Database side  (request services) and on supplier side (response services).
+
+For more details about the structure of the "service actions" exposed by EPREL , see the diagram "Product model registration request"
+
+For more details about the structure of the "service actions" to be exposed by suppliers, see the diagram "Product model registration response"
+
+
+"Service action" available to suppliers to operate the following operations on product models:
+	- pre-register product models,
+	- register product models,
+	- update product model registration,
+	- declare the date of end of placement on the market of a product model
+
+Format of the payload: zip archive. (See chapter "Structure of the registration request payload")
+
+This payload can be alternatively used 
+	- in system to system exchanges between supplier eDelivery access points and the EPREL one.
+	- interactively from the web application via  secured file upload.</xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="http://eprel.ener.ec.europa.eu/commonTypes/baseTypes/v1" schemaLocation="../../CommonTypes/BaseTypes_V1.16.xsd"/>
+	<xs:import namespace="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" schemaLocation="../../ProductModel/productModelCore_v2.7.xsd"/>
+	<xs:element name="ProductModelRegistrationRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Table /container of  'operations' that have to be performed.
+Product models can be, pre-registered, registered, corrected, removed from the market or rescaled.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="productOperation" type="ProductModelOperation" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="SharedTechnicalDocumentation" type="pmodelV2:TechnicalDocumentationDetail" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="REQUEST_ID" use="optional" type="baseV1:String32">
+				<xs:annotation>
+					<xs:documentation>ID of the transaction to be provided by the submitter (supplier).
+The submitter is free to use any value as transaction ID. 
+The only purpose of this ID is to be returned in the asynchronous response that will be given to this registration request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProductModelRegistrationResponse">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Container/root element  of the response to a "ProductRegistrationsRequest".
+The attribute REQUEST_ID refers to the identifier of the related ProductRegistrationsRequest.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="PRODUCT_MODEL_OPERATION" type="ProductOperationResult" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="GLOBAL_ERROR" type="baseV1:Log" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="GLOBAL_STATUS" type="ProductModelRegistratonGlobalStatusEnum" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="REQUEST_ID" use="optional" type="baseV1:NonEmptyString32">
+				<xs:annotation>
+					<xs:documentation>Reference to identifier of the originating request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="productOperation" type="RegistrationServV2:ProductModelOperation"/>
+	<xs:simpleType name="ModelStatusEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COMPLETE"/>
+			<xs:enumeration value="INCOMPLETE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OperationStatusEnum">
+		<xs:annotation>
+			<xs:documentation>Status resulting from the execution of the requested operation.
+	- If the operation was successfully processed =&gt; SUCCESS
+	- If non blocking inconsistencies have been detected in data.(Eg. ener  =&gt; PROCESSED_WITH_WARNING,
+	- If an operation has been rejected for security reasons (un-trusted attachment, request out of the scope of what the user is allowed to do in EPREL =&gt; FORBIDDEN_OPERATION
+	- For any other issues (incomplete product model, inconsistent request, runtime exception ...)  =&gt; PRODUCT_OPERATION_FAILED</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS">
+				<xs:annotation>
+					<xs:documentation>Operation processed successfully.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PROCESSED_WITH_WARNINGS">
+				<xs:annotation>
+					<xs:documentation>Operation processed with warning(s)
+The operation is correctly processed but some potential inconsistencies have been found by the EPREL system. 
+Warnings are returned to suppliers for information in order to prevent inconsistent registration and to enhance the data quality.
+
+See operation warning logs for more details.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FORBIDDEN_OPERATION">
+				<xs:annotation>
+					<xs:documentation>Operation not allowed.
+See operation error logs for more details.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRODUCT_OPERATION_FAILED">
+				<xs:annotation>
+					<xs:documentation>Operation not allowed.
+See operation error logs for more details.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OperationTypeEnum">
+		<xs:annotation>
+			<xs:documentation>Define the operation to perform on a product model.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="REGISTER_PRODUCT_MODEL">
+				<xs:annotation>
+					<xs:documentation>Legal registration of a product model (compliance data + energy label + product information sheet).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPDATE_PRODUCT_MODEL">
+				<xs:annotation>
+					<xs:documentation>Correction of a legal declaration of product model information accordingly to the Article 12(10) of the EU regulation 2017/1369
+
+This operation can only be used to correct errors or to complete an existing product model (in case of pre-registration for example). 
+This operation must not be used in case of changes made on a product that are relevant for the label or the product information (Article 4 (12)  of the EU regulation 2017/1369). In that case, a new product model shall be registered</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET">
+				<xs:annotation>
+					<xs:documentation>Declaration of starting date of the 15 years retention period of compliance data.  ( ON_MARKET_END_DATE)
+Article 4(6) and 16(q) of the EU regulation 2017/1369</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PREREGISTER_PRODUCT_MODEL">
+				<xs:annotation>
+					<xs:documentation>Operation used to early get an EPREL_PRODUCT_MODEL_ID that could be used to generate a QR Code. 
+This operation could be useful for suppliers who would like to prepare the packaging of their goods with the energy label a long time before putting their products on the EU market.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductModelRegistratonGlobalStatusEnum">
+		<xs:annotation>
+			<xs:documentation>Overall status of the transaction. 
+	- All the operations were processed successfully  =&gt;SUCCESS
+	- All the operations were processed but a warning as was on at least one of them =&gt; PROCESSED_WITH _WARNINGS
+	- At least one operation was in error =&gt; PROCESSED_WITH _ERRORS
+	- The structure of the request was rejected (invalid zip file structure, invalid xml file, missing attachments, un-trusted file formats...) =&gt;FAILED_INVALID_REQUEST
+	- For any other runtime errors =&gt; FAILED_UNEXPECTED_ERROR</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS">
+				<xs:annotation>
+					<xs:documentation>Operation processed successfully.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PROCESSED_WITH_WARNINGS">
+				<xs:annotation>
+					<xs:documentation>Operation processed with warning(s)
+The operation is correctly processed but some potential inconsistencies have been found by the EPREL system. 
+Warnings are returned to suppliers for information in order to prevent inconsistent registration and to enhance the data quality.
+
+See operation warning logs for more details.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PROCESSED_WITH_ERRORS">
+				<xs:annotation>
+					<xs:documentation>Operation not allowed.
+See operation error logs for more details.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAILED_INVALID_REQUEST">
+				<xs:annotation>
+					<xs:documentation>Operation not allowed.
+See operation error logs for more details.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAILED_UNEXPECTED_ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReasonForChange">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CORRECT_TYPO">
+				<xs:annotation>
+					<xs:documentation>Supplier has done a mistake when declaring a value and needs correction.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHANGE_IN_STANDARDS">
+				<xs:annotation>
+					<xs:documentation>The testing standards can change and some values need to be modified.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LABEL_SCALE_RANGE_CHANGE">
+				<xs:annotation>
+					<xs:documentation>In a same Delegated Regulation the scale of energy efficiency may change with the years (i.e. Reversible air conditioners classified in energy efficiency classes A - G from 01/01/2013 to 31/12/2014, A+ - F from 01/01/2015 to 31/12/2016, etc.) and model needs to be modified.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHANGE_REQUESTED_BY_MSA">
+				<xs:annotation>
+					<xs:documentation>If MSA detects an error or mistake that does not need a new model registration, it can ask the supplier to modify some values of a registered model.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ADDED_INFORMATION_NO_EFFECT_ON_DECLARATION">
+				<xs:annotation>
+					<xs:documentation>During the lifecycle of a model it might be, that either the company itself produces more helpful information, or clarification, or that it turns out that for communication with MSA this information speeds up their understanding (though strictly speaking not legally necessary). Additional information, that does not change in such a case the model, this cannot lead to a forced change in model number (=no new registration), a change of model would then not make any sense.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REQUEST_CHANGE_BY_EXTERNAL_BODY">
+				<xs:annotation>
+					<xs:documentation>A Certification Body very frequently detect errors in declared data, sometimes typing mistakes, many times performance data which, after test in Independent Laboratory, need correction (“re-rating”). Data linked to a product can represent up to dozens of values, and it can happen that one, a few, or more, need adjustment. New models each time is not sustainable.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ProductModelOperation">
+		<xs:annotation>
+			<xs:documentation>Intermediate type between the container "ProductModelRegistrationRequest" and the Product Models (ProductModelCore).
+This complexType is used to define the operation to be performed on a product model.
+An Operation ID is requested. In case of error, while processing the operation, the response will refer to the failing operation by designating it through its ID.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MODEL_VERSION" type="pmodelV2:ProductModelCore" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="OPERATION_TYPE" use="optional" type="OperationTypeEnum">
+			<xs:annotation>
+				<xs:documentation>Operation to perform on a product model.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="OPERATION_ID" use="optional" type="baseV1:String32">
+			<xs:annotation>
+				<xs:documentation>Unique identifier of the operation within the ProductModelRegistrationRequest. 
+This textual ID can be freely defined by the submitter. 
+This identifier is used in the response to return a processing status of the requested operation. 
+
+Note that the model identifier is not used for this purpose since its uniqueness within a batch of product operation is not guaranteed (E.g. in case of rescaling).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REASON_FOR_CHANGE" use="optional" type="ReasonForChange">
+			<xs:annotation>
+				<xs:documentation>Only needed for the operation of type "UPDATE_PRODUCT_MODEL" when the latest version of the product model is already in status "PUBLISHED" in EPREL.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="REASON_COMMENT" use="optional" type="baseV1:String1024">
+			<xs:annotation>
+				<xs:documentation>Only needed for the operation of type "UPDATE_PRODUCT_MODEL" when the latest version of the product model is already in status "PUBLISHED" in EPREL.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ProductOperationResult">
+		<xs:annotation>
+			<xs:documentation>Feedback on the list of operation requested to be processed in the EPREL database.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OPERATION_ID" type="baseV1:String32" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference an operation that is part of the issuing registration request.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OPERATION" type="OperationTypeEnum" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reminder of the original OPERATION type.
+See OperationStatusEnum</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OPERATION_STATUS" type="OperationStatusEnum" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Status of the operation.
+See OperationStatusEnum.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PROCESSING_DATE" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Processing date/time of the operation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EPREL_MODEL_REGISTRATION_NUMBER" type="xs:unsignedLong" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Registration number of the product model.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MODEL_IDENTIFIER" type="baseV1:String255" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Model identifier returned for information, as a reference, in order to ease the processing of the response.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MODEL_STATUS" type="ModelStatusEnum" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Status of the model registered (Incomplete, Complete).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PRODUCT_GROUP" type="baseV1:ProductGroupEnum" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Type of product model.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DELEGATED_ACT" type="baseV1:DelegatedActEnum" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The delegated act.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0" maxOccurs="1">
+				<xs:element name="TRADEMARK_REFERENCE" type="baseV1:NonEmptyString32" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>TRADEMARK_REFERENCE.
+The value must refer to a Trademark reference (internal code) defined centrally in the EPREL database. This trademark can be associated to a logo. 
+Advantages of this option: 
+	- Centralised update of the supplier names /trademark. Changes automatically impacts all the product models sharing the same reference.
+	- No need to provide a logo as image file for each registered product. The logo is uploaded centrally.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SUPPLIER_NAME_OR_TRADEMARK" type="baseV1:NonEmptyString255" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Name or trademark of the supplier  
+
+This value will be used on generated energy labels and product fiches expect if a logo is provided.
+
+PI Equivalent : BRAND</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="ERROR" type="baseV1:Log" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="WARNING" type="baseV1:Log" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
