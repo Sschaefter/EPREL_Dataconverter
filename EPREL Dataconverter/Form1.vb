@@ -12,10 +12,10 @@ Imports <xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/
 'Documentation
 
 Public Class Form1
-    Public xlApp As New Excel.Application
-    Public wb As Excel.Workbook
-    Public ws As Excel.Worksheet
-    Public wbook As Excel.Workbooks
+    'Public xlApp As New Excel.Application
+    'Public wb As Excel.Workbook
+    'Public ws As Excel.Worksheet
+    'Public wbook As Excel.Workbooks
     Public items() As String
     Public _EPREL_MODEL_REGISTRATION_NUMBER() As Integer
     Public _MODEL_IDENTIFIER() As String
@@ -95,7 +95,6 @@ Public Class Form1
         '    Form2.Visible = True
         'End If
 
-        Cursor.Current = Cursors.WaitCursor
 
         If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Then
             Select Case MsgBox("Please make shure, that all attachments are named liked in the source table and are located in one folder!", vbOKCancel)
@@ -147,13 +146,20 @@ Public Class Form1
             Exit Sub
         End If
 
-        Cursor.Current = Cursors.Default
+
+
+        Select Case MsgBox("Validate Zip File?", vbYesNo)
+            Case MsgBoxResult.Yes
+                Validate_ZIP()
+            Case MsgBoxResult.No
+                Exit Select
+        End Select
 
         If CheckB_Log.Checked = True Then
             Save_Log_XML()
         End If
 
-        'Close()
+        Close()
     End Sub
     Private Sub Save_Log_XML()
 
@@ -1191,9 +1197,11 @@ Public Class Form1
 
 #If DEBUG Then
         '---------DEBUG!---------------------
+        Dim dir As String = Directory.GetCurrentDirectory
         Directory.CreateDirectory("Data")
-        doc.Save(".\Data\registration-data.xml")
-        Dim start As String = ".\Data\"
+        Directory.CreateDirectory("Data\productModelRegistrationTable")
+        doc.Save(".\Data\productModelRegistrationTable\registration-data.xml")
+        Dim start As String = ".\Data\productModelRegistrationTable"
 #Else
         '------RELEASE!--------
         Dim dir As String = Directory.GetCurrentDirectory
@@ -1258,6 +1266,11 @@ Done:
         '---------------DEBUG!--------------------
         Directory.Delete(dir + "\Data\productModelRegistrationTable", True)
 
+#If DEBUG Then
+        Directory.Delete(".\Data", True)
+#End If
+
+
         MsgBox("Done!")
 
     End Sub
@@ -1277,7 +1290,8 @@ Done:
             Exit Sub
         End If
         '----------------------------Datei Auswählen und öffnen----------------------
-        xlApp.Visible = False
+
+        'xlApp.Visible = False
         Dim quelle As New OpenFileDialog
         quelle.Title = "Please select the source file!"
         quelle.Filter = "Excel files (*.xlsx)|*.xlsx"
@@ -1288,13 +1302,15 @@ Done:
             Exit Sub
         End If
 
+        Dim flname As String = quelle.FileName
+
         Select Case CB_OperationType.SelectedItem
             Case "UPDATE_PRODUCT_MODEL"
-                PARSE_UPDATE(quelle)
+                PARSE_UPDATE(flname)
             Case "PREREGISTER_PRODUCT_MODEL"
-                PARSE_PREREGISTER(quelle)
+                PARSE_PREREGISTER(flname)
             Case "REGISTER_PRODUCT_MODEL"
-                PARSE_REGISTER(quelle)
+                PARSE_REGISTER(flname)
             Case "DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET"
                 MsgBox("Not yet implemented")
                 Exit Sub
@@ -1328,20 +1344,13 @@ Done:
 
 
     End Sub
-    Sub PARSE_PREREGISTER(quelle)
-        'PARSE -DATA
+    Sub PARSE_PREREGISTER(ByVal quelle As String)
 
-        Dim book = xlApp.Workbooks.Open(quelle.FileName)
-
-        'Dim book = xlApp.Workbooks.Open("C:\Users\User79\Desktop\EPREL_Datenkonvertierung_Python_20210201\quelle.xlsx")
-
-
-
+        Dim xlApp As New Excel.Application
+        Dim book = xlApp.Workbooks.Open(quelle)
         Dim xltab1 = book.Worksheets("PREREGISTRATION")
-        'Dim items() As String
         Dim xlUP As Object = Excel.XlDirection.xlUp
         Dim lastentry As Object
-        'Dim dummy As Integer
 
         dummy = xltab1.Range("A" & xltab1.Rows.Count).End(xlUP).Row
 
@@ -1355,8 +1364,9 @@ Done:
         'PARSE_END
 
     End Sub
-    Sub PARSE_REGISTER(quelle)
-        Dim book = xlApp.Workbooks.Open(quelle.FileName)
+    Sub PARSE_REGISTER(ByVal quelle As String)
+        Dim xlApp As New Excel.Application
+        Dim book = xlApp.Workbooks.Open(quelle)
         Dim xltab1 = book.Worksheets("REGISTER_PRODUCT_MODEL")
         Dim xltab2 = book.Worksheets("attachments")
         Dim xlUP As Object = Excel.XlDirection.xlUp
@@ -1527,18 +1537,36 @@ Done:
 
         xlApp.ActiveWorkbook.Close(False)
         xlApp.Quit()
+        System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp)
 
 
     End Sub
 
-    Sub PARSE_UPDATE(quelle)
-        Dim book = xlApp.Workbooks.Open(quelle.FileName)
-        Dim xltab1 = book.Worksheets("UPDATE_PRODUCT_MODEL")
-        Dim xltab2 = book.Worksheets("attachments")
-        Dim xlUP As Object = Excel.XlDirection.xlUp
+    Sub PARSE_UPDATE(ByVal quelle As String)
+        Dim xlApp As Excel.Application
+        Dim book As Excel.Workbook
+        Dim xltab1 As Excel.Worksheet
+        Dim xltab2 As Excel.Worksheet
+        Dim xlUP As Object
         Dim lastentry As Object
 
-        dummy = xltab1.Range("A" & xltab1.Rows.Count).End(xlUP).Row
+        xlApp = New Excel.Application
+        xlApp.Visible = False
+        book = xlApp.Workbooks.Open(quelle)
+        xltab1 = xlApp.Worksheets("UPDATE_PRODUCT_MODEL")
+        xltab2 = xlApp.Worksheets("attachments")
+        xlUP = Excel.XlDirection.xlUp
+
+
+        'Dim book As Excel.Workbooks = Excel._W
+        'book.Open(quelle)
+        'Dim book = xlApp.Workbooks.Open(quelle.FileName)
+        'Dim xltab1 = book.Worksheets("UPDATE_PRODUCT_MODEL")
+        'Dim xltab2 = book.Worksheets("attachments")
+        'Dim xlUP As Object = Excel.XlDirection.xlUp
+        'Dim lastentry As Object
+
+        dummy = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
 
         'dummy = book.Sheets(1).Range("A" & xltab1.Rows.Count).End(xlUP).Row
         lastentry = xltab1.Range("A1:A" & dummy).Value
@@ -1685,7 +1713,8 @@ Done:
 
         Next
 
-        dummy2 = book.Worksheets("attachments").Range("A" & xltab2.Rows.Count).End(xlUP).Row
+        'dummy2 = book.Worksheets("attachments").Range("A" & xltab2.Rows.Count).End(xlUP).Row
+        dummy2 = xltab2.Range("A" & xltab2.Rows.Count).End(xlUp).Row
         lastentry = xltab2.Range("A1:A" & dummy2).Value
 
         dummy2 = dummy2 - 2
@@ -1706,7 +1735,12 @@ Done:
 
         xlApp.ActiveWorkbook.Close(False)
         xlApp.Quit()
+
+
+
     End Sub
+
+
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         System.Diagnostics.Process.Start("mailto:m.planeck@nimbus-group.com")
