@@ -1,8 +1,6 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Globalization
-Imports System.Xml
-Imports System.Xml.Schema
-Imports System.Xml.XPath
+
 
 Imports <xmlns:ns3="http://eprel.ener.ec.europa.eu/services/productModelService/modelRegistrationService/v2">
 Imports <xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2">
