@@ -405,15 +405,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EPREL Dataconverter"
-        "ProductCode" = "8:{27FEC6EB-5296-45E7-AC28-092E25999CEA}"
-        "PackageCode" = "8:{F3118F17-B2D7-4386-B28C-A02511ECC9EF}"
+        "ProductCode" = "8:{125D4C40-5E70-4AB4-9B0F-D91BD8DD775D}"
+        "PackageCode" = "8:{836FD6E5-DF97-4935-BFD5-F21EB85FD166}"
         "UpgradeCode" = "8:{48D2175A-0959-4829-9876-51F55C0EFB3A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.1"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.1.2"
         "Manufacturer" = "8:nimbus Group GmbH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:mailto:m.planeck@nimbus-group.com"
@@ -941,7 +941,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_35A41287E3394B4DB6D9F3107E9889E6"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\EPREl Dataconverter\\obj\\Release\\EPREL Dataconverter.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_82695946E16A4D0789E71903F09673DE"

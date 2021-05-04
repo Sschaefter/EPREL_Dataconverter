@@ -1195,15 +1195,19 @@ Public Class Form1
         '---------DEBUG!---------------------
         Directory.CreateDirectory("Data")
         doc.Save(".\Data\registration-data.xml")
+        Dim start As String = ".\Data\"
 #Else
-        ''------RELEASE!--------
+        '------RELEASE!--------
         Dim dir As String = Directory.GetCurrentDirectory
         Directory.GetAccessControl(dir + "\Data\")
-        doc.Save(dir + "\Data\registration-data.xml")
+        Directory.CreateDirectory(dir + "\Data\productModelRegistrationTable")
+        doc.Save(dir + "\Data\productModelRegistrationTable\registration-data.xml")
+
+        Dim start As String = ".\Data\productModelRegistrationTable\"
 #End If
 
 
-        Dim start As String = ".\Data\"
+
 
         Dim ziel As New SaveFileDialog
         ziel.Filter = "zip files (*.zip)|*.zip"
@@ -1220,45 +1224,42 @@ Public Class Form1
             MsgBox("Error!")
             Exit Sub
         End If
-        Try
-            If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Or CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
+
+        If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Or CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
 Select_File:
-                Dim SPECTRAL As New FolderBrowserDialog
-                'Dim dmmy As String = Path.GetDirectoryName(ziel.FileName) & "\"
-                'SPECTRAL.RootFolder = dmmy
-                SPECTRAL.Description = "Please select folder with attachment data!"
+            Dim SPECTRAL As New FolderBrowserDialog
+            SPECTRAL.Description = "Please select folder with attachment data!"
 
-                SPECTRAL.ShowDialog()
-
-                Directory.CreateDirectory(start & "\attachments\")
-                Dim fle As String
-                Dim target As String = ""
-
-
-                For Each fle In Directory.GetFiles(SPECTRAL.SelectedPath)
-                    target = start & "attachments\" & Path.GetFileName(fle)
-                    File.Copy(fle, target)
-                Next
-
+            SPECTRAL.ShowDialog()
+            If SPECTRAL.SelectedPath = "" Then
+                Select Case MsgBox("Are you shure you do not want to upload any files?", MsgBoxStyle.YesNo)
+                    Case MsgBoxResult.Yes
+                        GoTo Done
+                    Case MsgBoxResult.No
+                        GoTo Select_File
+                    Case Else
+                        GoTo Select_File
+                End Select
             End If
-        Catch
 
-            Select Case MsgBox("Are you shure you do not want to upload any files?", MsgBoxStyle.YesNo)
-                Case MsgBoxResult.Yes
-                    Exit Try
-                Case MsgBoxResult.No
-                    GoTo Select_File
-                Case Else
-                    GoTo Select_File
-            End Select
-        End Try
+            Directory.CreateDirectory(dir + "\Data\productModelRegistrationTable\attachments\")
 
+            Dim fle As String
+            Dim target As String = ""
+
+            For Each fle In Directory.GetFiles(SPECTRAL.SelectedPath)
+                target = dir & "\Data\productModelRegistrationTable\attachments\" & Path.GetFileName(fle)
+                File.Copy(fle, target)
+            Next
+
+        End If
+
+Done:
         ZipFile.CreateFromDirectory(start, ziel.FileName)
 
-#If DEBUG Then
         '---------------DEBUG!--------------------
-        Directory.Delete(".\Data", True)
-#End If
+        Directory.Delete(dir + "\Data\productModelRegistrationTable", True)
+
         MsgBox("Done!")
 
     End Sub
