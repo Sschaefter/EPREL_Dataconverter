@@ -24,6 +24,7 @@ Partial Class Form_Contact
     Private Sub InitializeComponent()
         Me.CB_ContactDetails = New System.Windows.Forms.CheckBox()
         Me.P_ContactDetails = New System.Windows.Forms.Panel()
+        Me.TB_Email = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.CBox_Country = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -51,7 +52,6 @@ Partial Class Form_Contact
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TB_ContactName = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.TB_Email = New System.Windows.Forms.TextBox()
         Me.P_ContactDetails.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -99,6 +99,13 @@ Partial Class Form_Contact
         Me.P_ContactDetails.Name = "P_ContactDetails"
         Me.P_ContactDetails.Size = New System.Drawing.Size(238, 433)
         Me.P_ContactDetails.TabIndex = 1
+        '
+        'TB_Email
+        '
+        Me.TB_Email.Location = New System.Drawing.Point(6, 133)
+        Me.TB_Email.Name = "TB_Email"
+        Me.TB_Email.Size = New System.Drawing.Size(206, 20)
+        Me.TB_Email.TabIndex = 28
         '
         'Label14
         '
@@ -244,9 +251,9 @@ Partial Class Form_Contact
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(3, 117)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(73, 13)
+        Me.Label5.Size = New System.Drawing.Size(77, 13)
         Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Email Address"
+        Me.Label5.Text = "Email Address*"
         '
         'Label4
         '
@@ -269,9 +276,9 @@ Partial Class Form_Contact
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(109, 39)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(62, 13)
+        Me.Label3.Size = New System.Drawing.Size(58, 13)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Last Name*"
+        Me.Label3.Text = "Last Name"
         '
         'TB_LastName
         '
@@ -285,9 +292,9 @@ Partial Class Form_Contact
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(3, 39)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(61, 13)
+        Me.Label2.Size = New System.Drawing.Size(57, 13)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "First Name*"
+        Me.Label2.Text = "First Name"
         '
         'TB_FirstName
         '
@@ -320,13 +327,6 @@ Partial Class Form_Contact
         Me.Button1.TabIndex = 2
         Me.Button1.Text = "Close"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TB_Email
-        '
-        Me.TB_Email.Location = New System.Drawing.Point(6, 133)
-        Me.TB_Email.Name = "TB_Email"
-        Me.TB_Email.Size = New System.Drawing.Size(206, 20)
-        Me.TB_Email.TabIndex = 28
         '
         'Form_Contact
         '

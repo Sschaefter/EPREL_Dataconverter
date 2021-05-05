@@ -39,12 +39,14 @@ Partial Class Form1
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.CB_RegistrantNature = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(73, 257)
+        Me.Button1.Location = New System.Drawing.Point(73, 356)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 0
@@ -96,6 +98,8 @@ Partial Class Form1
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.CB_RegistrantNature)
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Txt_ContactRef)
         Me.Panel1.Controls.Add(Me.Label5)
@@ -110,12 +114,12 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(45, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(281, 239)
+        Me.Panel1.Size = New System.Drawing.Size(281, 318)
         Me.Panel1.TabIndex = 7
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(169, 206)
+        Me.Button2.Location = New System.Drawing.Point(169, 258)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 13
@@ -161,7 +165,7 @@ Partial Class Form1
         'CheckB_Log
         '
         Me.CheckB_Log.AutoSize = True
-        Me.CheckB_Log.Location = New System.Drawing.Point(23, 206)
+        Me.CheckB_Log.Location = New System.Drawing.Point(23, 258)
         Me.CheckB_Log.Name = "CheckB_Log"
         Me.CheckB_Log.Size = New System.Drawing.Size(44, 17)
         Me.CheckB_Log.TabIndex = 8
@@ -181,7 +185,7 @@ Partial Class Form1
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(113, 324)
+        Me.LinkLabel1.Location = New System.Drawing.Point(115, 409)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(144, 13)
         Me.LinkLabel1.TabIndex = 8
@@ -190,18 +194,37 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(214, 257)
+        Me.Button3.Location = New System.Drawing.Point(214, 356)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 9
         Me.Button3.Text = "Validate Zip"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'CB_RegistrantNature
+        '
+        Me.CB_RegistrantNature.FormattingEnabled = True
+        Me.CB_RegistrantNature.IntegralHeight = False
+        Me.CB_RegistrantNature.Items.AddRange(New Object() {"AUTHORISED_REPRESENTATIVE", "IMPORTER", "MANUFACTURER"})
+        Me.CB_RegistrantNature.Location = New System.Drawing.Point(23, 219)
+        Me.CB_RegistrantNature.Name = "CB_RegistrantNature"
+        Me.CB_RegistrantNature.Size = New System.Drawing.Size(221, 21)
+        Me.CB_RegistrantNature.TabIndex = 14
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(23, 203)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(102, 13)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Nature of Registrant"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(374, 346)
+        Me.ClientSize = New System.Drawing.Size(374, 431)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Panel1)
@@ -243,4 +266,6 @@ Partial Class Form1
     Friend WithEvents Label5 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents Label6 As Label
+    Friend WithEvents CB_RegistrantNature As ComboBox
 End Class
