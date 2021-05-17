@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0E67C3E1D5904174B8D9858C7F573E68"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,6 +40,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9F795A646AC14E759BE86991508F8513"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A3B5285A2FF04C40AAA8BE457AAD1CCE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -194,26 +194,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E67C3E1D5904174B8D9858C7F573E68"
-            {
-            "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\Vorlage_EPREL_ECO-V0.2.xlsx"
-            "TargetName" = "8:Vorlage_EPREL_ECO-V0.2.xlsx"
-            "Tag" = "8:"
-            "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_435742F05DBA655873821CA047B2A840"
             {
             "AssemblyRegister" = "3:1"
@@ -280,6 +260,26 @@
             {
             "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\EprelExchangeModel-2.7.10-SNAPSHOT.jar"
             "TargetName" = "8:EprelExchangeModel-2.7.10-SNAPSHOT.jar"
+            "Tag" = "8:"
+            "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3B5285A2FF04C40AAA8BE457AAD1CCE"
+            {
+            "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\Vorlage_EPREL_ECO-V0.3.xlsx"
+            "TargetName" = "8:Vorlage_EPREL_ECO-V0.3.xlsx"
             "Tag" = "8:"
             "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
             "Condition" = "8:"
@@ -405,15 +405,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EPREL Dataconverter"
-        "ProductCode" = "8:{B28644CF-7D78-4AAF-B909-29DA31508516}"
-        "PackageCode" = "8:{608ECAFB-7974-41D6-B29D-247AEEA513CD}"
+        "ProductCode" = "8:{197E3AA5-0C80-4848-A205-9B1395F0866A}"
+        "PackageCode" = "8:{E6B9ACE4-1541-4E37-BF78-6E187BD5AF78}"
         "UpgradeCode" = "8:{48D2175A-0959-4829-9876-51F55C0EFB3A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.5"
+        "ProductVersion" = "8:1.1.6"
         "Manufacturer" = "8:nimbus Group GmbH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:mailto:m.planeck@nimbus-group.com"

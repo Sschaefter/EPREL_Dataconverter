@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EPREL Dataconverter.exe" size="118232">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EPREL Dataconverter.exe" size="122840">
       <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.5" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l7q35esvKAqj1Nxm270hhomCOptaJ/LrSD23Kg5JIcw=</dsig:DigestValue>
+        <dsig:DigestValue>VR2TZhw0+yYixA7vTHNwIwNCgMXs+e8dZI5KGfNEVMw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

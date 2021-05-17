@@ -677,14 +677,14 @@ Public Class Form1
     Public Sub REGISTRATION()
 
         Try
-            '---Declaration
+            '---Declaration -M
             Dim decl As XDeclaration = New XDeclaration(encoding:="UTF-8", standalone:="yes", version:="1.0")
             doc.Declaration = decl
 
-            '---Registration
+            '---Registration -M
             Dim REGISTRATION As XElement = <ns3:ProductModelRegistrationRequest xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" REQUEST_ID="nothing"/>
 
-            '---Request
+            '---Request -M
             Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
             REQUEST_ID.Value = Txt_Request.Text
 
@@ -697,16 +697,16 @@ Public Class Form1
                 Dim OPERATION_ID As XAttribute = productOperation.Attribute("OPERATION_ID")
                 OPERATION_ID.Value = i
 
-                '---Model Version
+                '---Model Version -M
                 Dim MODEL_VERSION As XElement = <MODEL_VERSION/>
                 productOperation.Add(MODEL_VERSION)
 
-                '---Model Identifier
+                '---Model Identifier -M
                 Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
                 MODEL_IDENTIFIER.Value = _MODEL_IDENTIFIER(i)
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
-                '---Supplier
+                '---Supplier -M
                 'Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
                 'SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
                 'MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
@@ -714,7 +714,7 @@ Public Class Form1
                 TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
                 MODEL_VERSION.Add(TRADEMARK_REFERENCE)
 
-                '---Delegated Act
+                '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
                 DELEGATED_ACT.Value = "EU_2019_2015"
                 MODEL_VERSION.Add(DELEGATED_ACT)
@@ -724,7 +724,7 @@ Public Class Form1
                 PRODUCT_GROUP.Value = "LAMP"
                 MODEL_VERSION.Add(PRODUCT_GROUP)
 
-                '---Energy Label
+                '---Energy Label 
                 If _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i) <> "" Then
                     Dim ENERGY_LABEL As XElement = <ENERGY_LABEL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" xsi:type="ns5:GeneratedEnergyLabel"/>
                     Dim CONSIDER_GENERATED_LABEL_AS_PROVIDED As XElement = <CONSIDER_GENERATED_LABEL_AS_PROVIDED/>
@@ -1308,29 +1308,31 @@ Public Class Form1
                         Continue For
                     End If
 
-                    If _DLS_MIN_BEAM_ANGLE(i) <> "" Then
-                        Dim MIN_BEAM_ANGLE As XElement = <MIN_BEAM_ANGLE/>
-                        MIN_BEAM_ANGLE.Value = _DLS_MIN_BEAM_ANGLE(i)
-                        PRODUCT_GROUP_DETAIL.Add(MIN_BEAM_ANGLE)
-                    Else
-                        Form2.LB_Log.Items.Add("Min beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
-                        'Throw New ArgumentException("Exception Occured")
-                        errorstate = True
-                        Continue For
+                    If _DLS_BEAM_ANGLE(i) = "" Then
+                        If _DLS_MIN_BEAM_ANGLE(i) <> "" Then
+                            Dim MIN_BEAM_ANGLE As XElement = <MIN_BEAM_ANGLE/>
+                            MIN_BEAM_ANGLE.Value = _DLS_MIN_BEAM_ANGLE(i)
+                            PRODUCT_GROUP_DETAIL.Add(MIN_BEAM_ANGLE)
+                        Else
+                            Form2.LB_Log.Items.Add("Min beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+
+                        If _DLS_MAX_BEAM_ANGLE(i) <> "" Then
+                            Dim MAX_BEAM_ANGLE As XElement = <MAX_BEAM_ANGLE/>
+                            MAX_BEAM_ANGLE.Value = _DLS_MAX_BEAM_ANGLE(i)
+                            PRODUCT_GROUP_DETAIL.Add(MAX_BEAM_ANGLE)
+                        Else
+                            Form2.LB_Log.Items.Add("Max beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
                     End If
 
-                    If _DLS_MAX_BEAM_ANGLE(i) <> "" Then
-                        Dim MAX_BEAM_ANGLE As XElement = <MAX_BEAM_ANGLE/>
-                        MAX_BEAM_ANGLE.Value = _DLS_MAX_BEAM_ANGLE(i)
-                        PRODUCT_GROUP_DETAIL.Add(MAX_BEAM_ANGLE)
-                    Else
-                        Form2.LB_Log.Items.Add("Max beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
-                        'Throw New ArgumentException("Exception Occured")
-                        errorstate = True
-                        Continue For
-                    End If
                 End If
-
 
                 If _LIGHTING_TECHNOLOGY(i) = "LED" Or _LIGHTING_TECHNOLOGY(i) = "OLED" Then
                     If _LED_R9_COLOUR_RENDERING_INDEX(i) <> "" Then
@@ -1407,9 +1409,9 @@ Public Class Form1
                                 End If
 
                             Case "false"
-                                Dim CLAIM_LED_REPLACE_FLOURESCENT As XElement = <CLAIM_LED_REPLACE_FLOURESCENT/>
-                                CLAIM_LED_REPLACE_FLOURESCENT.Value = _LED_MLS_CLAIM_LED_REPLACE_FLUORESCENT(i)
-                                PRODUCT_GROUP_DETAIL.Add(CLAIM_LED_REPLACE_FLOURESCENT)
+                                Dim CLAIM_LED_REPLACE_FLUORESCENT As XElement = <CLAIM_LED_REPLACE_FLUORESCENT/>
+                                CLAIM_LED_REPLACE_FLUORESCENT.Value = _LED_MLS_CLAIM_LED_REPLACE_FLUORESCENT(i)
+                                PRODUCT_GROUP_DETAIL.Add(CLAIM_LED_REPLACE_FLUORESCENT)
                             Case Else
                                 Form2.LB_Log.Items.Add("Replacement claim for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
                                 'Throw New ArgumentException("Exception Occured")
@@ -1429,33 +1431,24 @@ Public Class Form1
                         End If
 
 
-                    End If
-
-                    If _LED_MLS_FLICKER_METRIC(i) <> "" Then
-                        Dim FLICKER_METRIC As XElement = <FLICKER_METRIC/>
-                        FLICKER_METRIC.Value = _LED_MLS_FLICKER_METRIC(i)
-                        PRODUCT_GROUP_DETAIL.Add(FLICKER_METRIC)
-                    Else
-                        Form2.LB_Log.Items.Add("Flicker Metric for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
-                        'Throw New ArgumentException("Exception Occured")
-                        errorstate = True
-                        Continue For
-                    End If
+                        If _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i) <> "" Then
+                            Dim STROBOSCOPIC_EFFECT_METRIC As XElement = <STROBOSCOPIC_EFFECT_METRIC/>
+                            STROBOSCOPIC_EFFECT_METRIC.Value = _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i)
+                            PRODUCT_GROUP_DETAIL.Add(STROBOSCOPIC_EFFECT_METRIC)
+                        Else
+                            Form2.LB_Log.Items.Add("Stroboscopic effect for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
 
 
-                    If _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i) <> "" Then
-                        Dim STROBOSCOPIC_EFFECT_METRIC As XElement = <STROBOSCOPIC_EFFECT_METRIC/>
-                        STROBOSCOPIC_EFFECT_METRIC.Value = _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i)
-                        PRODUCT_GROUP_DETAIL.Add(STROBOSCOPIC_EFFECT_METRIC)
-                    Else
-                        Form2.LB_Log.Items.Add("Stroboscopic effect for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
-                        'Throw New ArgumentException("Exception Occured")
-                        errorstate = True
-                        Continue For
                     End If
+
+
                 End If
 
-                    MODEL_VERSION.Add(PRODUCT_GROUP_DETAIL)
+                MODEL_VERSION.Add(PRODUCT_GROUP_DETAIL)
 
             Next
 
@@ -1517,17 +1510,20 @@ Public Class Form1
                     Continue For
                 End If
 
-                '---Model Identifier
+                '---Model Identifier -M
                 Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
                 MODEL_IDENTIFIER.Value = _MODEL_IDENTIFIER(i)
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
-                '---Supplier
-                Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                '---Supplier -M
+                'Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+                'SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+                'MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
 
-                '---Delegated Act
+                '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
                 DELEGATED_ACT.Value = "EU_2019_2015"
                 MODEL_VERSION.Add(DELEGATED_ACT)
@@ -1537,29 +1533,36 @@ Public Class Form1
                 PRODUCT_GROUP.Value = "LAMP"
                 MODEL_VERSION.Add(PRODUCT_GROUP)
 
-                '---Energy Label
+                '---Energy Label 
                 If _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i) <> "" Then
                     Dim ENERGY_LABEL As XElement = <ENERGY_LABEL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2" xsi:type="ns5:GeneratedEnergyLabel"/>
                     Dim CONSIDER_GENERATED_LABEL_AS_PROVIDED As XElement = <CONSIDER_GENERATED_LABEL_AS_PROVIDED/>
+
                     CONSIDER_GENERATED_LABEL_AS_PROVIDED.Value = _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i)
                     ENERGY_LABEL.Add(CONSIDER_GENERATED_LABEL_AS_PROVIDED)
                     MODEL_VERSION.Add(ENERGY_LABEL)
                 Else
                     Form2.LB_Log.Items.Add("Energy Label for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
-                    'Throw New ArgumentException("Exeption Occured")
+                    'Throw New ArgumentException("Exception Occured")
                     errorstate = True
                     Continue For
                 End If
 
-                '---Nature of Registrant
-                Dim REGISTRANT_NATURE As XElement = <REGISTRANT_NATURE/>
-                REGISTRANT_NATURE.Value = CB_RegistrantNature.SelectedItem
-                MODEL_VERSION.Add(REGISTRANT_NATURE)
 
                 '---Market Start Date YYYY-MM-DD
                 Dim ON_MARKET_START_DATE As XElement = <ON_MARKET_START_DATE/>
                 ON_MARKET_START_DATE.Value = _ON_MARKET_START_DATE(i)
                 MODEL_VERSION.Add(ON_MARKET_START_DATE)
+
+                '---Registrant Nature
+                Dim REGISTRANT_NATURE As XElement = <REGISTRANT_NATURE/>
+                REGISTRANT_NATURE.Value = CB_RegistrantNature.SelectedItem
+                MODEL_VERSION.Add(REGISTRANT_NATURE)
+
+                '---UK MSA
+                Dim VISIBLE_TO_UK_MSA As XElement = <VISIBLE_TO_UK_MSA/>
+                VISIBLE_TO_UK_MSA.Value = _VISIBLE_TO_UK_MSA(i)
+                MODEL_VERSION.Add(VISIBLE_TO_UK_MSA)
 
                 '---technical Documentation
                 Try
@@ -1609,6 +1612,11 @@ Public Class Form1
                                 DOCUMENT.Add(New XElement(TECHNICAL_PART))
                             End If
 
+                            If _TD(j)._TD_TESTING_CONDITIONS = True Then
+                                TECHNICAL_PART.Value = "TESTING_CONDITIONS"
+                                DOCUMENT.Add(New XElement(TECHNICAL_PART))
+                            End If
+
                             If _TD(j)._TD_SPECIFIC_PRECAUTIONS = True Then
                                 TECHNICAL_PART.Value = "SPECIFIC_PRECAUTIONS"
                                 DOCUMENT.Add(New XElement(TECHNICAL_PART))
@@ -1626,54 +1634,35 @@ Public Class Form1
                         MODEL_VERSION.Add(TECHNICAL_DOCUMENTATION)
                     End If
                 Catch ex As Exception
-                    Form2.LB_Log.Items.Add("technical Information for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
                     errorstate = True
+                    Form2.LB_Log.Items.Add("technical Information for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
                     Continue For
                 End Try
 
 
 
-                '----Kontakt
+                '---Kontakt
                 Select Case Form_Contact.CB_ContactDetails.Checked
+
                     Case False
+                        '---Contact Details
                         Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ContactByReference"/>
+                        '--- Contact Reference
                         Dim CONTACT_REFERENCE As XElement = <CONTACT_REFERENCE/>
                         CONTACT_REFERENCE.Value = Txt_ContactRef.Text
                         CONTACT_DETAILS.Add(CONTACT_REFERENCE)
                         MODEL_VERSION.Add(CONTACT_DETAILS)
+
                     Case True
+                        '---Contact details
                         Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ModelSpecificContactDetails"/>
                         Dim CONTACT_NAME As XElement = <CONTACT_NAME/>
                         CONTACT_NAME.Value = Form_Contact.TB_ContactName.Text
                         CONTACT_DETAILS.Add(CONTACT_NAME)
 
-                        Dim FIRST_NAME As XElement = <FIRST_NAME/>
-                        FIRST_NAME.Value = Form_Contact.TB_FirstName.Text
-                        CONTACT_DETAILS.Add(FIRST_NAME)
-
-                        Dim LAST_NAME As XElement = <LAST_NAME/>
-                        LAST_NAME.Value = Form_Contact.TB_LastName.Text
-                        CONTACT_DETAILS.Add(LAST_NAME)
-
-                        Dim PHONE_NUMBER As XElement = <PHONE_NUMBER/>
-                        PHONE_NUMBER.Value = Form_Contact.TB_PhoneNumber.Text
-                        CONTACT_DETAILS.Add(PHONE_NUMBER)
-
-                        If Form_Contact.TB_Email.Text <> "" Then
-                            Dim EMAIL_ADDRESS As XElement = <EMAIL_ADDRESS/>
-                            EMAIL_ADDRESS.Value = Form_Contact.TB_Email.Text
-                            CONTACT_DETAILS.Add(EMAIL_ADDRESS)
-                        End If
-
-                        If Form_Contact.TB_URL.Text <> "" Then
-                            Dim URL As XElement = <URL/>
-                            URL.Value = Form_Contact.TB_URL.Text
-                            CONTACT_DETAILS.Add(URL)
-                        End If
-
                         With Form_Contact
                             If .TB_StreetName.Text <> "" Or .TB_Number.Text <> "" Or .TB_City.Text <> "" Or .TB_Municipality.Text <> "" Or .TB_Province.Text <> "" Or .TB_Postcode.Text <> "" Or .CBox_Country.SelectedItem <> "" Then
-                                Dim ADDRESS As XElement = <ADDRESS xsi.type="ns5:DetailedAddress"/>
+                                Dim ADDRESS As XElement = <ADDRESS xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/baseTypes/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns5:DetailedAddress"/>
 
                                 If .TB_StreetName.Text <> "" Then
                                     Dim STREET_NAME As XElement = <STREET_NAME/>
@@ -1719,107 +1708,285 @@ Public Class Form1
                                 CONTACT_DETAILS.Add(ADDRESS)
                             End If
                         End With
+
+                        Dim FIRST_NAME As XElement = <FIRST_NAME/>
+                        FIRST_NAME.Value = Form_Contact.TB_FirstName.Text
+                        CONTACT_DETAILS.Add(FIRST_NAME)
+
+                        Dim LAST_NAME As XElement = <LAST_NAME/>
+                        LAST_NAME.Value = Form_Contact.TB_LastName.Text
+                        CONTACT_DETAILS.Add(LAST_NAME)
+
+                        Dim PHONE_NUMBER As XElement = <PHONE_NUMBER/>
+                        PHONE_NUMBER.Value = Form_Contact.TB_PhoneNumber.Text
+                        CONTACT_DETAILS.Add(PHONE_NUMBER)
+
+                        If Form_Contact.TB_Email.Text <> "" Then
+                            Dim EMAIL_ADDRESS As XElement = <EMAIL_ADDRESS/>
+                            EMAIL_ADDRESS.Value = Form_Contact.TB_Email.Text
+                            CONTACT_DETAILS.Add(EMAIL_ADDRESS)
+                        End If
+
+                        If Form_Contact.TB_URL.Text <> "" Then
+                            Dim URL As XElement = <URL/>
+                            URL.Value = Form_Contact.TB_URL.Text
+                            CONTACT_DETAILS.Add(URL)
+                        End If
+
+
                         MODEL_VERSION.Add(CONTACT_DETAILS)
                 End Select
 
+
+
+
                 '---Product Group Detail
                 Dim PRODUCT_GROUP_DETAIL As XElement = <PRODUCT_GROUP_DETAIL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://eprel.ener.ec.europa.eu/productModel/productGroups/lightsource/v1" xsi:type="ns5:LightSource"/>
+
+                '---Lighting technology
                 Dim LIGHTING_TECHNOLOGY As XElement = <LIGHTING_TECHNOLOGY/>
                 LIGHTING_TECHNOLOGY.Value = _LIGHTING_TECHNOLOGY(i)
                 PRODUCT_GROUP_DETAIL.Add(LIGHTING_TECHNOLOGY)
 
-                Dim CAP_TYPE As XElement = <CAP_TYPE/>
-                CAP_TYPE.Value = _CAP_TYPE(i)
-                PRODUCT_GROUP_DETAIL.Add(CAP_TYPE)
-
-                Dim DIRECTIONAL As XElement = <DIRECTIONAL/>
-                DIRECTIONAL.Value = _DIRECTIONAL(i)
-                PRODUCT_GROUP_DETAIL.Add(DIRECTIONAL)
-
-                Dim MAINS As XElement = <MAINS/>
-                MAINS.Value = _MAINS(i)
-                PRODUCT_GROUP_DETAIL.Add(MAINS)
-
-                Dim CONNECTED_LIGHT_SOURCE As XElement = <CONNECTED_LIGHT_SOURCE/>
-                CONNECTED_LIGHT_SOURCE.Value = _CONNECTED_LIGHT_SOURCE(i)
-                PRODUCT_GROUP_DETAIL.Add(CONNECTED_LIGHT_SOURCE)
-
-                Dim COLOUR_TUNEABLE_LIGHT_SOURCE As XElement = <COLOUR_TUNEABLE_LIGHT_SOURCE/>
-                COLOUR_TUNEABLE_LIGHT_SOURCE.Value = _COLOUR_TUNEABLE_LIGHT_SOURCE(i)
-                PRODUCT_GROUP_DETAIL.Add(COLOUR_TUNEABLE_LIGHT_SOURCE)
-
-                Dim HIGH_LUMINANCE_LIGHT_SOURCE As XElement = <HIGH_LUMINANCE_LIGHT_SOURCE/>
-                HIGH_LUMINANCE_LIGHT_SOURCE.Value = _HIGH_LUMINANCE_LIGHT_SOURCE(i)
-                PRODUCT_GROUP_DETAIL.Add(HIGH_LUMINANCE_LIGHT_SOURCE)
-
-                Dim ANTI_GLARE_SHIELD As XElement = <ANTI_GLARE_SHIELD/>
-                ANTI_GLARE_SHIELD.Value = _ANTI_GLARE_SHIELD(i)
-                PRODUCT_GROUP_DETAIL.Add(ANTI_GLARE_SHIELD)
-
-                Dim DIMMABLE As XElement = <DIMMABLE/>
-                DIMMABLE.Value = _DIMMABLE(i)
-                PRODUCT_GROUP_DETAIL.Add(DIMMABLE)
-
-                Dim ENERGY_CONS_ON_MODE As XElement = <ENERGY_CONS_ON_MODE/>
-                ENERGY_CONS_ON_MODE.Value = _ENERGY_CONS_ON_MODE(i)
-                PRODUCT_GROUP_DETAIL.Add(ENERGY_CONS_ON_MODE)
-
-                Dim ENERGY_CLASS As XElement = <ENERGY_CLASS/>
-                ENERGY_CLASS.Value = _ENERGY_CLASS(i)
-                PRODUCT_GROUP_DETAIL.Add(ENERGY_CLASS)
-
-                Dim LUMINOUS_FLUX As XElement = <LUMINOUS_FLUX/>
-                LUMINOUS_FLUX.Value = _LUMINOUS_FLUX(i)
-                PRODUCT_GROUP_DETAIL.Add(LUMINOUS_FLUX)
-
-                Dim BEAM_ANGLE_CORRESPONDENCE As XElement = <BEAM_ANGLE_CORRESPONDENCE/>
-                BEAM_ANGLE_CORRESPONDENCE.Value = _BEAM_ANGLE_CORRESPONDENCE(i)
-                PRODUCT_GROUP_DETAIL.Add(BEAM_ANGLE_CORRESPONDENCE)
-
-                Dim CORRELATED_COLOUR_TEMP_TYPE As XElement = <CORRELATED_COLOUR_TEMP_TYPE/>
-                CORRELATED_COLOUR_TEMP_TYPE.Value = _CORRELATED_COLOUR_TEMP_TYPE(i)
-                PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP_TYPE)
-                Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
-
-                Select Case CORRELATED_COLOUR_TEMP_TYPE.Value
-                    Case "SINGLE_VALUE"
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_SINGLE(i)
-                        PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
-                    Case "STEPS"
-                        'Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_1(i)
-                        PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_2(i)
-                        PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_3(i)
-                        PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_4(i)
-                        PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
-                    Case "RANGE"
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_MIN(i)
-                        PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
-                        CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_MAX(i)
-                        PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
-                End Select
-
-
-                Dim POWER_ON_MODE As XElement = <POWER_ON_MODE/>
-                POWER_ON_MODE.Value = _POWER_ON_MODE(i)
-                PRODUCT_GROUP_DETAIL.Add(POWER_ON_MODE)
-
-                Dim POWER_STANDBY As XElement = <POWER_STANDBY/>
-                POWER_STANDBY.Value = _POWER_STANDBY(i)
-                PRODUCT_GROUP_DETAIL.Add(POWER_STANDBY)
-
-                If CONNECTED_LIGHT_SOURCE.Value = "true" Then
-                    Dim POWER_STANDBY_NETWORKED As XElement = <POWER_STANDBY_NETWORKED/>
-                    POWER_STANDBY_NETWORKED.Value = _POWER_STANDBY_NETWORKED(i)
-                    PRODUCT_GROUP_DETAIL.Add(POWER_STANDBY_NETWORKED)
+                '---Captype
+                If _CAP_TYPE(i) <> "" Then
+                    Dim CAP_TYPE As XElement = <CAP_TYPE/>
+                    CAP_TYPE.Value = _CAP_TYPE(i)
+                    PRODUCT_GROUP_DETAIL.Add(CAP_TYPE)
+                Else
+                    Form2.LB_Log.Items.Add("Cap Type for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exeption Occured")
+                    errorstate = True
+                    Continue For
                 End If
 
-                Dim COLOUR_RENDERING_INDEX As XElement = <COLOUR_RENDERING_INDEX/>
-                COLOUR_RENDERING_INDEX.Value = _COLOUR_RENDERING_INDEX(i)
-                PRODUCT_GROUP_DETAIL.Add(COLOUR_RENDERING_INDEX)
+                '---Directional
+                If _DIRECTIONAL(i) <> "" Then
+                    Dim DIRECTIONAL As XElement = <DIRECTIONAL/>
+                    DIRECTIONAL.Value = _DIRECTIONAL(i)
+                    PRODUCT_GROUP_DETAIL.Add(DIRECTIONAL)
+                Else
+                    Form2.LB_Log.Items.Add("Direction for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                '---Mains
+                If _MAINS(i) <> "" Then
+                    Dim MAINS As XElement = <MAINS/>
+                    MAINS.Value = _MAINS(i)
+                    PRODUCT_GROUP_DETAIL.Add(MAINS)
+                Else
+                    Form2.LB_Log.Items.Add("MAINS for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                '---Connected lightsource
+                If _CONNECTED_LIGHT_SOURCE(i) <> "" Then
+                    Dim CONNECTED_LIGHT_SOURCE As XElement = <CONNECTED_LIGHT_SOURCE/>
+                    CONNECTED_LIGHT_SOURCE.Value = _CONNECTED_LIGHT_SOURCE(i)
+                    PRODUCT_GROUP_DETAIL.Add(CONNECTED_LIGHT_SOURCE)
+                Else
+                    Form2.LB_Log.Items.Add(" for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _COLOUR_TUNEABLE_LIGHT_SOURCE(i) <> "" Then
+                    Dim COLOUR_TUNEABLE_LIGHT_SOURCE As XElement = <COLOUR_TUNEABLE_LIGHT_SOURCE/>
+                    COLOUR_TUNEABLE_LIGHT_SOURCE.Value = _COLOUR_TUNEABLE_LIGHT_SOURCE(i)
+                    PRODUCT_GROUP_DETAIL.Add(COLOUR_TUNEABLE_LIGHT_SOURCE)
+                Else
+                    Form2.LB_Log.Items.Add("CTLS for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                '---Envelope
+                If _LIGHTING_TECHNOLOGY(i) = "MIXED" Or _LIGHTING_TECHNOLOGY(i) = "OTHER_HID" Then
+                    Select Case _ENVELOPE(i)
+                        Case "NO"
+                            Dim ENVELOPE As XElement = <ENVELOPE/>
+                            ENVELOPE.Value = "NO"
+                            PRODUCT_GROUP_DETAIL.Add(ENVELOPE)
+                        Case "SECOND"
+                            Dim ENVELOPE As XElement = <ENVELOPE/>
+                            ENVELOPE.Value = "SECOND"
+                            PRODUCT_GROUP_DETAIL.Add(ENVELOPE)
+                        Case "NON_CLEAR"
+                            Dim ENVELOPE As XElement = <ENVELOPE/>
+                            ENVELOPE.Value = "NON_CLEAR"
+                            PRODUCT_GROUP_DETAIL.Add(ENVELOPE)
+                        Case Else
+                            errorstate = True
+                            Form2.LB_Log.Items.Add("Envelope is missing for Modelidentifier" & _MODEL_IDENTIFIER(i) & " is missing!")
+                            Continue For
+                    End Select
+                End If
+
+                '---High luminance Light source
+                If _HIGH_LUMINANCE_LIGHT_SOURCE(i) <> "" Then
+                    Dim HIGH_LUMINANCE_LIGHT_SOURCE As XElement = <HIGH_LUMINANCE_LIGHT_SOURCE/>
+                    HIGH_LUMINANCE_LIGHT_SOURCE.Value = _HIGH_LUMINANCE_LIGHT_SOURCE(i)
+                    PRODUCT_GROUP_DETAIL.Add(HIGH_LUMINANCE_LIGHT_SOURCE)
+                Else
+                    Form2.LB_Log.Items.Add("High luminance for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _ANTI_GLARE_SHIELD(i) <> "" Then
+                    Dim ANTI_GLARE_SHIELD As XElement = <ANTI_GLARE_SHIELD/>
+                    ANTI_GLARE_SHIELD.Value = _ANTI_GLARE_SHIELD(i)
+                    PRODUCT_GROUP_DETAIL.Add(ANTI_GLARE_SHIELD)
+                Else
+                    Form2.LB_Log.Items.Add("Anti Glare shield for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _DIMMABLE(i) <> "" Then
+                    Dim DIMMABLE As XElement = <DIMMABLE/>
+                    DIMMABLE.Value = _DIMMABLE(i)
+                    PRODUCT_GROUP_DETAIL.Add(DIMMABLE)
+                Else
+                    Form2.LB_Log.Items.Add("Dimmable for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _ENERGY_CONS_ON_MODE(i) <> "" Then
+                    Dim ENERGY_CONS_ON_MODE As XElement = <ENERGY_CONS_ON_MODE/>
+                    ENERGY_CONS_ON_MODE.Value = _ENERGY_CONS_ON_MODE(i)
+                    PRODUCT_GROUP_DETAIL.Add(ENERGY_CONS_ON_MODE)
+                Else
+                    Form2.LB_Log.Items.Add("Energy consumption for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _ENERGY_CLASS(i) <> "" Then
+                    Dim ENERGY_CLASS As XElement = <ENERGY_CLASS/>
+                    ENERGY_CLASS.Value = _ENERGY_CLASS(i)
+                    PRODUCT_GROUP_DETAIL.Add(ENERGY_CLASS)
+                Else
+                    Form2.LB_Log.Items.Add("Energyclass for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _LUMINOUS_FLUX(i) <> "" Then
+                    Dim LUMINOUS_FLUX As XElement = <LUMINOUS_FLUX/>
+                    LUMINOUS_FLUX.Value = _LUMINOUS_FLUX(i)
+                    PRODUCT_GROUP_DETAIL.Add(LUMINOUS_FLUX)
+                Else
+                    Form2.LB_Log.Items.Add("Luminus flux for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _BEAM_ANGLE_CORRESPONDENCE(i) <> "" Then
+                    Dim BEAM_ANGLE_CORRESPONDENCE As XElement = <BEAM_ANGLE_CORRESPONDENCE/>
+                    BEAM_ANGLE_CORRESPONDENCE.Value = _BEAM_ANGLE_CORRESPONDENCE(i)
+                    PRODUCT_GROUP_DETAIL.Add(BEAM_ANGLE_CORRESPONDENCE)
+                Else
+                    Form2.LB_Log.Items.Add("Beam angle correspondence for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+
+                If _CORRELATED_COLOUR_TEMP_TYPE(i) <> "" Then
+
+                    Dim CORRELATED_COLOUR_TEMP_TYPE As XElement = <CORRELATED_COLOUR_TEMP_TYPE/>
+                    CORRELATED_COLOUR_TEMP_TYPE.Value = _CORRELATED_COLOUR_TEMP_TYPE(i)
+                    PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP_TYPE)
+
+                    Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
+                    Select Case CORRELATED_COLOUR_TEMP_TYPE.Value
+                        Case "SINGLE_VALUE"
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_SINGLE(i)
+                            PRODUCT_GROUP_DETAIL.Add(CORRELATED_COLOUR_TEMP)
+                        Case "STEPS"
+                            'Dim CORRELATED_COLOUR_TEMP As XElement = <CORRELATED_COLOUR_TEMP/>
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_1(i)
+                            PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_2(i)
+                            PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_3(i)
+                            PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_4(i)
+                            PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
+                        Case "RANGE"
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_MIN(i)
+                            PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
+                            CORRELATED_COLOUR_TEMP.Value = _CORRELATED_COLOUR_TEMP_MAX(i)
+                            PRODUCT_GROUP_DETAIL.Add(New XElement(CORRELATED_COLOUR_TEMP))
+                    End Select
+
+                Else
+                    Form2.LB_Log.Items.Add("Correlated colour temperature type for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+
+                If _POWER_ON_MODE(i) <> "" Then
+                    Dim POWER_ON_MODE As XElement = <POWER_ON_MODE/>
+                    POWER_ON_MODE.Value = _POWER_ON_MODE(i)
+
+                    PRODUCT_GROUP_DETAIL.Add(POWER_ON_MODE)
+                Else
+                    Form2.LB_Log.Items.Add("Power for on mode for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _POWER_STANDBY(i) <> "" Then
+                    Dim POWER_STANDBY As XElement = <POWER_STANDBY/>
+                    POWER_STANDBY.Value = _POWER_STANDBY(i)
+                    PRODUCT_GROUP_DETAIL.Add(POWER_STANDBY)
+                Else
+                    Form2.LB_Log.Items.Add("Standby power for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+
+                If _CONNECTED_LIGHT_SOURCE(i) <> "" Then
+                    If _CONNECTED_LIGHT_SOURCE(i) = "true" Then
+                        Dim POWER_STANDBY_NETWORKED As XElement = <POWER_STANDBY_NETWORKED/>
+                        POWER_STANDBY_NETWORKED.Value = _POWER_STANDBY_NETWORKED(i)
+                        PRODUCT_GROUP_DETAIL.Add(POWER_STANDBY_NETWORKED)
+                    End If
+                Else
+                    Form2.LB_Log.Items.Add("Standby networked power for on mode for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _COLOUR_RENDERING_INDEX(i) <> "" Then
+                    Dim COLOUR_RENDERING_INDEX As XElement = <COLOUR_RENDERING_INDEX/>
+                    COLOUR_RENDERING_INDEX.Value = _COLOUR_RENDERING_INDEX(i)
+                    PRODUCT_GROUP_DETAIL.Add(COLOUR_RENDERING_INDEX)
+                End If
+
 
                 If _MIN_COLOUR_RENDERING_INDEX(i) <> "" Then
                     Dim MIN_COLOUR_RENDERING_INDEX As XElement = <MIN_COLOUR_RENDERING_INDEX/>
@@ -1833,63 +2000,261 @@ Public Class Form1
                     PRODUCT_GROUP_DETAIL.Add(MAX_COLOUR_RENDERING_INDEX)
                 End If
 
-                Dim DIMENSION_HEIGHT As XElement = <DIMENSION_HEIGHT/>
-                DIMENSION_HEIGHT.Value = _DIMENSION_HEIGHT(i)
-                PRODUCT_GROUP_DETAIL.Add(DIMENSION_HEIGHT)
+                If _DIMENSION_HEIGHT(i) <> "" Then
+                    Dim DIMENSION_HEIGHT As XElement = <DIMENSION_HEIGHT/>
+                    DIMENSION_HEIGHT.Value = _DIMENSION_HEIGHT(i)
+                    PRODUCT_GROUP_DETAIL.Add(DIMENSION_HEIGHT)
+                Else
+                    Form2.LB_Log.Items.Add("Dimension height for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
 
-                Dim DIMENSION_WIDTH As XElement = <DIMENSION_WIDTH/>
-                DIMENSION_WIDTH.Value = _DIMENSION_WIDTH(i)
-                PRODUCT_GROUP_DETAIL.Add(DIMENSION_WIDTH)
 
-                Dim DIMENSION_DEPTH As XElement = <DIMENSION_DEPTH/>
-                DIMENSION_DEPTH.Value = _DIMENSION_DEPTH(i)
-                PRODUCT_GROUP_DETAIL.Add(DIMENSION_DEPTH)
+                If _DIMENSION_WIDTH(i) <> "" Then
+                    Dim DIMENSION_WIDTH As XElement = <DIMENSION_WIDTH/>
+                    DIMENSION_WIDTH.Value = _DIMENSION_WIDTH(i)
+                    PRODUCT_GROUP_DETAIL.Add(DIMENSION_WIDTH)
+                Else
+                    Form2.LB_Log.Items.Add("Dimension width for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                If _DIMENSION_DEPTH(i) <> "" Then
+                    Dim DIMENSION_DEPTH As XElement = <DIMENSION_DEPTH/>
+                    DIMENSION_DEPTH.Value = _DIMENSION_DEPTH(i)
+                    PRODUCT_GROUP_DETAIL.Add(DIMENSION_DEPTH)
+                Else
+                    Form2.LB_Log.Items.Add("Dimension depth for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
 
                 If _SPECTRAL_POWER_DISTRIBUTION_IMAGE(i) <> "" Then
                     Dim SPECTRAL_POWER_DISTRIBUTION_IMAGE As XElement = <SPECTRAL_POWER_DISTRIBUTION_IMAGE/>
                     SPECTRAL_POWER_DISTRIBUTION_IMAGE.Value = "/attachments/" & _SPECTRAL_POWER_DISTRIBUTION_IMAGE(i)
                     PRODUCT_GROUP_DETAIL.Add(SPECTRAL_POWER_DISTRIBUTION_IMAGE)
+                Else
+                    Form2.LB_Log.Items.Add("Spectral power distribution image for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
                 End If
 
-                Dim CLAIM_EQUIVALENT_POWER As XElement = <CLAIM_EQUIVALENT_POWER/>
-                CLAIM_EQUIVALENT_POWER.Value = "false"
-                PRODUCT_GROUP_DETAIL.Add(CLAIM_EQUIVALENT_POWER)
+                '---Claim equivalent power
+                If _CLAIM_EQUIVALENT_POWER(i) <> "" Then
+                    Dim CLAIM_EQUIVALENT_POWER As XElement = <CLAIM_EQUIVALENT_POWER/>
+                    CLAIM_EQUIVALENT_POWER.Value = _CLAIM_EQUIVALENT_POWER(i)
+                    PRODUCT_GROUP_DETAIL.Add(CLAIM_EQUIVALENT_POWER)
+                Else
+                    Form2.LB_Log.Items.Add("Claim equivalent power for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    errorstate = True
+                    Continue For
+                End If
+                '---Equivalent Power
+                Select Case _CLAIM_EQUIVALENT_POWER(i)
+                    Case "true"
+                        Dim EQUIVALENT_POWER As XElement = <EQUIVALENT_POWER/>
+                        EQUIVALENT_POWER.Value = _EQUIVALENT_POWER(i)
+                        PRODUCT_GROUP_DETAIL.Add(EQUIVALENT_POWER)
+                    Case "false"
+                        Exit Select
+                    Case Else
+                        Form2.LB_Log.Items.Add("Equivalent power for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                        errorstate = True
+                        Continue For
+                End Select
 
-                'Dim EQUIVALENT_POWER As XElement = <EQUIVALENT_POWER/>
-                'EQUIVALENT_POWER.Value = "1"
-                'PRODUCT_GROUP_DETAIL.Add(EQUIVALENT_POWER)
 
-                Dim CHROMATICITY_COORD_X As XElement = <CHROMATICITY_COORD_X/>
-                CHROMATICITY_COORD_X.Value = _CHROMATICITY_COORD_X(i)
-                PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_X)
 
-                Dim CHROMATICITY_COORD_Y As XElement = <CHROMATICITY_COORD_Y/>
-                CHROMATICITY_COORD_Y.Value = _CHROMATICITY_COORD_Y(i)
-                PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_Y)
+                If _CHROMATICITY_COORD_X(i) <> "" Then
+                    Dim CHROMATICITY_COORD_X As XElement = <CHROMATICITY_COORD_X/>
+                    CHROMATICITY_COORD_X.Value = _CHROMATICITY_COORD_X(i)
+                    PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_X)
+                Else
+                    Form2.LB_Log.Items.Add("Chromaticity coordinate for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
 
-                If LIGHTING_TECHNOLOGY.Value = "LED" Then
-                    Dim R9_COLOUR_RENDERING_INDEX As XElement = <R9_COLOUR_RENDERING_INDEX/>
-                    R9_COLOUR_RENDERING_INDEX.Value = _LED_R9_COLOUR_RENDERING_INDEX(i)
-                    PRODUCT_GROUP_DETAIL.Add(R9_COLOUR_RENDERING_INDEX)
+                If _CHROMATICITY_COORD_Y(i) <> "" Then
+                    Dim CHROMATICITY_COORD_Y As XElement = <CHROMATICITY_COORD_Y/>
+                    CHROMATICITY_COORD_Y.Value = _CHROMATICITY_COORD_Y(i)
+                    PRODUCT_GROUP_DETAIL.Add(CHROMATICITY_COORD_Y)
+                Else
+                    Form2.LB_Log.Items.Add("Chromaticity coordinate for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exception Occured")
+                    errorstate = True
+                    Continue For
+                End If
 
-                    Dim SURVIVAL_FACTOR As XElement = <SURVIVAL_FACTOR/>
-                    SURVIVAL_FACTOR.Value = _LED_SURVIVAL_FACTOR(i)
-                    PRODUCT_GROUP_DETAIL.Add(SURVIVAL_FACTOR)
+                '---IF DLS
+                If _DIRECTIONAL(i) = "DLS" Then
+                    If _DLS_PEAK_LUMINOUS_INTENSITY(i) <> "" Then
+                        Dim PEAK_LUMINOUS_INTENSITY As XElement = <PEAK_LUMINOUS_INTENSITY/>
+                        PEAK_LUMINOUS_INTENSITY.Value = _DLS_PEAK_LUMINOUS_INTENSITY(i)
+                        PRODUCT_GROUP_DETAIL.Add(PEAK_LUMINOUS_INTENSITY)
+                    Else
+                        Form2.LB_Log.Items.Add("Peak luminous intensity for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                        'Throw New ArgumentException("Exception Occured")
+                        errorstate = True
+                        Continue For
+                    End If
 
-                    Dim LUMEN_MAINTENANCE_FACTOR As XElement = <LUMEN_MAINTENANCE_FACTOR/>
-                    LUMEN_MAINTENANCE_FACTOR.Value = _LED_LUMEN_MAINTENANCE_FACTOR(i)
-                    PRODUCT_GROUP_DETAIL.Add(LUMEN_MAINTENANCE_FACTOR)
+                    If _DLS_BEAM_ANGLE(i) <> "" Then
+                        Dim BEAM_ANGLE As XElement = <BEAM_ANGLE/>
+                        BEAM_ANGLE.Value = _DLS_BEAM_ANGLE(i)
+                        PRODUCT_GROUP_DETAIL.Add(BEAM_ANGLE)
+                    Else
+                        Form2.LB_Log.Items.Add("Beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                        'Throw New ArgumentException("Exception Occured")
+                        errorstate = True
+                        Continue For
+                    End If
+
+                    If _DLS_BEAM_ANGLE(i) = "" Then
+                        If _DLS_MIN_BEAM_ANGLE(i) <> "" Then
+                            Dim MIN_BEAM_ANGLE As XElement = <MIN_BEAM_ANGLE/>
+                            MIN_BEAM_ANGLE.Value = _DLS_MIN_BEAM_ANGLE(i)
+                            PRODUCT_GROUP_DETAIL.Add(MIN_BEAM_ANGLE)
+                        Else
+                            Form2.LB_Log.Items.Add("Min beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+
+                        If _DLS_MAX_BEAM_ANGLE(i) <> "" Then
+                            Dim MAX_BEAM_ANGLE As XElement = <MAX_BEAM_ANGLE/>
+                            MAX_BEAM_ANGLE.Value = _DLS_MAX_BEAM_ANGLE(i)
+                            PRODUCT_GROUP_DETAIL.Add(MAX_BEAM_ANGLE)
+                        Else
+                            Form2.LB_Log.Items.Add("Max beam angle for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+                    End If
 
                 End If
 
-                If LIGHTING_TECHNOLOGY.Value = "LED" And MAINS.Value = "MLS" Then
-                    Dim FLICKER_METRIC As XElement = <FLICKER_METRIC/>
-                    FLICKER_METRIC.Value = _LED_MLS_FLICKER_METRIC(i)
-                    PRODUCT_GROUP_DETAIL.Add(FLICKER_METRIC)
+                If _LIGHTING_TECHNOLOGY(i) = "LED" Or _LIGHTING_TECHNOLOGY(i) = "OLED" Then
+                    If _LED_R9_COLOUR_RENDERING_INDEX(i) <> "" Then
+                        Dim R9_COLOUR_RENDERING_INDEX As XElement = <R9_COLOUR_RENDERING_INDEX/>
+                        R9_COLOUR_RENDERING_INDEX.Value = _LED_R9_COLOUR_RENDERING_INDEX(i)
+                        PRODUCT_GROUP_DETAIL.Add(R9_COLOUR_RENDERING_INDEX)
+                    Else
+                        Form2.LB_Log.Items.Add("R9 Value for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                        'Throw New ArgumentException("Exception Occured")
+                        errorstate = True
+                        Continue For
+                    End If
 
-                    Dim STROBOSCOPIC_EFFECT_METRIC As XElement = <STROBOSCOPIC_EFFECT_METRIC/>
-                    STROBOSCOPIC_EFFECT_METRIC.Value = _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i)
-                    PRODUCT_GROUP_DETAIL.Add(STROBOSCOPIC_EFFECT_METRIC)
+                    If _LED_SURVIVAL_FACTOR(i) <> "" Then
+                        Dim SURVIVAL_FACTOR As XElement = <SURVIVAL_FACTOR/>
+                        SURVIVAL_FACTOR.Value = _LED_SURVIVAL_FACTOR(i)
+                        PRODUCT_GROUP_DETAIL.Add(SURVIVAL_FACTOR)
+                    Else
+                        Form2.LB_Log.Items.Add("Survival Factor for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                        'Throw New ArgumentException("Exception Occured")
+                        errorstate = True
+                        Continue For
+                    End If
+
+                    If _LED_LUMEN_MAINTENANCE_FACTOR(i) <> "" Then
+                        Dim LUMEN_MAINTENANCE_FACTOR As XElement = <LUMEN_MAINTENANCE_FACTOR/>
+                        LUMEN_MAINTENANCE_FACTOR.Value = _LED_LUMEN_MAINTENANCE_FACTOR(i)
+                        PRODUCT_GROUP_DETAIL.Add(LUMEN_MAINTENANCE_FACTOR)
+                    Else
+                        Form2.LB_Log.Items.Add("Lumen maintnance factor for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                        'Throw New ArgumentException("Exception Occured")
+                        errorstate = True
+                        Continue For
+                    End If
+
+                    If _MAINS(i) = "MLS" Then
+                        If _LED_MLS_DISPLACEMENT_FACTOR(i) <> "" Then
+                            Dim DISPLACEMENT_FACTOR As XElement = <DISPLACEMENT_FACTOR/>
+                            DISPLACEMENT_FACTOR.Value = _LED_MLS_DISPLACEMENT_FACTOR(i)
+                            PRODUCT_GROUP_DETAIL.Add(DISPLACEMENT_FACTOR)
+                        Else
+                            Form2.LB_Log.Items.Add("Displacementfactor for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+
+                        If _LED_MLS_COLOUR_CONSISTENCY(i) <> "" Then
+                            Dim COLOUR_CONSISTENCY As XElement = <COLOUR_CONSISTENCY/>
+                            COLOUR_CONSISTENCY.Value = _LED_MLS_COLOUR_CONSISTENCY(i)
+                            PRODUCT_GROUP_DETAIL.Add(COLOUR_CONSISTENCY)
+                        Else
+                            Form2.LB_Log.Items.Add("Colour consistency for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+
+                        Select Case _LED_MLS_CLAIM_LED_REPLACE_FLUORESCENT(i)
+                            Case "true"
+                                Dim CLAIM_LED_REPLACE_FLOURESCENT As XElement = <CLAIM_LED_REPLACE_FLOURESCENT/>
+                                CLAIM_LED_REPLACE_FLOURESCENT.Value = _LED_MLS_CLAIM_LED_REPLACE_FLUORESCENT(i)
+                                PRODUCT_GROUP_DETAIL.Add(CLAIM_LED_REPLACE_FLOURESCENT)
+
+                                If _LED_MLS_FL_REPLACEMENT_CLAIM(i) <> "" Then
+                                    Dim REPLACEMENT_CLAIM As XElement = <REPLACEMENT_CLAIM/>
+                                    REPLACEMENT_CLAIM.Value = _LED_MLS_FL_REPLACEMENT_CLAIM(i)
+                                    PRODUCT_GROUP_DETAIL.Add(REPLACEMENT_CLAIM)
+                                Else
+                                    Form2.LB_Log.Items.Add("Replacement claim for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                                    'Throw New ArgumentException("Exception Occured")
+                                    errorstate = True
+                                    Continue For
+                                End If
+
+                            Case "false"
+                                Dim CLAIM_LED_REPLACE_FLUORESCENT As XElement = <CLAIM_LED_REPLACE_FLUORESCENT/>
+                                CLAIM_LED_REPLACE_FLUORESCENT.Value = _LED_MLS_CLAIM_LED_REPLACE_FLUORESCENT(i)
+                                PRODUCT_GROUP_DETAIL.Add(CLAIM_LED_REPLACE_FLUORESCENT)
+                            Case Else
+                                Form2.LB_Log.Items.Add("Replacement claim for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                                'Throw New ArgumentException("Exception Occured")
+                                errorstate = True
+                                Continue For
+                        End Select
+
+                        If _LED_MLS_FLICKER_METRIC(i) <> "" Then
+                            Dim FLICKER_METRIC As XElement = <FLICKER_METRIC/>
+                            FLICKER_METRIC.Value = _LED_MLS_FLICKER_METRIC(i)
+                            PRODUCT_GROUP_DETAIL.Add(FLICKER_METRIC)
+                        Else
+                            Form2.LB_Log.Items.Add("Flicker Metric for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+
+
+                        If _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i) <> "" Then
+                            Dim STROBOSCOPIC_EFFECT_METRIC As XElement = <STROBOSCOPIC_EFFECT_METRIC/>
+                            STROBOSCOPIC_EFFECT_METRIC.Value = _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i)
+                            PRODUCT_GROUP_DETAIL.Add(STROBOSCOPIC_EFFECT_METRIC)
+                        Else
+                            Form2.LB_Log.Items.Add("Stroboscopic effect for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                            'Throw New ArgumentException("Exception Occured")
+                            errorstate = True
+                            Continue For
+                        End If
+
+
+                    End If
+
+
                 End If
 
                 MODEL_VERSION.Add(PRODUCT_GROUP_DETAIL)
@@ -1897,9 +2262,12 @@ Public Class Form1
             Next
 
             doc.Add(REGISTRATION)
+
+#If DEBUG Then
             Console.WriteLine("Display the modified XML...")
             Console.WriteLine(doc)
             doc.Save(Console.Out)
+#End If
 
         Catch ex As Exception
             ErrorDlg("xml", ex)
