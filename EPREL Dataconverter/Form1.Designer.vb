@@ -30,6 +30,8 @@ Partial Class Form1
         Me.Txt_Request = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.CB_RegistrantNature = New System.Windows.Forms.ComboBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Txt_ContactRef = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -39,8 +41,6 @@ Partial Class Form1
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.CB_RegistrantNature = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -117,6 +117,25 @@ Partial Class Form1
         Me.Panel1.Size = New System.Drawing.Size(281, 318)
         Me.Panel1.TabIndex = 7
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(23, 203)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(102, 13)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Nature of Registrant"
+        '
+        'CB_RegistrantNature
+        '
+        Me.CB_RegistrantNature.FormattingEnabled = True
+        Me.CB_RegistrantNature.IntegralHeight = False
+        Me.CB_RegistrantNature.Items.AddRange(New Object() {"AUTHORISED_REPRESENTATIVE", "IMPORTER", "MANUFACTURER"})
+        Me.CB_RegistrantNature.Location = New System.Drawing.Point(23, 219)
+        Me.CB_RegistrantNature.Name = "CB_RegistrantNature"
+        Me.CB_RegistrantNature.Size = New System.Drawing.Size(221, 21)
+        Me.CB_RegistrantNature.TabIndex = 14
+        '
         'Button2
         '
         Me.Button2.Location = New System.Drawing.Point(169, 258)
@@ -147,7 +166,7 @@ Partial Class Form1
         '
         Me.CB_ReasonChange.Enabled = False
         Me.CB_ReasonChange.FormattingEnabled = True
-        Me.CB_ReasonChange.Items.AddRange(New Object() {"CORRECT_TYPO", "CHANGE_IN_STANDARDS", "LABEL_SCALE_RANGE_CHANGE", "CHANGE_REQUEST_BY_MSA", "ADDED_INFORMATION_NO_EFFECT_ON_DECLARATION", "REQUEST_CHANGE_BY_EXTERNAL_BODY"})
+        Me.CB_ReasonChange.Items.AddRange(New Object() {"CORRECT_TYPO", "CHANGE_IN_STANDARDS", "LABEL_SCALE_RANGE_CHANGE", "CHANGE_REQUESTED_BY_MSA", "ADDED_INFORMATION_NO_EFFECT_ON_DECLARATION", "REQUEST_CHANGE_BY_EXTERNAL_BODY"})
         Me.CB_ReasonChange.Location = New System.Drawing.Point(23, 102)
         Me.CB_ReasonChange.Name = "CB_ReasonChange"
         Me.CB_ReasonChange.Size = New System.Drawing.Size(221, 21)
@@ -200,25 +219,6 @@ Partial Class Form1
         Me.Button3.TabIndex = 9
         Me.Button3.Text = "Validate Zip"
         Me.Button3.UseVisualStyleBackColor = True
-        '
-        'CB_RegistrantNature
-        '
-        Me.CB_RegistrantNature.FormattingEnabled = True
-        Me.CB_RegistrantNature.IntegralHeight = False
-        Me.CB_RegistrantNature.Items.AddRange(New Object() {"AUTHORISED_REPRESENTATIVE", "IMPORTER", "MANUFACTURER"})
-        Me.CB_RegistrantNature.Location = New System.Drawing.Point(23, 219)
-        Me.CB_RegistrantNature.Name = "CB_RegistrantNature"
-        Me.CB_RegistrantNature.Size = New System.Drawing.Size(221, 21)
-        Me.CB_RegistrantNature.TabIndex = 14
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(23, 203)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(102, 13)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Nature of Registrant"
         '
         'Form1
         '

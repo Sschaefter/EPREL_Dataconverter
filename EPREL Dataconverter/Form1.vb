@@ -15,7 +15,7 @@ Imports <xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/
 Public Class Form1
 
     Public items() As String
-    Public _EPREL_MODEL_REGISTRATION_NUMBER() As Integer
+    Public _EPREL_MODEL_REGISTRATION_NUMBER() As String
     Public _MODEL_IDENTIFIER() As String
     Public _CONSIDER_GENERATED_LABEL_AS_PROVIDED() As String
     Public _ON_MARKET_START_DATE() As String
@@ -485,7 +485,7 @@ Public Class Form1
     Sub PARSE_UPDATE(ByVal quelle As String)
         Dim xlApp As New Excel.Application
         Dim book = xlApp.Workbooks.Open(quelle)
-        Dim xltab1 = book.Worksheets("REGISTER_PRODUCT_MODEL")
+        Dim xltab1 = book.Worksheets("UPDATE_PRODUCT_MODEL")
         Dim xltab2 = book.Worksheets("attachments")
         Dim xlUP As Object = Excel.XlDirection.xlUp
         Dim lastentry As Object
@@ -660,8 +660,9 @@ Public Class Form1
                 _TD(i)._TD_GENERAL_DESCRIPTION = xltab2.Range("F" & i + 2).Value
                 _TD(i)._TD_MESURED_TECHNICAL_PARAMETERS = xltab2.Range("G" & i + 2).Value
                 _TD(i)._TD_REFERENCES_TO_HARMONIZED_STANDARDS = xltab2.Range("H" & i + 2).Value
-                _TD(i)._TD_SPECIFIC_PRECAUTIONS = xltab2.Range("I" & i + 2).Value
-                _TD(i)._TD_FILE_NAME = xltab2.Range("J" & i + 2).Value
+                _TD(i)._TD_TESTING_CONDITIONS = xltab2.Range("I" & i + 2).Value
+                _TD(i)._TD_SPECIFIC_PRECAUTIONS = xltab2.Range("J" & i + 2).Value
+                _TD(i)._TD_FILE_NAME = xltab2.Range("K" & i + 2).Value
             Next
 
         Catch ex As Exception
