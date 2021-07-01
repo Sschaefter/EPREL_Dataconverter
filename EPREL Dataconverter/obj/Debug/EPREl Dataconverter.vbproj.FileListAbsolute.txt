@@ -59,7 +59,6 @@ C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\E
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.exe
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.pdb
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\EPREL Dataconverter.xml
-C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbprojAssemblyReference.cache
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.ResolveComReference.cache
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form1.resources
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form2.resources
@@ -73,3 +72,4 @@ C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\E
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.exe
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.xml
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.pdb
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.AssemblyReference.cache

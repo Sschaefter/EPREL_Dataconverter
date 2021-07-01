@@ -379,9 +379,11 @@ Public Class Form1
                 _HIGH_LUMINANCE_LIGHT_SOURCE(i - 1) = xltab1.Range("L" & i + 1).Value
                 _ANTI_GLARE_SHIELD(i - 1) = xltab1.Range("M" & i + 1).Value
                 _DIMMABLE(i - 1) = xltab1.Range("N" & i + 1).Value
-                _ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("O" & i + 1).Value)
-                _ENERGY_CLASS(i - 1) = xltab1.Range("P" & i + 1).Value
-                _LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("R" & i + 1).Value)
+                _ENERGY_CONS_ON_MODE(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("P" & i + 1).Value))
+                '_ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
+                _ENERGY_CLASS(i - 1) = xltab1.Range("Q" & i + 1).Value
+                _LUMINOUS_FLUX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("S" & i + 1).Value))
+                '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("S" & i + 1).Value
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("T" & i + 1).Value
                 dmy2 = Math.Ceiling(xltab1.Range("U" & i + 1).Value / 100)
@@ -432,8 +434,9 @@ Public Class Form1
                 _DLS_MIN_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 dmy2 = xltab1.Range("AS" & i + 1).Value
                 _DLS_MAX_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
-                dmy2 = xltab1.Range("AT" & i + 1).Value
-                _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AU" & i + 1).Value))
+                'dmy2 = xltab1.Range("AU" & i + 1).Value
+                '_LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 dmy2 = xltab1.Range("AU" & i + 1).Value
                 _LED_SURVIVAL_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
                 dmy2 = xltab1.Range("AV" & i + 1).Value
@@ -572,9 +575,11 @@ Public Class Form1
                 _HIGH_LUMINANCE_LIGHT_SOURCE(i - 1) = xltab1.Range("M" & i + 1).Value
                 _ANTI_GLARE_SHIELD(i - 1) = xltab1.Range("N" & i + 1).Value
                 _DIMMABLE(i - 1) = xltab1.Range("O" & i + 1).Value
-                _ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
+                _ENERGY_CONS_ON_MODE(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("P" & i + 1).Value))
+                '_ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
                 _ENERGY_CLASS(i - 1) = xltab1.Range("Q" & i + 1).Value
-                _LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
+                _LUMINOUS_FLUX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("S" & i + 1).Value))
+                '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("T" & i + 1).Value
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("U" & i + 1).Value
                 dmy2 = Math.Ceiling(xltab1.Range("V" & i + 1).Value / 100)
@@ -625,8 +630,9 @@ Public Class Form1
                 _DLS_MIN_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 dmy2 = xltab1.Range("AT" & i + 1).Value
                 _DLS_MAX_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
-                dmy2 = xltab1.Range("AU" & i + 1).Value
-                _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AU" & i + 1).Value))
+                'dmy2 = xltab1.Range("AU" & i + 1).Value
+                '_LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 dmy2 = xltab1.Range("AV" & i + 1).Value
                 _LED_SURVIVAL_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
                 dmy2 = xltab1.Range("AW" & i + 1).Value
@@ -708,12 +714,15 @@ Public Class Form1
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
                 '---Supplier -M
-                'Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                'SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                'MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
-                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                If CB_Trademark.Checked = True Then
+                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                Else
+                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                End If
 
                 '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
@@ -1517,12 +1526,15 @@ Public Class Form1
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
                 '---Supplier -M
-                'Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                'SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                'MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
-                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                If CB_Trademark.Checked = True Then
+                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                Else
+                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                End If
 
                 '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
@@ -2311,10 +2323,16 @@ Public Class Form1
                 MODEL_IDENTIFIER.Value = items(i)
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
-                '---Supplier
-                Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                '---Supplier -M
+                If CB_Trademark.Checked = True Then
+                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                Else
+                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                End If
 
                 '---Delegated Act
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
@@ -2485,6 +2503,7 @@ Done:
 
         state = True
     End Sub
+
 
     '---Logging
     Private Sub Save_Log_XML()

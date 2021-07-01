@@ -41,6 +41,7 @@ Partial Class Form1
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.CB_Trademark = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -98,6 +99,7 @@ Partial Class Form1
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.CB_Trademark)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.CB_RegistrantNature)
         Me.Panel1.Controls.Add(Me.Button2)
@@ -220,6 +222,16 @@ Partial Class Form1
         Me.Button3.Text = "Validate Zip"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'CB_Trademark
+        '
+        Me.CB_Trademark.AutoSize = True
+        Me.CB_Trademark.Location = New System.Drawing.Point(167, 125)
+        Me.CB_Trademark.Name = "CB_Trademark"
+        Me.CB_Trademark.Size = New System.Drawing.Size(77, 17)
+        Me.CB_Trademark.TabIndex = 16
+        Me.CB_Trademark.Text = "Trademark"
+        Me.CB_Trademark.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -268,4 +280,5 @@ Partial Class Form1
     Friend WithEvents Button3 As Button
     Friend WithEvents Label6 As Label
     Friend WithEvents CB_RegistrantNature As ComboBox
+    Friend WithEvents CB_Trademark As CheckBox
 End Class
