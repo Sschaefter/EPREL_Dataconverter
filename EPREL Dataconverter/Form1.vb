@@ -379,10 +379,10 @@ Public Class Form1
                 _HIGH_LUMINANCE_LIGHT_SOURCE(i - 1) = xltab1.Range("L" & i + 1).Value
                 _ANTI_GLARE_SHIELD(i - 1) = xltab1.Range("M" & i + 1).Value
                 _DIMMABLE(i - 1) = xltab1.Range("N" & i + 1).Value
-                _ENERGY_CONS_ON_MODE(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("P" & i + 1).Value))
+                _ENERGY_CONS_ON_MODE(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("O" & i + 1).Value))
                 '_ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
-                _ENERGY_CLASS(i - 1) = xltab1.Range("Q" & i + 1).Value
-                _LUMINOUS_FLUX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("S" & i + 1).Value))
+                _ENERGY_CLASS(i - 1) = xltab1.Range("P" & i + 1).Value
+                _LUMINOUS_FLUX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("R" & i + 1).Value))
                 '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("S" & i + 1).Value
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("T" & i + 1).Value

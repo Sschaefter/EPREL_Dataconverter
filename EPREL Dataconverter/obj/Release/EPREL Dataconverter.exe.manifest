@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Lightory_SW.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.8" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.9" language="neutral" processorArchitecture="msil" />
     <commandLine file="EPREL Dataconverter.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -44,13 +44,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EPREL Dataconverter.exe" size="118744">
-      <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.8" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.9" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>AamCX88t+TptjgS2mBaErrf8Ww20ZJG6evYB0TgC1fA=</dsig:DigestValue>
+        <dsig:DigestValue>riYOwTki8h3CmnWTJYokhPAkLRefNU63tFORNoSoaAs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
