@@ -6,12 +6,6 @@ Imports <xmlns:ns3="http://eprel.ener.ec.europa.eu/services/productModelService/
 Imports <xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2">
 Imports <xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2">
 
-
-
-'Imports System.IO
-'Imports System.IO.Compression
-'Documentation
-
 Public Class Form1
 
     Public items() As String
@@ -187,6 +181,11 @@ Public Class Form1
         Form2.Show()
         Form2.Hide()
         CB_RegistrantNature.SelectedIndex = 0
+#If DEBUG Then
+        BT_Tools.Enabled = True
+#Else
+        BT_Tools.Enabled = False
+#End If
     End Sub
     Private Sub CheckB_Log_CheckedChanged(sender As Object, e As EventArgs) Handles CheckB_Log.CheckedChanged
         Select Case CheckB_Log.Checked
@@ -2504,6 +2503,10 @@ Done:
         state = True
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles BT_Tools.Click
+        Form3.Show()
+    End Sub
+
 
     '---Logging
     Private Sub Save_Log_XML()
@@ -2527,5 +2530,8 @@ Done:
         End If
 
     End Sub
+
+
+
 
 End Class

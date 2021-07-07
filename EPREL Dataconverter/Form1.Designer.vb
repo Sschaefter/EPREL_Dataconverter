@@ -30,6 +30,7 @@ Partial Class Form1
         Me.Txt_Request = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CB_Trademark = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.CB_RegistrantNature = New System.Windows.Forms.ComboBox()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -41,7 +42,7 @@ Partial Class Form1
         Me.CB_OperationType = New System.Windows.Forms.ComboBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.CB_Trademark = New System.Windows.Forms.CheckBox()
+        Me.BT_Tools = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,6 +119,16 @@ Partial Class Form1
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(281, 318)
         Me.Panel1.TabIndex = 7
+        '
+        'CB_Trademark
+        '
+        Me.CB_Trademark.AutoSize = True
+        Me.CB_Trademark.Location = New System.Drawing.Point(167, 125)
+        Me.CB_Trademark.Name = "CB_Trademark"
+        Me.CB_Trademark.Size = New System.Drawing.Size(77, 17)
+        Me.CB_Trademark.TabIndex = 16
+        Me.CB_Trademark.Text = "Trademark"
+        Me.CB_Trademark.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -211,32 +222,32 @@ Partial Class Form1
         Me.LinkLabel1.Size = New System.Drawing.Size(144, 13)
         Me.LinkLabel1.TabIndex = 8
         Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "©Mario Planeck, 29.04.2021"
+        Me.LinkLabel1.Text = "©Mario Planeck, 07.07.2021"
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(214, 356)
+        Me.Button3.Location = New System.Drawing.Point(154, 356)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 9
         Me.Button3.Text = "Validate Zip"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'CB_Trademark
+        'BT_Tools
         '
-        Me.CB_Trademark.AutoSize = True
-        Me.CB_Trademark.Location = New System.Drawing.Point(167, 125)
-        Me.CB_Trademark.Name = "CB_Trademark"
-        Me.CB_Trademark.Size = New System.Drawing.Size(77, 17)
-        Me.CB_Trademark.TabIndex = 16
-        Me.CB_Trademark.Text = "Trademark"
-        Me.CB_Trademark.UseVisualStyleBackColor = True
+        Me.BT_Tools.Location = New System.Drawing.Point(235, 356)
+        Me.BT_Tools.Name = "BT_Tools"
+        Me.BT_Tools.Size = New System.Drawing.Size(75, 23)
+        Me.BT_Tools.TabIndex = 10
+        Me.BT_Tools.Text = "Tools"
+        Me.BT_Tools.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(374, 431)
+        Me.Controls.Add(Me.BT_Tools)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Panel1)
@@ -281,4 +292,5 @@ Partial Class Form1
     Friend WithEvents Label6 As Label
     Friend WithEvents CB_RegistrantNature As ComboBox
     Friend WithEvents CB_Trademark As CheckBox
+    Friend WithEvents BT_Tools As Button
 End Class

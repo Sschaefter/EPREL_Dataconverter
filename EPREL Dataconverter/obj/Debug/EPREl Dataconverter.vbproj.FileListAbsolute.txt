@@ -73,3 +73,10 @@ C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\E
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.xml
 C:\Users\User79\Source\Repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.pdb
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.AssemblyReference.cache
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form3.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\SeleniumExtras.WaitHelpers.dll
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\WebDriver.dll
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\WebDriver.Support.dll
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\WebDriver.xml
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\WebDriver.Support.xml
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL Dataconverter.vbproj.CopyComplete

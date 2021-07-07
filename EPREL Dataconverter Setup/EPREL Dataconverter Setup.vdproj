@@ -28,6 +28,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2D1228D0716110B8F2FAF7374DEAD7EF"
+        "OwnerKey" = "8:_DE28527426BA90F9897FF33AFE6BF605"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D1228D0716110B8F2FAF7374DEAD7EF"
+        "OwnerKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_33916F054A9F652C49CFA341FBB1EDEB"
         "OwnerKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +47,18 @@
         "Entry"
         {
         "MsmKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5B807C1028252D700BCE70522E6D98F0"
+        "OwnerKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D29C5D3442F465FAE8853B3AC438587"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -52,14 +76,32 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A3B5285A2FF04C40AAA8BE457AAD1CCE"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_DE28527426BA90F9897FF33AFE6BF605"
+        "OwnerKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DE28527426BA90F9897FF33AFE6BF605"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2D1228D0716110B8F2FAF7374DEAD7EF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5B807C1028252D700BCE70522E6D98F0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -226,6 +268,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2D1228D0716110B8F2FAF7374DEAD7EF"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2D1228D0716110B8F2FAF7374DEAD7EF"
+                    {
+                    "Name" = "8:WebDriver.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WebDriver.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_33916F054A9F652C49CFA341FBB1EDEB"
             {
             "AssemblyRegister" = "3:1"
@@ -255,6 +328,57 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5B807C1028252D700BCE70522E6D98F0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_5B807C1028252D700BCE70522E6D98F0"
+                    {
+                    "Name" = "8:SeleniumExtras.WaitHelpers.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SeleniumExtras.WaitHelpers.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D29C5D3442F465FAE8853B3AC438587"
+            {
+            "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\Vorlage_EPREL_ECO-V0.4.xlsx"
+            "TargetName" = "8:Vorlage_EPREL_ECO-V0.4.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6D8FFE234B869BD63B541B0659319345"
@@ -308,10 +432,21 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3B5285A2FF04C40AAA8BE457AAD1CCE"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DE28527426BA90F9897FF33AFE6BF605"
             {
-            "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\Vorlage_EPREL_ECO-V0.3.xlsx"
-            "TargetName" = "8:Vorlage_EPREL_ECO-V0.3.xlsx"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_DE28527426BA90F9897FF33AFE6BF605"
+                    {
+                    "Name" = "8:WebDriver.Support.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WebDriver.Support.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
             "Condition" = "8:"
@@ -325,7 +460,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -405,16 +540,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:EPREL Dataconverter Version 1.1.9"
-        "ProductCode" = "8:{EF02C5B1-0283-494D-AB63-46EBB558614F}"
-        "PackageCode" = "8:{A2BCA877-33DA-4C59-93B0-B0CF4A45BE1E}"
+        "ProductName" = "8:EPREL Dataconverter Version 1.1.10"
+        "ProductCode" = "8:{7C81EEC2-CB73-4FEA-93CD-0B94EDD90B16}"
+        "PackageCode" = "8:{4C305722-D794-4E41-8DB7-4A25D7CB53B6}"
         "UpgradeCode" = "8:{48D2175A-0959-4829-9876-51F55C0EFB3A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.9"
+        "ProductVersion" = "8:1.1.10"
         "Manufacturer" = "8:nimbus Group GmbH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:mailto:m.planeck@nimbus-group.com"
@@ -942,7 +1077,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_35A41287E3394B4DB6D9F3107E9889E6"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\EPREl Dataconverter\\obj\\Release\\EPREL Dataconverter.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_82695946E16A4D0789E71903F09673DE"

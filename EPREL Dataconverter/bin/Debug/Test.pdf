@@ -1,0 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Redirect to Europa static page</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    window.location.href = 'https://ec.europa.eu/info/energy-climate-change-environment/standards-tools-and-labels/products-labelling-rules-and-requirements/energy-label-and-ecodesign/product-database/qr-code-new-energy-label_en';
+</script>
+</body>
+</html>
