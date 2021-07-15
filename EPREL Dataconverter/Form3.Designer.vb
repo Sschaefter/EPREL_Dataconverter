@@ -24,8 +24,8 @@ Partial Class Form3
     Private Sub InitializeComponent()
         Me.B_Label_Loader = New System.Windows.Forms.Button()
         Me.TB_Label_Folder = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.B_Fiches_Loader = New System.Windows.Forms.Button()
+        Me.TB_Fiches_Folder = New System.Windows.Forms.TextBox()
         Me.DirectorySearcher1 = New System.DirectoryServices.DirectorySearcher()
         Me.SuspendLayout()
         '
@@ -37,6 +37,7 @@ Partial Class Form3
         Me.B_Label_Loader.TabIndex = 0
         Me.B_Label_Loader.Text = "Download Labels"
         Me.B_Label_Loader.UseVisualStyleBackColor = True
+        Me.B_Label_Loader.UseWaitCursor = True
         '
         'TB_Label_Folder
         '
@@ -45,22 +46,26 @@ Partial Class Form3
         Me.TB_Label_Folder.Size = New System.Drawing.Size(305, 20)
         Me.TB_Label_Folder.TabIndex = 1
         Me.TB_Label_Folder.Text = "Click to select folder"
+        Me.TB_Label_Folder.UseWaitCursor = True
         '
-        'Button1
+        'B_Fiches_Loader
         '
-        Me.Button1.Location = New System.Drawing.Point(323, 41)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(115, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Download Fiches"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.B_Fiches_Loader.Location = New System.Drawing.Point(323, 41)
+        Me.B_Fiches_Loader.Name = "B_Fiches_Loader"
+        Me.B_Fiches_Loader.Size = New System.Drawing.Size(115, 23)
+        Me.B_Fiches_Loader.TabIndex = 2
+        Me.B_Fiches_Loader.Text = "Download Fiches"
+        Me.B_Fiches_Loader.UseVisualStyleBackColor = True
+        Me.B_Fiches_Loader.UseWaitCursor = True
         '
-        'TextBox1
+        'TB_Fiches_Folder
         '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 43)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(305, 20)
-        Me.TextBox1.TabIndex = 3
+        Me.TB_Fiches_Folder.Location = New System.Drawing.Point(12, 43)
+        Me.TB_Fiches_Folder.Name = "TB_Fiches_Folder"
+        Me.TB_Fiches_Folder.Size = New System.Drawing.Size(305, 20)
+        Me.TB_Fiches_Folder.TabIndex = 3
+        Me.TB_Fiches_Folder.Text = "Click to select folder"
+        Me.TB_Fiches_Folder.UseWaitCursor = True
         '
         'DirectorySearcher1
         '
@@ -73,12 +78,14 @@ Partial Class Form3
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(452, 103)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TB_Fiches_Folder)
+        Me.Controls.Add(Me.B_Fiches_Loader)
         Me.Controls.Add(Me.TB_Label_Folder)
         Me.Controls.Add(Me.B_Label_Loader)
         Me.Name = "Form3"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tools"
+        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -86,7 +93,7 @@ Partial Class Form3
 
     Friend WithEvents B_Label_Loader As Button
     Friend WithEvents TB_Label_Folder As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents B_Fiches_Loader As Button
+    Friend WithEvents TB_Fiches_Folder As TextBox
     Friend WithEvents DirectorySearcher1 As DirectoryServices.DirectorySearcher
 End Class

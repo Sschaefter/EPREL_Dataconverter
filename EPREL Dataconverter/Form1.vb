@@ -385,12 +385,18 @@ Public Class Form1
                 '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("S" & i + 1).Value
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("T" & i + 1).Value
+
+                'CCT - Single
                 dmy2 = Math.Ceiling(xltab1.Range("U" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_SINGLE(i - 1) = String.Format("{0000}", dmy2 * 100)
+                'CCT - Range
+                'MIN
                 dmy2 = Math.Ceiling(xltab1.Range("V" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_MIN(i - 1) = String.Format("{00000}", dmy2 * 100)
+                'MAX
                 dmy2 = Math.Ceiling(xltab1.Range("W" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_MAX(i - 1) = String.Format("{00000}", dmy2 * 100)
+                'CCT - Steps
                 dmy2 = Math.Ceiling(xltab1.Range("X" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_1(i - 1) = String.Format("{00000}", dmy2 * 100)
                 dmy2 = Math.Ceiling(xltab1.Range("Y" & i + 1).Value / 100)
@@ -399,6 +405,7 @@ Public Class Form1
                 _CORRELATED_COLOUR_TEMP_3(i - 1) = String.Format("{00000}", dmy2 * 100)
                 dmy2 = Math.Ceiling(xltab1.Range("AA" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_4(i - 1) = String.Format("{00000}", dmy2 * 100)
+                'Power_ON_MODE
                 dmy2 = xltab1.Range("AB" & i + 1).Value
                 _POWER_ON_MODE(i - 1) = String.Format(provider, "{0:###0.0}", dmy2)
                 dmy2 = xltab1.Range("AC" & i + 1).Value
@@ -433,9 +440,11 @@ Public Class Form1
                 _DLS_MIN_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 dmy2 = xltab1.Range("AS" & i + 1).Value
                 _DLS_MAX_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
-                _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AU" & i + 1).Value))
+                ' R9
+                _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AT" & i + 1).Value))
                 'dmy2 = xltab1.Range("AU" & i + 1).Value
                 '_LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+
                 dmy2 = xltab1.Range("AU" & i + 1).Value
                 _LED_SURVIVAL_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
                 dmy2 = xltab1.Range("AV" & i + 1).Value
@@ -581,12 +590,17 @@ Public Class Form1
                 '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("T" & i + 1).Value
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("U" & i + 1).Value
+                'CCT - Single
                 dmy2 = Math.Ceiling(xltab1.Range("V" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_SINGLE(i - 1) = String.Format("{0000}", dmy2 * 100)
+                'CCT - Range
+                'MIN
                 dmy2 = Math.Ceiling(xltab1.Range("W" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_MIN(i - 1) = String.Format("{00000}", dmy2 * 100)
+                'MAX
                 dmy2 = Math.Ceiling(xltab1.Range("X" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_MAX(i - 1) = String.Format("{00000}", dmy2 * 100)
+                'CCT - Steps
                 dmy2 = Math.Ceiling(xltab1.Range("Y" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_1(i - 1) = String.Format("{00000}", dmy2 * 100)
                 dmy2 = Math.Ceiling(xltab1.Range("Z" & i + 1).Value / 100)
@@ -629,9 +643,11 @@ Public Class Form1
                 _DLS_MIN_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 dmy2 = xltab1.Range("AT" & i + 1).Value
                 _DLS_MAX_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
+
                 _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AU" & i + 1).Value))
                 'dmy2 = xltab1.Range("AU" & i + 1).Value
                 '_LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+
                 dmy2 = xltab1.Range("AV" & i + 1).Value
                 _LED_SURVIVAL_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
                 dmy2 = xltab1.Range("AW" & i + 1).Value
