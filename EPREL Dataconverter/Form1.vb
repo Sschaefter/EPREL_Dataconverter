@@ -64,6 +64,9 @@ Public Class Form1
     Public _LED_MLS_FL_REPLACEMENT_CLAIM() As String
     Public _LED_MLS_FLICKER_METRIC() As String
     Public _LED_MLS_STROBOSCOPIC_EFFECT_METRIC() As String
+    Public row As Integer
+    Public col As String
+    Public sheet As String
 
     Structure _TECHNICAL_DOCUMENTATION
         Public _TD_MODEL_IDENTIFIER As String
@@ -362,102 +365,155 @@ Public Class Form1
             Dim dmy2 As Double
 
             For i = 1 To dummy - 1
-                _MODEL_IDENTIFIER(i - 1) = xltab1.Range("A" & i + 1).Value
-                _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i - 1) = xltab1.Range("B" & i + 1).Value
-                dmy1 = xltab1.Range("C" & i + 1).Value
+                sheet = "REGISTER_PRODUCT_MODEL"
+                row = i + 1
+                col = "A"
+                _MODEL_IDENTIFIER(i - 1) = xltab1.Range(col & i + 1).Value
+                col = "B"
+                _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i - 1) = xltab1.Range(col & i + 1).Value
+                col = "C"
+                dmy1 = xltab1.Range(col & i + 1).Value
                 '-Format date to yyyy-mm-dd+hh:mm
                 _ON_MARKET_START_DATE(i - 1) = dmy1.ToString("yyyy") & "-" & dmy1.ToString("MM") & "-" & dmy1.ToString("dd") & dmy1.ToString("zzz")
+                col = "D"
                 _VISIBLE_TO_UK_MSA(i - 1) = xltab1.Range("D" & i + 1).Value
+                col = "E"
                 _LIGHTING_TECHNOLOGY(i - 1) = xltab1.Range("E" & i + 1).Value
+                col = "F"
                 _DIRECTIONAL(i - 1) = xltab1.Range("F" & i + 1).Value
+                col = "G"
                 _CAP_TYPE(i - 1) = xltab1.Range("G" & i + 1).Value
+                col = "H"
                 _MAINS(i - 1) = xltab1.Range("H" & i + 1).Value
+                col = "I"
                 _CONNECTED_LIGHT_SOURCE(i - 1) = xltab1.Range("I" & i + 1).Value
+                col = "J"
                 _COLOUR_TUNEABLE_LIGHT_SOURCE(i - 1) = xltab1.Range("J" & i + 1).Value
+                col = "K"
                 _ENVELOPE(i - 1) = xltab1.Range("K" & i + 1).Value
+                col = "L"
                 _HIGH_LUMINANCE_LIGHT_SOURCE(i - 1) = xltab1.Range("L" & i + 1).Value
+                col = "M"
                 _ANTI_GLARE_SHIELD(i - 1) = xltab1.Range("M" & i + 1).Value
+                col = "N"
                 _DIMMABLE(i - 1) = xltab1.Range("N" & i + 1).Value
+                col = "O"
                 _ENERGY_CONS_ON_MODE(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("O" & i + 1).Value))
+                col = "P"
                 '_ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
                 _ENERGY_CLASS(i - 1) = xltab1.Range("P" & i + 1).Value
+                col = "R"
                 _LUMINOUS_FLUX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("R" & i + 1).Value))
+                col = "S"
                 '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("S" & i + 1).Value
+                col = "T"
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("T" & i + 1).Value
 
                 'CCT - Single
+                col = "U"
                 dmy2 = Math.Ceiling(xltab1.Range("U" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_SINGLE(i - 1) = String.Format("{0000}", dmy2 * 100)
                 'CCT - Range
                 'MIN
+                col = "V"
                 dmy2 = Math.Ceiling(xltab1.Range("V" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_MIN(i - 1) = String.Format("{00000}", dmy2 * 100)
                 'MAX
+                col = "W"
                 dmy2 = Math.Ceiling(xltab1.Range("W" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_MAX(i - 1) = String.Format("{00000}", dmy2 * 100)
                 'CCT - Steps
+                col = "X"
                 dmy2 = Math.Ceiling(xltab1.Range("X" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_1(i - 1) = String.Format("{00000}", dmy2 * 100)
+                col = "Y"
                 dmy2 = Math.Ceiling(xltab1.Range("Y" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_2(i - 1) = String.Format("{00000}", dmy2 * 100)
+                col = "Z"
                 dmy2 = Math.Ceiling(xltab1.Range("Z" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_3(i - 1) = String.Format("{00000}", dmy2 * 100)
+                col = "AA"
                 dmy2 = Math.Ceiling(xltab1.Range("AA" & i + 1).Value / 100)
                 _CORRELATED_COLOUR_TEMP_4(i - 1) = String.Format("{00000}", dmy2 * 100)
                 'Power_ON_MODE
+                col = "AB"
                 dmy2 = xltab1.Range("AB" & i + 1).Value
                 _POWER_ON_MODE(i - 1) = String.Format(provider, "{0:###0.0}", dmy2)
+                col = "AC"
                 dmy2 = xltab1.Range("AC" & i + 1).Value
                 _POWER_STANDBY(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
+                col = "AD"
                 dmy2 = xltab1.Range("AD" & i + 1).Value
                 _POWER_STANDBY_NETWORKED(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
+                col = "AE"
                 dmy2 = xltab1.Range("AE" & i + 1).Value
                 _COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                col = "AF"
                 dmy2 = xltab1.Range("AF" & i + 1).Value
                 _MIN_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                col = "AG"
                 dmy2 = xltab1.Range("AG" & i + 1).Value
                 _MAX_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                col = "AH"
                 dmy2 = xltab1.Range("AH" & i + 1).Value
                 _DIMENSION_HEIGHT(i - 1) = String.Format(provider, "{0:#####}", dmy2)
+                col = "AI"
                 dmy2 = xltab1.Range("AI" & i + 1).Value
                 _DIMENSION_WIDTH(i - 1) = String.Format(provider, "{0:#####}", dmy2)
+                col = "AJ"
                 dmy2 = xltab1.Range("AJ" & i + 1).Value
                 _DIMENSION_DEPTH(i - 1) = String.Format(provider, "{0:#####}", dmy2)
+                col = "AK"
                 _SPECTRAL_POWER_DISTRIBUTION_IMAGE(i - 1) = xltab1.Range("AK" & i + 1).Value
                 _CLAIM_EQUIVALENT_POWER(i - 1) = xltab1.Range("AL" & i + 1).Value
+                col = "AM"
                 dmy2 = xltab1.Range("AM" & i + 1).Value
                 _EQUIVALENT_POWER(i - 1) = String.Format(provider, "{0:#####}", dmy2)
+                col = "AN"
                 dmy2 = xltab1.Range("AN" & i + 1).Value
                 _CHROMATICITY_COORD_X(i - 1) = String.Format(provider, "{0:0.000}", dmy2)
+                col = "AO"
                 dmy2 = xltab1.Range("AO" & i + 1).Value
                 _CHROMATICITY_COORD_Y(i - 1) = String.Format(provider, "{0:0.000}", dmy2)
+                col = "AP"
                 dmy2 = xltab1.Range("AP" & i + 1).Value
                 _DLS_PEAK_LUMINOUS_INTENSITY(i - 1) = String.Format(provider, "{0:######}", dmy2)
+                col = "AQ"
                 dmy2 = xltab1.Range("AQ" & i + 1).Value
                 _DLS_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                col = "AR"
                 dmy2 = xltab1.Range("AR" & i + 1).Value
                 _DLS_MIN_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
+                col = "AS"
                 dmy2 = xltab1.Range("AS" & i + 1).Value
                 _DLS_MAX_BEAM_ANGLE(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 ' R9
+                col = "AT"
                 _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AT" & i + 1).Value))
                 'dmy2 = xltab1.Range("AU" & i + 1).Value
                 '_LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
-
+                col = "AU"
                 dmy2 = xltab1.Range("AU" & i + 1).Value
                 _LED_SURVIVAL_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
+                col = "AV"
                 dmy2 = xltab1.Range("AV" & i + 1).Value
                 _LED_LUMEN_MAINTENANCE_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
+                col = "AW"
                 dmy2 = xltab1.Range("AW" & i + 1).Value
                 _LED_MLS_DISPLACEMENT_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
+                col = "AX"
                 dmy2 = xltab1.Range("AX" & i + 1).Value
                 _LED_MLS_COLOUR_CONSISTENCY(i - 1) = String.Format(provider, "{0:#}", dmy2)
+                col = "AY"
                 _LED_MLS_CLAIM_LED_REPLACE_FLUORESCENT(i - 1) = xltab1.Range("AY" & i + 1).Value
+                col = "AZ"
                 dmy2 = xltab1.Range("AZ" & i + 1).Value
                 _LED_MLS_FL_REPLACEMENT_CLAIM(i - 1) = String.Format(provider, "{0:##}", dmy2)
+                col = "BA"
                 dmy2 = xltab1.Range("BA" & i + 1).Value
                 _LED_MLS_FLICKER_METRIC(i - 1) = String.Format(provider, "{0:0.0}", dmy2)
+                col = "BB"
                 dmy2 = xltab1.Range("BB" & i + 1).Value
                 _LED_MLS_STROBOSCOPIC_EFFECT_METRIC(i - 1) = String.Format(provider, "{0:0.0}", dmy2)
 
@@ -469,21 +525,34 @@ Public Class Form1
             dummy2 = dummy2 - 2
             ReDim _TD(dummy2)
             For i = 0 To dummy2
+                sheet = "attachments"
+                row = i + 1
+                col = "A"
                 _TD(i)._TD_MODEL_IDENTIFIER = xltab2.Range("A" & i + 2).Value
+                col = "B"
                 _TD(i)._TD_DESCRIPTION = xltab2.Range("B" & i + 2).Value
+                col = "C"
                 _TD(i)._TD_LANGUAGE = xltab2.Range("C" & i + 2).Value
+                col = "D"
                 _TD(i)._TD_ADDITIONAL_PART = xltab2.Range("D" & i + 2).Value
+                col = "E"
                 _TD(i)._TD_CALCULATIONS = xltab2.Range("E" & i + 2).Value
+                col = "F"
                 _TD(i)._TD_GENERAL_DESCRIPTION = xltab2.Range("F" & i + 2).Value
+                col = "G"
                 _TD(i)._TD_MESURED_TECHNICAL_PARAMETERS = xltab2.Range("G" & i + 2).Value
+                col = "H"
                 _TD(i)._TD_REFERENCES_TO_HARMONIZED_STANDARDS = xltab2.Range("H" & i + 2).Value
+                col = "I"
                 _TD(i)._TD_TESTING_CONDITIONS = xltab2.Range("I" & i + 2).Value
+                col = "J"
                 _TD(i)._TD_SPECIFIC_PRECAUTIONS = xltab2.Range("J" & i + 2).Value
+                col = "K"
                 _TD(i)._TD_FILE_NAME = xltab2.Range("K" & i + 2).Value
             Next
 
         Catch ex As Exception
-            ErrorDlg("parse", ex)
+            ErrorDlg("parse", ex, row, col, sheet)
         End Try
 
 
@@ -2506,11 +2575,11 @@ Done:
     End Sub
 
     '---Errors
-    Private Sub ErrorDlg(ByVal type As String, Optional ByVal reason As Exception = Nothing)
+    Private Sub ErrorDlg(ByVal type As String, Optional ByVal reason As Exception = Nothing, Optional ByVal row As Integer = 0, Optional ByVal col As String = Nothing, Optional sheet As String = Nothing)
         If type = "xml" Then
             MsgBox("Error while processing xml! Please check your files and try again! For detailed information check log.")
         ElseIf type = "parse" Then
-            MsgBox("Error while parsing Excel file! Please check your files and try again! For detailed information check log." & vbNewLine & "Error: " & reason.Message)
+            MsgBox("Error while parsing Excel file! Please check your files and try again!" & vbNewLine & "Error: " & reason.Message & vbNewLine & "Please check row " & row & " at column " & col & " on sheet " & sheet & " !")
         Else
             MsgBox("Hard error")
             Close()
