@@ -117,7 +117,619 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="DirectorySearcher1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="B_Label_Loader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>323, 12</value>
+  </data>
+  <data name="B_Label_Loader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="B_Label_Loader.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="B_Label_Loader.Text" xml:space="preserve">
+    <value>Download Labels</value>
+  </data>
+  <data name="&gt;&gt;B_Label_Loader.Name" xml:space="preserve">
+    <value>B_Label_Loader</value>
+  </data>
+  <data name="&gt;&gt;B_Label_Loader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Label_Loader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;B_Label_Loader.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="TB_Label_Folder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 14</value>
+  </data>
+  <data name="TB_Label_Folder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 20</value>
+  </data>
+  <data name="TB_Label_Folder.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TB_Label_Folder.Text" xml:space="preserve">
+    <value>Click to select download folder</value>
+  </data>
+  <data name="&gt;&gt;TB_Label_Folder.Name" xml:space="preserve">
+    <value>TB_Label_Folder</value>
+  </data>
+  <data name="&gt;&gt;TB_Label_Folder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TB_Label_Folder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TB_Label_Folder.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="B_Fiches_Loader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>323, 116</value>
+  </data>
+  <data name="B_Fiches_Loader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 23</value>
+  </data>
+  <data name="B_Fiches_Loader.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="B_Fiches_Loader.Text" xml:space="preserve">
+    <value>Download Fiches</value>
+  </data>
+  <data name="&gt;&gt;B_Fiches_Loader.Name" xml:space="preserve">
+    <value>B_Fiches_Loader</value>
+  </data>
+  <data name="&gt;&gt;B_Fiches_Loader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Fiches_Loader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;B_Fiches_Loader.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="TB_Fiches_Folder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 118</value>
+  </data>
+  <data name="TB_Fiches_Folder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 20</value>
+  </data>
+  <data name="TB_Fiches_Folder.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TB_Fiches_Folder.Text" xml:space="preserve">
+    <value>Click to select download folder</value>
+  </data>
+  <data name="&gt;&gt;TB_Fiches_Folder.Name" xml:space="preserve">
+    <value>TB_Fiches_Folder</value>
+  </data>
+  <data name="&gt;&gt;TB_Fiches_Folder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TB_Fiches_Folder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TB_Fiches_Folder.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.Name" xml:space="preserve">
+    <value>RB_BW</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.Name" xml:space="preserve">
+    <value>RB_COL</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 40</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 48</value>
+  </data>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="RB_BW.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="RB_BW.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RB_BW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 26</value>
+  </data>
+  <data name="RB_BW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="RB_BW.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="RB_BW.Text" xml:space="preserve">
+    <value>Black and White</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.Name" xml:space="preserve">
+    <value>RB_BW</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;RB_BW.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="RB_COL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RB_COL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="RB_COL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="RB_COL.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="RB_COL.Text" xml:space="preserve">
+    <value>Coloured</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.Name" xml:space="preserve">
+    <value>RB_COL</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;RB_COL.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.Name" xml:space="preserve">
+    <value>RB_SVG</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.Name" xml:space="preserve">
+    <value>RB_PNG</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.Name" xml:space="preserve">
+    <value>RB_PDF</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 40</value>
+  </data>
+  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 72</value>
+  </data>
+  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="RB_SVG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RB_SVG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RB_SVG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 49</value>
+  </data>
+  <data name="RB_SVG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="RB_SVG.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="RB_SVG.Text" xml:space="preserve">
+    <value>SVG</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.Name" xml:space="preserve">
+    <value>RB_SVG</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;RB_SVG.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="RB_PNG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RB_PNG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RB_PNG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 26</value>
+  </data>
+  <data name="RB_PNG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="RB_PNG.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="RB_PNG.Text" xml:space="preserve">
+    <value>PNG</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.Name" xml:space="preserve">
+    <value>RB_PNG</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;RB_PNG.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="RB_PDF.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RB_PDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="RB_PDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 17</value>
+  </data>
+  <data name="RB_PDF.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="RB_PDF.Text" xml:space="preserve">
+    <value>PDF</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.Name" xml:space="preserve">
+    <value>RB_PDF</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;RB_PDF.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.Name" xml:space="preserve">
+    <value>RB_SMALL</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.Parent" xml:space="preserve">
+    <value>Panel3</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.Name" xml:space="preserve">
+    <value>RB_BIG</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.Parent" xml:space="preserve">
+    <value>Panel3</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 40</value>
+  </data>
+  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 50</value>
+  </data>
+  <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
+    <value>Panel3</value>
+  </data>
+  <data name="&gt;&gt;Panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="RB_SMALL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RB_SMALL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 26</value>
+  </data>
+  <data name="RB_SMALL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="RB_SMALL.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="RB_SMALL.Text" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.Name" xml:space="preserve">
+    <value>RB_SMALL</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.Parent" xml:space="preserve">
+    <value>Panel3</value>
+  </data>
+  <data name="&gt;&gt;RB_SMALL.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="RB_BIG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RB_BIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="RB_BIG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 17</value>
+  </data>
+  <data name="RB_BIG.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="RB_BIG.Text" xml:space="preserve">
+    <value>Big</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.Name" xml:space="preserve">
+    <value>RB_BIG</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.Parent" xml:space="preserve">
+    <value>Panel3</value>
+  </data>
+  <data name="&gt;&gt;RB_BIG.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CBox_Zipall_Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CBox_Zipall_Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 40</value>
+  </data>
+  <data name="CBox_Zipall_Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="CBox_Zipall_Label.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="CBox_Zipall_Label.Text" xml:space="preserve">
+    <value>Zip file</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Label.Name" xml:space="preserve">
+    <value>CBox_Zipall_Label</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Label.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="CB_LB_LANG.Items" xml:space="preserve">
+    <value>BG</value>
+  </data>
+  <data name="CB_LB_LANG.Items1" xml:space="preserve">
+    <value>CS</value>
+  </data>
+  <data name="CB_LB_LANG.Items2" xml:space="preserve">
+    <value>DA</value>
+  </data>
+  <data name="CB_LB_LANG.Items3" xml:space="preserve">
+    <value>DE</value>
+  </data>
+  <data name="CB_LB_LANG.Items4" xml:space="preserve">
+    <value>ET</value>
+  </data>
+  <data name="CB_LB_LANG.Items5" xml:space="preserve">
+    <value>EL</value>
+  </data>
+  <data name="CB_LB_LANG.Items6" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="CB_LB_LANG.Items7" xml:space="preserve">
+    <value>ES</value>
+  </data>
+  <data name="CB_LB_LANG.Items8" xml:space="preserve">
+    <value>FR</value>
+  </data>
+  <data name="CB_LB_LANG.Items9" xml:space="preserve">
+    <value>GA</value>
+  </data>
+  <data name="CB_LB_LANG.Items10" xml:space="preserve">
+    <value>HR</value>
+  </data>
+  <data name="CB_LB_LANG.Items11" xml:space="preserve">
+    <value>IT</value>
+  </data>
+  <data name="CB_LB_LANG.Items12" xml:space="preserve">
+    <value>LV</value>
+  </data>
+  <data name="CB_LB_LANG.Items13" xml:space="preserve">
+    <value>LT</value>
+  </data>
+  <data name="CB_LB_LANG.Items14" xml:space="preserve">
+    <value>HU</value>
+  </data>
+  <data name="CB_LB_LANG.Items15" xml:space="preserve">
+    <value>MT</value>
+  </data>
+  <data name="CB_LB_LANG.Items16" xml:space="preserve">
+    <value>NL</value>
+  </data>
+  <data name="CB_LB_LANG.Items17" xml:space="preserve">
+    <value>PL</value>
+  </data>
+  <data name="CB_LB_LANG.Items18" xml:space="preserve">
+    <value>PT</value>
+  </data>
+  <data name="CB_LB_LANG.Items19" xml:space="preserve">
+    <value>RO</value>
+  </data>
+  <data name="CB_LB_LANG.Items20" xml:space="preserve">
+    <value>SK</value>
+  </data>
+  <data name="CB_LB_LANG.Items21" xml:space="preserve">
+    <value>SL</value>
+  </data>
+  <data name="CB_LB_LANG.Items22" xml:space="preserve">
+    <value>FI</value>
+  </data>
+  <data name="CB_LB_LANG.Items23" xml:space="preserve">
+    <value>SV</value>
+  </data>
+  <data name="CB_LB_LANG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 144</value>
+  </data>
+  <data name="CB_LB_LANG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 21</value>
+  </data>
+  <data name="CB_LB_LANG.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="CB_LB_LANG.Text" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="&gt;&gt;CB_LB_LANG.Name" xml:space="preserve">
+    <value>CB_LB_LANG</value>
+  </data>
+  <data name="&gt;&gt;CB_LB_LANG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CB_LB_LANG.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CB_LB_LANG.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CBox_Zipall_Fiche.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CBox_Zipall_Fiche.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 146</value>
+  </data>
+  <data name="CBox_Zipall_Fiche.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="CBox_Zipall_Fiche.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="CBox_Zipall_Fiche.Text" xml:space="preserve">
+    <value>Zip file </value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Fiche.Name" xml:space="preserve">
+    <value>CBox_Zipall_Fiche</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Fiche.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Fiche.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CBox_Zipall_Fiche.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>452, 185</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form3</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

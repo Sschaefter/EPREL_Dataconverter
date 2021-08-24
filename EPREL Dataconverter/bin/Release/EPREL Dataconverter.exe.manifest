@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Lightory_SW.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.11" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.13" language="neutral" processorArchitecture="msil" />
     <commandLine file="EPREL Dataconverter.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EPREL Dataconverter.exe" size="130008">
-      <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.11" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EPREL Dataconverter.exe" size="204248">
+      <assemblyIdentity name="EPREL Dataconverter" version="1.1.0.13" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FV+Mg1/49afDaDZnhdn+JgT65dCcBzUBS6Oh0+JKQTs=</dsig:DigestValue>
+        <dsig:DigestValue>mRaXPyiem5QrEvB/vKtcxk5f1RnqtT6ILLHcaZLzH2k=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="de\EPREL Dataconverter.resources.dll" size="8192">
+      <assemblyIdentity name="EPREL Dataconverter.resources" version="1.1.0.13" language="de" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>NK0ES4DNHgRaORCwL+MJviIRNDgeutkQ6wbs56eqDSc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -22,6 +22,7 @@ Partial Class Form_Contact
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Contact))
         Me.CB_ContactDetails = New System.Windows.Forms.CheckBox()
         Me.P_ContactDetails = New System.Windows.Forms.Panel()
         Me.TB_Email = New System.Windows.Forms.TextBox()
@@ -57,12 +58,8 @@ Partial Class Form_Contact
         '
         'CB_ContactDetails
         '
-        Me.CB_ContactDetails.AutoSize = True
-        Me.CB_ContactDetails.Location = New System.Drawing.Point(12, 12)
+        resources.ApplyResources(Me.CB_ContactDetails, "CB_ContactDetails")
         Me.CB_ContactDetails.Name = "CB_ContactDetails"
-        Me.CB_ContactDetails.Size = New System.Drawing.Size(118, 17)
-        Me.CB_ContactDetails.TabIndex = 0
-        Me.CB_ContactDetails.Text = "Use Contact details"
         Me.CB_ContactDetails.UseVisualStyleBackColor = True
         '
         'P_ContactDetails
@@ -94,245 +91,156 @@ Partial Class Form_Contact
         Me.P_ContactDetails.Controls.Add(Me.TB_FirstName)
         Me.P_ContactDetails.Controls.Add(Me.Label1)
         Me.P_ContactDetails.Controls.Add(Me.TB_ContactName)
-        Me.P_ContactDetails.Enabled = False
-        Me.P_ContactDetails.Location = New System.Drawing.Point(12, 35)
+        resources.ApplyResources(Me.P_ContactDetails, "P_ContactDetails")
         Me.P_ContactDetails.Name = "P_ContactDetails"
-        Me.P_ContactDetails.Size = New System.Drawing.Size(238, 433)
-        Me.P_ContactDetails.TabIndex = 1
         '
         'TB_Email
         '
-        Me.TB_Email.Location = New System.Drawing.Point(6, 133)
+        resources.ApplyResources(Me.TB_Email, "TB_Email")
         Me.TB_Email.Name = "TB_Email"
-        Me.TB_Email.Size = New System.Drawing.Size(206, 20)
-        Me.TB_Email.TabIndex = 28
         '
         'Label14
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(171, 0)
+        resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(64, 13)
-        Me.Label14.TabIndex = 27
-        Me.Label14.Text = "* Mandatory"
         '
         'CBox_Country
         '
         Me.CBox_Country.FormattingEnabled = True
-        Me.CBox_Country.Items.AddRange(New Object() {"AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "EL", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK", "UK", "LI", "NO", "IS", "XI"})
-        Me.CBox_Country.Location = New System.Drawing.Point(6, 406)
+        Me.CBox_Country.Items.AddRange(New Object() {resources.GetString("CBox_Country.Items"), resources.GetString("CBox_Country.Items1"), resources.GetString("CBox_Country.Items2"), resources.GetString("CBox_Country.Items3"), resources.GetString("CBox_Country.Items4"), resources.GetString("CBox_Country.Items5"), resources.GetString("CBox_Country.Items6"), resources.GetString("CBox_Country.Items7"), resources.GetString("CBox_Country.Items8"), resources.GetString("CBox_Country.Items9"), resources.GetString("CBox_Country.Items10"), resources.GetString("CBox_Country.Items11"), resources.GetString("CBox_Country.Items12"), resources.GetString("CBox_Country.Items13"), resources.GetString("CBox_Country.Items14"), resources.GetString("CBox_Country.Items15"), resources.GetString("CBox_Country.Items16"), resources.GetString("CBox_Country.Items17"), resources.GetString("CBox_Country.Items18"), resources.GetString("CBox_Country.Items19"), resources.GetString("CBox_Country.Items20"), resources.GetString("CBox_Country.Items21"), resources.GetString("CBox_Country.Items22"), resources.GetString("CBox_Country.Items23"), resources.GetString("CBox_Country.Items24"), resources.GetString("CBox_Country.Items25"), resources.GetString("CBox_Country.Items26"), resources.GetString("CBox_Country.Items27"), resources.GetString("CBox_Country.Items28"), resources.GetString("CBox_Country.Items29"), resources.GetString("CBox_Country.Items30"), resources.GetString("CBox_Country.Items31")})
+        resources.ApplyResources(Me.CBox_Country, "CBox_Country")
         Me.CBox_Country.Name = "CBox_Country"
-        Me.CBox_Country.Size = New System.Drawing.Size(100, 21)
-        Me.CBox_Country.TabIndex = 26
         '
         'Label13
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 390)
+        resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(43, 13)
-        Me.Label13.TabIndex = 25
-        Me.Label13.Text = "Country"
         '
         'Label12
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(3, 351)
+        resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(56, 13)
-        Me.Label12.TabIndex = 24
-        Me.Label12.Text = "Post Code"
         '
         'TB_Postcode
         '
-        Me.TB_Postcode.Location = New System.Drawing.Point(6, 367)
+        resources.ApplyResources(Me.TB_Postcode, "TB_Postcode")
         Me.TB_Postcode.Name = "TB_Postcode"
-        Me.TB_Postcode.Size = New System.Drawing.Size(207, 20)
-        Me.TB_Postcode.TabIndex = 23
         '
         'Label11
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 312)
+        resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(49, 13)
-        Me.Label11.TabIndex = 22
-        Me.Label11.Text = "Province"
         '
         'TB_Province
         '
-        Me.TB_Province.Location = New System.Drawing.Point(6, 328)
+        resources.ApplyResources(Me.TB_Province, "TB_Province")
         Me.TB_Province.Name = "TB_Province"
-        Me.TB_Province.Size = New System.Drawing.Size(207, 20)
-        Me.TB_Province.TabIndex = 21
         '
         'Label10
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 273)
+        resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(62, 13)
-        Me.Label10.TabIndex = 20
-        Me.Label10.Text = "Municipality"
         '
         'TB_Municipality
         '
-        Me.TB_Municipality.Location = New System.Drawing.Point(6, 289)
+        resources.ApplyResources(Me.TB_Municipality, "TB_Municipality")
         Me.TB_Municipality.Name = "TB_Municipality"
-        Me.TB_Municipality.Size = New System.Drawing.Size(207, 20)
-        Me.TB_Municipality.TabIndex = 19
         '
         'Label9
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(3, 234)
+        resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(24, 13)
-        Me.Label9.TabIndex = 18
-        Me.Label9.Text = "City"
         '
         'TB_City
         '
-        Me.TB_City.Location = New System.Drawing.Point(6, 250)
+        resources.ApplyResources(Me.TB_City, "TB_City")
         Me.TB_City.Name = "TB_City"
-        Me.TB_City.Size = New System.Drawing.Size(207, 20)
-        Me.TB_City.TabIndex = 17
         '
         'Label8
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(171, 195)
+        resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(44, 13)
-        Me.Label8.TabIndex = 16
-        Me.Label8.Text = "Number"
         '
         'TB_Number
         '
-        Me.TB_Number.Location = New System.Drawing.Point(174, 211)
+        resources.ApplyResources(Me.TB_Number, "TB_Number")
         Me.TB_Number.Name = "TB_Number"
-        Me.TB_Number.Size = New System.Drawing.Size(41, 20)
-        Me.TB_Number.TabIndex = 15
         '
         'Label7
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(3, 195)
+        resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(66, 13)
-        Me.Label7.TabIndex = 14
-        Me.Label7.Text = "Street Name"
         '
         'TB_StreetName
         '
-        Me.TB_StreetName.Location = New System.Drawing.Point(6, 211)
+        resources.ApplyResources(Me.TB_StreetName, "TB_StreetName")
         Me.TB_StreetName.Name = "TB_StreetName"
-        Me.TB_StreetName.Size = New System.Drawing.Size(161, 20)
-        Me.TB_StreetName.TabIndex = 13
         '
         'Label6
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(3, 156)
+        resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(29, 13)
-        Me.Label6.TabIndex = 12
-        Me.Label6.Text = "URL"
         '
         'TB_URL
         '
-        Me.TB_URL.Location = New System.Drawing.Point(6, 172)
+        resources.ApplyResources(Me.TB_URL, "TB_URL")
         Me.TB_URL.Name = "TB_URL"
-        Me.TB_URL.Size = New System.Drawing.Size(207, 20)
-        Me.TB_URL.TabIndex = 11
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 117)
+        resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(77, 13)
-        Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Email Address*"
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 78)
+        resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 13)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Phone Number*"
         '
         'TB_PhoneNumber
         '
-        Me.TB_PhoneNumber.Location = New System.Drawing.Point(6, 94)
+        resources.ApplyResources(Me.TB_PhoneNumber, "TB_PhoneNumber")
         Me.TB_PhoneNumber.Name = "TB_PhoneNumber"
-        Me.TB_PhoneNumber.Size = New System.Drawing.Size(207, 20)
-        Me.TB_PhoneNumber.TabIndex = 6
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(109, 39)
+        resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(58, 13)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Last Name"
         '
         'TB_LastName
         '
-        Me.TB_LastName.Location = New System.Drawing.Point(112, 55)
+        resources.ApplyResources(Me.TB_LastName, "TB_LastName")
         Me.TB_LastName.Name = "TB_LastName"
-        Me.TB_LastName.Size = New System.Drawing.Size(100, 20)
-        Me.TB_LastName.TabIndex = 4
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 39)
+        resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(57, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "First Name"
         '
         'TB_FirstName
         '
-        Me.TB_FirstName.Location = New System.Drawing.Point(6, 55)
+        resources.ApplyResources(Me.TB_FirstName, "TB_FirstName")
         Me.TB_FirstName.Name = "TB_FirstName"
-        Me.TB_FirstName.Size = New System.Drawing.Size(100, 20)
-        Me.TB_FirstName.TabIndex = 2
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 0)
+        resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(79, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Contact Name*"
         '
         'TB_ContactName
         '
-        Me.TB_ContactName.Location = New System.Drawing.Point(6, 16)
+        resources.ApplyResources(Me.TB_ContactName, "TB_ContactName")
         Me.TB_ContactName.Name = "TB_ContactName"
-        Me.TB_ContactName.Size = New System.Drawing.Size(100, 20)
-        Me.TB_ContactName.TabIndex = 0
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(97, 474)
+        resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Close"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Form_Contact
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(268, 505)
         Me.ControlBox = False
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.P_ContactDetails)
@@ -340,8 +248,6 @@ Partial Class Form_Contact
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_Contact"
         Me.ShowIcon = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Contact Details"
         Me.P_ContactDetails.ResumeLayout(False)
         Me.P_ContactDetails.PerformLayout()
         Me.ResumeLayout(False)

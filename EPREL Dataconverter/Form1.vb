@@ -151,13 +151,21 @@ Public Class Form1
             End If
             OUTPUT()
         ElseIf CB_OperationType.SelectedItem = "DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET" Then
-            MsgBox("Not available in this Version!")
-            Exit Sub
+            Form2.LB_Log.Items.Add("DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET")
+            SELECT_INPUT()
+            If state = True Then
+                Exit Sub
+            End If
+            DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET()
+            If state = True Then
+                Exit Sub
+            End If
+            OUTPUT()
         End If
 
 
 
-        Select Case MsgBox("Validate Zip File?", vbYesNo)
+            Select Case MsgBox("Validate Zip File?", vbYesNo)
             Case MsgBoxResult.Yes
                 Validate_ZIP()
             Case MsgBoxResult.No
@@ -184,11 +192,7 @@ Public Class Form1
         Form2.Show()
         Form2.Hide()
         CB_RegistrantNature.SelectedIndex = 0
-#If DEBUG Then
-        BT_Tools.Enabled = True
-#Else
-        BT_Tools.Enabled = False
-#End If
+
     End Sub
     Private Sub CheckB_Log_CheckedChanged(sender As Object, e As EventArgs) Handles CheckB_Log.CheckedChanged
         Select Case CheckB_Log.Checked
@@ -236,7 +240,7 @@ Public Class Form1
             Case "REGISTER_PRODUCT_MODEL"
                 PARSE_REGISTER(flname)
             Case "DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET"
-                MsgBox("Not yet implemented")
+                PARSE_DEOP(flname)
                 Exit Sub
         End Select
 
@@ -762,6 +766,44 @@ Public Class Form1
         xlApp.Quit()
 
 
+    End Sub
+    Sub PARSE_DEOP(ByRef quelle As String)
+        Dim xlApp As New Excel.Application
+        Dim book = xlApp.Workbooks.Open(quelle)
+        Dim xltab1 = book.Worksheets("END_OF_PLACEMENT")
+        Dim xlUP As Object = Excel.XlDirection.xlUp
+        Dim lastentry As Object
+
+        Try
+            dummy = xltab1.Range("A" & xltab1.Rows.Count).End(xlUP).Row
+
+
+            lastentry = xltab1.Range("A1:A" & dummy).Value
+            ReDim _EPREL_MODEL_REGISTRATION_NUMBER(dummy - 1)
+            ReDim _MODEL_IDENTIFIER(dummy - 1)
+            ReDim _ON_MARKET_START_DATE(dummy - 1)
+            ReDim _ON_MARKET_END_DATE(dummy - 1)
+            Dim provider As CultureInfo = New CultureInfo("en-EN")
+            Dim dmy1 As Date
+
+
+            For i = 1 To dummy - 1
+                _EPREL_MODEL_REGISTRATION_NUMBER(i - 1) = xltab1.Range("A" & i + 1).Value
+                _MODEL_IDENTIFIER(i - 1) = xltab1.Range("B" & i + 1).Value
+                dmy1 = xltab1.Range("C" & i + 1).Value
+                '-Format date to yyyy-mm-dd+hh:mm
+                _ON_MARKET_START_DATE(i - 1) = dmy1.ToString("yyyy") & "-" & dmy1.ToString("MM") & "-" & dmy1.ToString("dd") & dmy1.ToString("zzz")
+                dmy1 = xltab1.Range("D" & i + 1).Value
+                '-Format date to yyyy-mm-dd+hh:mm
+                _ON_MARKET_END_DATE(i - 1) = dmy1.ToString("yyyy") & "-" & dmy1.ToString("MM") & "-" & dmy1.ToString("dd") & dmy1.ToString("zzz")
+
+            Next
+
+        Catch ex As Exception
+            ErrorDlg("parse", ex)
+        End Try
+        xlApp.ActiveWorkbook.Close(False)
+        xlApp.Quit()
     End Sub
 
     '---Generating XML
@@ -2446,6 +2488,104 @@ Public Class Form1
         End Try
 
 
+    End Sub
+    Public Sub DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET()
+        Try
+
+            '---Decleration
+            Dim decl As XDeclaration = New XDeclaration(encoding:="UTF-8", standalone:="yes", version:="1.0")
+            doc.Declaration = decl
+
+            '---Registration
+            Dim REGISTRATION As XElement = <ns3:ProductModelRegistrationRequest xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" REQUEST_ID="nothing"/>
+
+            '---Request-ID
+            Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
+            REQUEST_ID.Value = Txt_Request.Text
+
+            For i = 0 To dummy - 2
+                '---product Operation
+                Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
+                REGISTRATION.Add(productOperation)
+                Dim OPERATION_TYPE As XAttribute = productOperation.Attribute("OPERATION_TYPE")
+                OPERATION_TYPE.Value = CB_OperationType.SelectedItem
+                Dim OPERATION_ID As XAttribute = productOperation.Attribute("OPERATION_ID")
+                OPERATION_ID.Value = i
+
+                '-Model Version
+                Dim MODEL_VERSION As XElement = <MODEL_VERSION/>
+                productOperation.Add(MODEL_VERSION)
+
+                '---EPREL REGISTRATION Number
+                If _EPREL_MODEL_REGISTRATION_NUMBER(i) <> "" Then
+                    Dim EPREL_REGISTRATION_NUMBER As XElement = <EPREL_MODEL_REGISTRATION_NUMBER/>
+                    EPREL_REGISTRATION_NUMBER.Value = _EPREL_MODEL_REGISTRATION_NUMBER(i)
+                    MODEL_VERSION.Add(EPREL_REGISTRATION_NUMBER)
+                Else
+                    Form2.LB_Log.Items.Add("EPREL Model Registration Number for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    'Throw New ArgumentException("Exeption Occured")
+                    errorstate = True
+                    Continue For
+                End If
+
+                '---Model Identifier -M
+                Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
+                MODEL_IDENTIFIER.Value = _MODEL_IDENTIFIER(i)
+                MODEL_VERSION.Add(MODEL_IDENTIFIER)
+
+                '---Supplier -M
+                If CB_Trademark.Checked = True Then
+                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
+                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
+                Else
+                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                End If
+
+                '---Delegated Act -M
+                Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
+                DELEGATED_ACT.Value = "EU_2019_2015"
+                MODEL_VERSION.Add(DELEGATED_ACT)
+
+                '---Product Group
+                Dim PRODUCT_GROUP As XElement = <PRODUCT_GROUP/>
+                PRODUCT_GROUP.Value = "LAMP"
+                MODEL_VERSION.Add(PRODUCT_GROUP)
+
+                '---Market Start Date YYYY-MM-DD
+                Dim ON_MARKET_START_DATE As XElement = <ON_MARKET_START_DATE/>
+                ON_MARKET_START_DATE.Value = _ON_MARKET_START_DATE(i)
+                MODEL_VERSION.Add(ON_MARKET_START_DATE)
+
+                '---Market END Date YYYY-MM-DD
+                Dim ON_MARKET_END_DATE As XElement = <ON_MARKET_END_DATE/>
+                ON_MARKET_END_DATE.Value = _ON_MARKET_END_DATE(i)
+                MODEL_VERSION.Add(ON_MARKET_END_DATE)
+
+                ''---Registrant Nature
+                'Dim REGISTRANT_NATURE As XElement = <REGISTRANT_NATURE/>
+                'REGISTRANT_NATURE.Value = CB_RegistrantNature.SelectedItem
+                'MODEL_VERSION.Add(REGISTRANT_NATURE)
+
+            Next
+
+            doc.Add(REGISTRATION)
+
+#If DEBUG Then
+            Console.WriteLine("Display the modified XML...")
+            Console.WriteLine(doc)
+            doc.Save(Console.Out)
+#End If
+
+        Catch ex As Exception
+            ErrorDlg("xml", ex)
+        End Try
+
+        If errorstate = True Then
+            ErrorDlg("xml")
+        End If
     End Sub
 
     '---Output

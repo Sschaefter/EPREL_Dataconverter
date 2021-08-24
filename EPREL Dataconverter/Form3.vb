@@ -19,26 +19,49 @@ Public Class Form3
 
 
         Dim pdfBytes As Byte()
-            Dim pdfFilePath As String
-            Dim xlApp As New EX.Application
+        Dim pdfFilePath As String
+        Dim xlApp As New EX.Application
 
-            Dim input As New OpenFileDialog
-            input.Filter = "Excel Files (*.xlsx)|*.xlsx"
-            input.ShowDialog()
+        Dim input As New OpenFileDialog
+        input.Filter = "Excel Files (*.xlsx)|*.xlsx"
+        input.ShowDialog()
 
 
 
         Dim xlBook = xlApp.Workbooks.Open(input.FileName)
-            Dim xltab1 = xlBook.Worksheets("DOWNLOAD")
-            Dim xlUp = EX.XlDirection.xlUp
-            Dim lastentry As Integer
-            Dim add As String
+        Dim xltab1 = xlBook.Worksheets("DOWNLOAD")
+        Dim xlUp = EX.XlDirection.xlUp
+        Dim lastentry As Integer
+        Dim add As String
+        Dim LB_COL As String = "COLOR"
+        Dim LB_SZ As String = "BIG"
+        Dim LB_FF As String = "PDF"
 
+        If RB_BW.Checked = True Then
+            LB_COL = "BW"
+        Else
+            LB_COL = "COLOR"
+        End If
+
+        If RB_BIG.Checked = True Then
+            LB_SZ = "BIG"
+        Else
+            LB_SZ = "SMALL"
+        End If
+
+        If RB_PDF.Checked = True Then
+            LB_FF = "PDF"
+        ElseIf RB_PNG.Checked = True Then
+            LB_FF = "PNG"
+        Else
+            LB_FF = "SVG"
+        End If
 
 
         lastentry = xltab1.Range("B" & xltab1.Rows.Count).End(xlUp).Row
         'lastentry = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
         'lastentry = xltab1.Range("A1:A" & lastentry).Value
+
 
 
 
@@ -48,19 +71,25 @@ Public Class Form3
             For row As Integer = 2 To lastentry
                 add = xltab1.Range("B" & row).Value
                 'pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/tyres/" & add & "/labels?format=PDF"))
-                pdfBytes = Await GetPDFResourceAsync(New Uri("https://energy-label.acceptance.ec.europa.eu/api/light_source/" & add & "/labels?format=PDF"))
-                pdfFilePath = Path.Combine(TB_Label_Folder.Text, xltab1.Range("A" & row).Value & "_" & add & ".pdf")
-                File.WriteAllBytes(pdfFilePath, pdfBytes)
+                If CBox_Zipall_Label.Checked = False Then
+                    pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/labels?format=" & LB_FF & "&type=" & LB_SZ & "_" & LB_COL))
+                    pdfFilePath = Path.Combine(TB_Label_Folder.Text, "label_" & xltab1.Range("A" & row).Value & "_" & add & "_" & LB_SZ & "_" & LB_COL & "." & LB_FF)
+                    File.WriteAllBytes(pdfFilePath, pdfBytes)
+                ElseIf CBox_Zipall_Label.Checked = True Then
+                    pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/labels"))
+                    pdfFilePath = Path.Combine(TB_Label_Folder.Text, xltab1.Range("A" & row).Value & "_" & add & ".zip")
+                    File.WriteAllBytes(pdfFilePath, pdfBytes)
+                End If
             Next
 
         Catch ex As Exception
-                xlBook.Close(SaveChanges:=False)
-                xlApp.Quit()
-                Exit Sub
-            End Try
-
             xlBook.Close(SaveChanges:=False)
             xlApp.Quit()
+            Exit Sub
+        End Try
+
+        xlBook.Close(SaveChanges:=False)
+        xlApp.Quit()
 
         MsgBox("Download finished!", MsgBoxStyle.OkOnly)
 
@@ -126,7 +155,7 @@ Public Class Form3
     End Sub
 
     Private Async Sub B_Fiches_Loader_Click(sender As Object, e As EventArgs) Handles B_Fiches_Loader.Click
-        If TB_Label_Folder.Text = "Click to select folder" Then
+        If TB_Fiches_Folder.Text = "Click to select folder" Then
             MsgBox("Please choose output folder!")
             Exit Sub
         End If
@@ -148,8 +177,6 @@ Public Class Form3
         Dim lastentry As Integer
         Dim add As String
 
-
-
         lastentry = xltab1.Range("B" & xltab1.Rows.Count).End(xlUp).Row
         'lastentry = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
         'lastentry = xltab1.Range("A1:A" & lastentry).Value
@@ -162,9 +189,15 @@ Public Class Form3
             For row As Integer = 2 To lastentry
                 add = xltab1.Range("B" & row).Value
                 'pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/tyres/" & add & "/labels?format=PDF"))
-                pdfBytes = Await GetPDFResourceAsync(New Uri("https://energy-label.acceptance.ec.europa.eu/api/light_source/" & add & "/labels?format=PDF"))
-                pdfFilePath = Path.Combine(TB_Label_Folder.Text, xltab1.Range("A" & row).Value & "_" & add & ".pdf")
-                File.WriteAllBytes(pdfFilePath, pdfBytes)
+                If CBox_Zipall_Fiche.Checked = False Then
+                    pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/fiches?language=" & CB_LB_LANG.Text))
+                    pdfFilePath = Path.Combine(TB_Fiches_Folder.Text, "fiche_" & xltab1.Range("A" & row).Value & "_" & add & "_" & CB_LB_LANG.Text & ".pdf")
+                    File.WriteAllBytes(pdfFilePath, pdfBytes)
+                ElseIf CBox_Zipall_Fiche.Checked = True Then
+                    pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/fiches"))
+                    pdfFilePath = Path.Combine(TB_Fiches_Folder.Text, xltab1.Range("A" & row).Value & "_" & add & ".zip")
+                    File.WriteAllBytes(pdfFilePath, pdfBytes)
+                End If
             Next
 
         Catch ex As Exception
@@ -177,6 +210,38 @@ Public Class Form3
         xlApp.Quit()
 
         MsgBox("Download finished!", MsgBoxStyle.OkOnly)
+
+    End Sub
+
+    Private Sub CBox_Zipall_CheckedChanged(sender As Object, e As EventArgs) Handles CBox_Zipall_Label.CheckedChanged
+        If CBox_Zipall_Label.Checked = True Then
+            Panel1.Enabled = False
+            Panel2.Enabled = False
+            Panel3.Enabled = False
+        Else
+            Panel1.Enabled = True
+            Panel2.Enabled = True
+            Panel3.Enabled = True
+        End If
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CBox_Zipall_Fiche.CheckedChanged
+        If CBox_Zipall_Fiche.Checked = True Then
+            CB_LB_LANG.Enabled = False
+        Else
+            CB_LB_LANG.Enabled = True
+
+        End If
+    End Sub
+
+    Private Sub TB_Fiches_Folder_Click(sender As Object, e As EventArgs) Handles TB_Fiches_Folder.Click
+        Dim folder As New FolderBrowserDialog()
+
+        If folder.ShowDialog = DialogResult.Cancel Then
+            MsgBox("Please select folder!")
+        Else
+            TB_Fiches_Folder.Text = folder.SelectedPath + "\"
+        End If
 
     End Sub
 End Class

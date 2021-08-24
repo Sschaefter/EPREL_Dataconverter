@@ -48,58 +48,38 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(73, 356)
+        resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Start"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(23, 46)
+        resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(80, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Operation Type"
         '
         'Txt_TrademarkRef
         '
-        Me.Txt_TrademarkRef.Location = New System.Drawing.Point(23, 142)
+        resources.ApplyResources(Me.Txt_TrademarkRef, "Txt_TrademarkRef")
         Me.Txt_TrademarkRef.Name = "Txt_TrademarkRef"
-        Me.Txt_TrademarkRef.Size = New System.Drawing.Size(221, 20)
-        Me.Txt_TrademarkRef.TabIndex = 4
-        Me.Txt_TrademarkRef.Text = "REF001"
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(23, 126)
+        resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(111, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Trademark Reference"
         '
         'Txt_Request
         '
-        Me.Txt_Request.Location = New System.Drawing.Point(23, 23)
+        resources.ApplyResources(Me.Txt_Request, "Txt_Request")
         Me.Txt_Request.Name = "Txt_Request"
-        Me.Txt_Request.Size = New System.Drawing.Size(221, 20)
-        Me.Txt_Request.TabIndex = 6
-        Me.Txt_Request.Text = "Request"
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(23, 7)
+        resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 13)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Request ID"
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.CB_Trademark)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.CB_RegistrantNature)
@@ -115,147 +95,95 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Txt_TrademarkRef)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(45, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(281, 318)
-        Me.Panel1.TabIndex = 7
         '
         'CB_Trademark
         '
-        Me.CB_Trademark.AutoSize = True
-        Me.CB_Trademark.Location = New System.Drawing.Point(167, 125)
+        resources.ApplyResources(Me.CB_Trademark, "CB_Trademark")
         Me.CB_Trademark.Name = "CB_Trademark"
-        Me.CB_Trademark.Size = New System.Drawing.Size(77, 17)
-        Me.CB_Trademark.TabIndex = 16
-        Me.CB_Trademark.Text = "Trademark"
         Me.CB_Trademark.UseVisualStyleBackColor = True
         '
         'Label6
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(23, 203)
+        resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(102, 13)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Nature of Registrant"
         '
         'CB_RegistrantNature
         '
+        resources.ApplyResources(Me.CB_RegistrantNature, "CB_RegistrantNature")
         Me.CB_RegistrantNature.FormattingEnabled = True
-        Me.CB_RegistrantNature.IntegralHeight = False
-        Me.CB_RegistrantNature.Items.AddRange(New Object() {"AUTHORISED_REPRESENTATIVE", "IMPORTER", "MANUFACTURER"})
-        Me.CB_RegistrantNature.Location = New System.Drawing.Point(23, 219)
+        Me.CB_RegistrantNature.Items.AddRange(New Object() {resources.GetString("CB_RegistrantNature.Items"), resources.GetString("CB_RegistrantNature.Items1"), resources.GetString("CB_RegistrantNature.Items2")})
         Me.CB_RegistrantNature.Name = "CB_RegistrantNature"
-        Me.CB_RegistrantNature.Size = New System.Drawing.Size(221, 21)
-        Me.CB_RegistrantNature.TabIndex = 14
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(169, 258)
+        resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 13
-        Me.Button2.Text = "Contact"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Txt_ContactRef
         '
-        Me.Txt_ContactRef.Location = New System.Drawing.Point(23, 180)
+        resources.ApplyResources(Me.Txt_ContactRef, "Txt_ContactRef")
         Me.Txt_ContactRef.Name = "Txt_ContactRef"
-        Me.Txt_ContactRef.Size = New System.Drawing.Size(221, 20)
-        Me.Txt_ContactRef.TabIndex = 12
-        Me.Txt_ContactRef.Text = "REF001"
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(23, 164)
+        resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(97, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Contact Reference"
         '
         'CB_ReasonChange
         '
-        Me.CB_ReasonChange.Enabled = False
+        resources.ApplyResources(Me.CB_ReasonChange, "CB_ReasonChange")
         Me.CB_ReasonChange.FormattingEnabled = True
-        Me.CB_ReasonChange.Items.AddRange(New Object() {"CORRECT_TYPO", "CHANGE_IN_STANDARDS", "LABEL_SCALE_RANGE_CHANGE", "CHANGE_REQUESTED_BY_MSA", "ADDED_INFORMATION_NO_EFFECT_ON_DECLARATION", "REQUEST_CHANGE_BY_EXTERNAL_BODY"})
-        Me.CB_ReasonChange.Location = New System.Drawing.Point(23, 102)
+        Me.CB_ReasonChange.Items.AddRange(New Object() {resources.GetString("CB_ReasonChange.Items"), resources.GetString("CB_ReasonChange.Items1"), resources.GetString("CB_ReasonChange.Items2"), resources.GetString("CB_ReasonChange.Items3"), resources.GetString("CB_ReasonChange.Items4"), resources.GetString("CB_ReasonChange.Items5")})
         Me.CB_ReasonChange.Name = "CB_ReasonChange"
-        Me.CB_ReasonChange.Size = New System.Drawing.Size(221, 21)
-        Me.CB_ReasonChange.TabIndex = 10
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(23, 86)
+        resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(99, 13)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Reason for Change"
         '
         'CheckB_Log
         '
-        Me.CheckB_Log.AutoSize = True
-        Me.CheckB_Log.Location = New System.Drawing.Point(23, 258)
+        resources.ApplyResources(Me.CheckB_Log, "CheckB_Log")
         Me.CheckB_Log.Name = "CheckB_Log"
-        Me.CheckB_Log.Size = New System.Drawing.Size(44, 17)
-        Me.CheckB_Log.TabIndex = 8
-        Me.CheckB_Log.Text = "Log"
         Me.CheckB_Log.UseVisualStyleBackColor = True
         '
         'CB_OperationType
         '
+        resources.ApplyResources(Me.CB_OperationType, "CB_OperationType")
         Me.CB_OperationType.FormattingEnabled = True
-        Me.CB_OperationType.IntegralHeight = False
-        Me.CB_OperationType.Items.AddRange(New Object() {"DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET", "PREREGISTER_PRODUCT_MODEL", "REGISTER_PRODUCT_MODEL", "UPDATE_PRODUCT_MODEL"})
-        Me.CB_OperationType.Location = New System.Drawing.Point(23, 62)
+        Me.CB_OperationType.Items.AddRange(New Object() {resources.GetString("CB_OperationType.Items"), resources.GetString("CB_OperationType.Items1"), resources.GetString("CB_OperationType.Items2"), resources.GetString("CB_OperationType.Items3")})
         Me.CB_OperationType.Name = "CB_OperationType"
-        Me.CB_OperationType.Size = New System.Drawing.Size(221, 21)
-        Me.CB_OperationType.TabIndex = 7
         '
         'LinkLabel1
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(115, 409)
+        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(144, 13)
-        Me.LinkLabel1.TabIndex = 8
         Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "©Mario Planeck, 07.07.2021"
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(154, 356)
+        resources.ApplyResources(Me.Button3, "Button3")
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 9
-        Me.Button3.Text = "Validate Zip"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'BT_Tools
         '
-        Me.BT_Tools.Location = New System.Drawing.Point(235, 356)
+        resources.ApplyResources(Me.BT_Tools, "BT_Tools")
         Me.BT_Tools.Name = "BT_Tools"
-        Me.BT_Tools.Size = New System.Drawing.Size(75, 23)
-        Me.BT_Tools.TabIndex = 10
-        Me.BT_Tools.Text = "Tools"
         Me.BT_Tools.UseVisualStyleBackColor = True
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(374, 431)
         Me.Controls.Add(Me.BT_Tools)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button1)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "EPREL Dataconverter V1.0.1"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
