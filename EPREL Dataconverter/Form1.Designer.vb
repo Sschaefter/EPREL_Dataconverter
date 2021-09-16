@@ -30,7 +30,6 @@ Partial Class Form1
         Me.Txt_Request = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.CB_Trademark = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.CB_RegistrantNature = New System.Windows.Forms.ComboBox()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -80,7 +79,6 @@ Partial Class Form1
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.CB_Trademark)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.CB_RegistrantNature)
         Me.Panel1.Controls.Add(Me.Button2)
@@ -96,12 +94,6 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Name = "Panel1"
-        '
-        'CB_Trademark
-        '
-        resources.ApplyResources(Me.CB_Trademark, "CB_Trademark")
-        Me.CB_Trademark.Name = "CB_Trademark"
-        Me.CB_Trademark.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -219,6 +211,5 @@ Partial Class Form1
     Friend WithEvents Button3 As Button
     Friend WithEvents Label6 As Label
     Friend WithEvents CB_RegistrantNature As ComboBox
-    Friend WithEvents CB_Trademark As CheckBox
     Friend WithEvents BT_Tools As Button
 End Class

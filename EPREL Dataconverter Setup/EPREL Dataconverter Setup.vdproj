@@ -64,7 +64,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7D33DB3368E4447FA6AE4A9B9AA3D25C"
+        "MsmKey" = "8:_948C796AF04241DB8816C0A87537F73D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -392,10 +392,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7D33DB3368E4447FA6AE4A9B9AA3D25C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_948C796AF04241DB8816C0A87537F73D"
             {
-            "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\Vorlage_EPREL_ECO-V0.5.xlsx"
-            "TargetName" = "8:Vorlage_EPREL_ECO-V0.5.xlsx"
+            "SourcePath" = "8:T:\\00 - Lighting Division\\2021-002_EPREL\\200 Entwicklung\\210 Datenkonvertierung\\Vorlage_EPREL_ECO-V0.6.xlsx"
+            "TargetName" = "8:Vorlage_EPREL_ECO-V0.6.xlsx"
             "Tag" = "8:"
             "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
             "Condition" = "8:"
@@ -540,16 +540,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:EPREL Dataconverter Version 1.1.13"
-        "ProductCode" = "8:{53CB8F91-602F-44C3-95BC-76DE0988EC44}"
-        "PackageCode" = "8:{77C3F11A-2637-41CA-B1D4-FE15A203F4B7}"
+        "ProductName" = "8:EPREL Dataconverter Version 1.1.14"
+        "ProductCode" = "8:{C4DCAE84-2E81-453A-9B94-56E08E632AB4}"
+        "PackageCode" = "8:{7F423839-5DF2-4B90-9671-0352053668FC}"
         "UpgradeCode" = "8:{48D2175A-0959-4829-9876-51F55C0EFB3A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.13"
+        "ProductVersion" = "8:1.1.14"
         "Manufacturer" = "8:nimbus Group GmbH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:mailto:m.planeck@nimbus-group.com"

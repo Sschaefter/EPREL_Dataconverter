@@ -66,18 +66,15 @@ Public Class Form3
 
 
         Try
-
-
             For row As Integer = 2 To lastentry
-                add = xltab1.Range("B" & row).Value
-                'pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/tyres/" & add & "/labels?format=PDF"))
+                add = xltab1.Range("A" & row).Value
                 If CBox_Zipall_Label.Checked = False Then
                     pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/labels?format=" & LB_FF & "&type=" & LB_SZ & "_" & LB_COL))
-                    pdfFilePath = Path.Combine(TB_Label_Folder.Text, "label_" & xltab1.Range("A" & row).Value & "_" & add & "_" & LB_SZ & "_" & LB_COL & "." & LB_FF)
+                    pdfFilePath = Path.Combine(TB_Label_Folder.Text, "label_" & xltab1.Range("B" & row).Value & "_" & add & "_" & LB_SZ & "_" & LB_COL & "." & LB_FF)
                     File.WriteAllBytes(pdfFilePath, pdfBytes)
                 ElseIf CBox_Zipall_Label.Checked = True Then
                     pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/labels"))
-                    pdfFilePath = Path.Combine(TB_Label_Folder.Text, xltab1.Range("A" & row).Value & "_" & add & ".zip")
+                    pdfFilePath = Path.Combine(TB_Label_Folder.Text, xltab1.Range("B" & row).Value & "_" & add & ".zip")
                     File.WriteAllBytes(pdfFilePath, pdfBytes)
                 End If
             Next
@@ -184,18 +181,15 @@ Public Class Form3
 
 
         Try
-
-
             For row As Integer = 2 To lastentry
-                add = xltab1.Range("B" & row).Value
-                'pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/tyres/" & add & "/labels?format=PDF"))
+                add = xltab1.Range("A" & row).Value
                 If CBox_Zipall_Fiche.Checked = False Then
                     pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/fiches?language=" & CB_LB_LANG.Text))
-                    pdfFilePath = Path.Combine(TB_Fiches_Folder.Text, "fiche_" & xltab1.Range("A" & row).Value & "_" & add & "_" & CB_LB_LANG.Text & ".pdf")
+                    pdfFilePath = Path.Combine(TB_Fiches_Folder.Text, "fiche_" & xltab1.Range("B" & row).Value & "_" & add & "_" & CB_LB_LANG.Text & ".pdf")
                     File.WriteAllBytes(pdfFilePath, pdfBytes)
                 ElseIf CBox_Zipall_Fiche.Checked = True Then
                     pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/fiches"))
-                    pdfFilePath = Path.Combine(TB_Fiches_Folder.Text, xltab1.Range("A" & row).Value & "_" & add & ".zip")
+                    pdfFilePath = Path.Combine(TB_Fiches_Folder.Text, xltab1.Range("B" & row).Value & "_" & add & ".zip")
                     File.WriteAllBytes(pdfFilePath, pdfBytes)
                 End If
             Next

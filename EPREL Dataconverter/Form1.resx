@@ -149,8 +149,8 @@
   <data name="CB_OperationType.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 62</value>
   </data>
-  <data name="&gt;&gt;Txt_TrademarkRef.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;CB_ReasonChange.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="CheckB_Log.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 17</value>
@@ -164,8 +164,8 @@
   <data name="Txt_ContactRef.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 20</value>
   </data>
-  <data name="&gt;&gt;CB_ReasonChange.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="BT_Tools.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 356</value>
   </data>
   <data name="CheckB_Log.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -204,7 +204,7 @@
     <value>EPREL Dataconverter V1.0.1</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;Txt_Request.Name" xml:space="preserve">
     <value>Txt_Request</value>
@@ -313,7 +313,7 @@
     <value>23, 164</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;CB_ReasonChange.Name" xml:space="preserve">
     <value>CB_ReasonChange</value>
@@ -331,7 +331,7 @@
     <value>Txt_TrademarkRef</value>
   </data>
   <data name="&gt;&gt;Txt_Request.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -343,7 +343,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CB_ReasonChange.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -367,7 +367,7 @@
     <value>111, 13</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -388,7 +388,7 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Txt_ContactRef.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -427,7 +427,7 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;CB_RegistrantNature.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="Txt_Request.Text" xml:space="preserve">
     <value>Request</value>
@@ -485,7 +485,7 @@
     <value>4</value>
   </data>
   <data name="&gt;&gt;CB_OperationType.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;CB_RegistrantNature.Name" xml:space="preserve">
     <value>CB_RegistrantNature</value>
@@ -518,10 +518,10 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -587,7 +587,7 @@
     <value>23, 142</value>
   </data>
   <data name="&gt;&gt;Txt_TrademarkRef.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="CheckB_Log.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -601,9 +601,6 @@
   <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="BT_Tools.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 356</value>
-  </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -611,7 +608,7 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;LinkLabel1.Name" xml:space="preserve">
     <value>LinkLabel1</value>
@@ -695,7 +692,7 @@
     <value>Button2</value>
   </data>
   <data name="&gt;&gt;CheckB_Log.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -716,7 +713,7 @@
     <value>23, 258</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -738,6 +735,9 @@
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;Txt_TrademarkRef.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

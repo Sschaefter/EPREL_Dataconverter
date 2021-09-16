@@ -840,15 +840,10 @@ Public Class Form1
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
                 '---Supplier -M
-                If CB_Trademark.Checked = True Then
-                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
-                Else
-                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
-                End If
+                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+
 
                 '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
@@ -1652,15 +1647,10 @@ Public Class Form1
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
                 '---Supplier -M
-                If CB_Trademark.Checked = True Then
-                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
-                Else
-                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
-                End If
+                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+
 
                 '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
@@ -2450,15 +2440,10 @@ Public Class Form1
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
                 '---Supplier -M
-                If CB_Trademark.Checked = True Then
-                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
-                Else
-                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
                     TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
                     MODEL_VERSION.Add(TRADEMARK_REFERENCE)
-                End If
+
 
                 '---Delegated Act
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
@@ -2534,15 +2519,11 @@ Public Class Form1
                 MODEL_VERSION.Add(MODEL_IDENTIFIER)
 
                 '---Supplier -M
-                If CB_Trademark.Checked = True Then
-                    Dim SUPPLIER_NAME_OR_TRADEMARK As XElement = <SUPPLIER_NAME_OR_TRADEMARK/>
-                    SUPPLIER_NAME_OR_TRADEMARK.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(SUPPLIER_NAME_OR_TRADEMARK)
-                Else
-                    Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
+
+                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
                     TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
                     MODEL_VERSION.Add(TRADEMARK_REFERENCE)
-                End If
+
 
                 '---Delegated Act -M
                 Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
