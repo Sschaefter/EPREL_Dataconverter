@@ -125,6 +125,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Download Finished.Designer.vb">
+      <DependentUpon>Download Finished.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Download Finished.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +149,18 @@
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
     <Compile Include="Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.vb">
+      <DependentUpon>Form4.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form4.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Parsing.Designer.vb">
+      <DependentUpon>Parsing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Parsing.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Contact.Designer.vb">
@@ -166,8 +185,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="XML Process.Designer.vb">
+      <DependentUpon>XML Process.vb</DependentUpon>
+    </Compile>
+    <Compile Include="XML Process.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Download Finished.resx">
+      <DependentUpon>Download Finished.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.de.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +208,12 @@
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form4.resx">
+      <DependentUpon>Form4.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Parsing.resx">
+      <DependentUpon>Parsing.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Contact.resx">
       <DependentUpon>Form_Contact.vb</DependentUpon>
     </EmbeddedResource>
@@ -188,6 +222,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XML Process.resx">
+      <DependentUpon>XML Process.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -62,11 +62,15 @@ Public Class Form3
         'lastentry = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
         'lastentry = xltab1.Range("A1:A" & lastentry).Value
 
+        DownloadProcess.Button1.Enabled = False
+        DownloadProcess.Show()
 
-
+        'Dim process As Double = 100 / (lastentry - 1)
+        DownloadProcess.Label4.Text = lastentry - 1
 
         Try
             For row As Integer = 2 To lastentry
+                DownloadProcess.Label2.Text = row - 1
                 add = xltab1.Range("A" & row).Value
                 If CBox_Zipall_Label.Checked = False Then
                     pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/labels?format=" & LB_FF & "&type=" & LB_SZ & "_" & LB_COL))
@@ -77,6 +81,7 @@ Public Class Form3
                     pdfFilePath = Path.Combine(TB_Label_Folder.Text, xltab1.Range("B" & row).Value & "_" & add & ".zip")
                     File.WriteAllBytes(pdfFilePath, pdfBytes)
                 End If
+
             Next
 
         Catch ex As Exception
@@ -88,8 +93,7 @@ Public Class Form3
         xlBook.Close(SaveChanges:=False)
         xlApp.Quit()
 
-        MsgBox("Download finished!", MsgBoxStyle.OkOnly)
-
+        DownloadProcess.Button1.Enabled = True
 
 
     End Sub
@@ -178,10 +182,12 @@ Public Class Form3
         'lastentry = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
         'lastentry = xltab1.Range("A1:A" & lastentry).Value
 
-
+        DownloadProcess.Button1.Enabled = False
+        DownloadProcess.Label4.Text = lastentry - 1
 
         Try
             For row As Integer = 2 To lastentry
+                DownloadProcess.Label2.Text = row - 1
                 add = xltab1.Range("A" & row).Value
                 If CBox_Zipall_Fiche.Checked = False Then
                     pdfBytes = Await GetPDFResourceAsync(New Uri("https://eprel.ec.europa.eu/api/products/lightsources/" & add & "/fiches?language=" & CB_LB_LANG.Text))
@@ -203,7 +209,7 @@ Public Class Form3
         xlBook.Close(SaveChanges:=False)
         xlApp.Quit()
 
-        MsgBox("Download finished!", MsgBoxStyle.OkOnly)
+        DownloadProcess.Button1.Enabled = True
 
     End Sub
 

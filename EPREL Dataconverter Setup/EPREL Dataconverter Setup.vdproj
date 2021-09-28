@@ -76,6 +76,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D51647AF88B244E9A495BF27A2EF3621"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DE28527426BA90F9897FF33AFE6BF605"
         "OwnerKey" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
         "MsmSig" = "8:_UNDEFINED"
@@ -432,6 +438,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D51647AF88B244E9A495BF27A2EF3621"
+            {
+            "SourcePath" = "8:..\\EPREL Dataconverter-Manual.pdf"
+            "TargetName" = "8:EPREL Dataconverter-Manual.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DE28527426BA90F9897FF33AFE6BF605"
             {
             "AssemblyRegister" = "3:1"
@@ -540,16 +566,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:EPREL Dataconverter Version 1.1.14"
-        "ProductCode" = "8:{C4DCAE84-2E81-453A-9B94-56E08E632AB4}"
-        "PackageCode" = "8:{7F423839-5DF2-4B90-9671-0352053668FC}"
+        "ProductName" = "8:EPREL Dataconverter Version 1.1.15"
+        "ProductCode" = "8:{03031DD2-427D-4FAD-82DF-B6D92240B529}"
+        "PackageCode" = "8:{6DF7B044-A465-4D41-8C5B-02C356B4CB85}"
         "UpgradeCode" = "8:{48D2175A-0959-4829-9876-51F55C0EFB3A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.14"
+        "ProductVersion" = "8:1.1.15"
         "Manufacturer" = "8:nimbus Group GmbH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:mailto:m.planeck@nimbus-group.com"
@@ -662,6 +688,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2A5D43B4BA82421092553CC5582F76BB"
+            {
+            "Name" = "8:EPREL Dataconverter"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_35A41287E3394B4DB6D9F3107E9889E6"
+            "Folder" = "8:_DC92C1DF59F14709A8F9C1F92920B4D1"
+            "WorkingFolder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Icon" = "8:_06EF0B8D474F4D54ADAC441521CE6CD9"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_77570FC49FE441058277C1EC5F5D5CE6"
+            {
+            "Name" = "8:Vorlage_EPREL_ECO-V0.6.xlsx"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_948C796AF04241DB8816C0A87537F73D"
+            "Folder" = "8:_659F9BE6C66C43869B8D3AD0FA18B5C8"
+            "WorkingFolder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_936F614040B144CB81B20A8A83CFC952"
             {
             "Name" = "8:EPREL Dataconverter"
@@ -674,6 +728,20 @@
             "Folder" = "8:_659F9BE6C66C43869B8D3AD0FA18B5C8"
             "WorkingFolder" = "8:_82695946E16A4D0789E71903F09673DE"
             "Icon" = "8:_06EF0B8D474F4D54ADAC441521CE6CD9"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EECDE742732D45CBBF55DDAC92728E19"
+            {
+            "Name" = "8:EPREL Dataconverter-Manual.pdf"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_D51647AF88B244E9A495BF27A2EF3621"
+            "Folder" = "8:_659F9BE6C66C43869B8D3AD0FA18B5C8"
+            "WorkingFolder" = "8:_82695946E16A4D0789E71903F09673DE"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }

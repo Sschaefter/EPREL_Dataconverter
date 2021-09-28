@@ -42,6 +42,7 @@ Partial Class Form1
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.BT_Tools = New System.Windows.Forms.Button()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -78,7 +79,6 @@ Partial Class Form1
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.CB_RegistrantNature)
         Me.Panel1.Controls.Add(Me.Button2)
@@ -93,6 +93,7 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Txt_TrademarkRef)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'Label6
@@ -102,8 +103,8 @@ Partial Class Form1
         '
         'CB_RegistrantNature
         '
-        resources.ApplyResources(Me.CB_RegistrantNature, "CB_RegistrantNature")
         Me.CB_RegistrantNature.FormattingEnabled = True
+        resources.ApplyResources(Me.CB_RegistrantNature, "CB_RegistrantNature")
         Me.CB_RegistrantNature.Items.AddRange(New Object() {resources.GetString("CB_RegistrantNature.Items"), resources.GetString("CB_RegistrantNature.Items1"), resources.GetString("CB_RegistrantNature.Items2")})
         Me.CB_RegistrantNature.Name = "CB_RegistrantNature"
         '
@@ -143,8 +144,8 @@ Partial Class Form1
         '
         'CB_OperationType
         '
-        resources.ApplyResources(Me.CB_OperationType, "CB_OperationType")
         Me.CB_OperationType.FormattingEnabled = True
+        resources.ApplyResources(Me.CB_OperationType, "CB_OperationType")
         Me.CB_OperationType.Items.AddRange(New Object() {resources.GetString("CB_OperationType.Items"), resources.GetString("CB_OperationType.Items1"), resources.GetString("CB_OperationType.Items2"), resources.GetString("CB_OperationType.Items3")})
         Me.CB_OperationType.Name = "CB_OperationType"
         '
@@ -166,10 +167,17 @@ Partial Class Form1
         Me.BT_Tools.Name = "BT_Tools"
         Me.BT_Tools.UseVisualStyleBackColor = True
         '
+        'LinkLabel2
+        '
+        resources.ApplyResources(Me.LinkLabel2, "LinkLabel2")
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.TabStop = True
+        '
         'Form1
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.BT_Tools)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.LinkLabel1)
@@ -212,4 +220,5 @@ Partial Class Form1
     Friend WithEvents Label6 As Label
     Friend WithEvents CB_RegistrantNature As ComboBox
     Friend WithEvents BT_Tools As Button
+    Friend WithEvents LinkLabel2 As LinkLabel
 End Class

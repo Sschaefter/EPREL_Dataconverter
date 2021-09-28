@@ -70,3 +70,7 @@ C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Release
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Form1.de.resources
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\de\EPREL Dataconverter.resources.dll
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.AssemblyReference.cache
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.DownloadProcess.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Disclaimer.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Parsing.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.XML_Process.resources

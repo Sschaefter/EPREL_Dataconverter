@@ -188,6 +188,14 @@ Public Class Form1
         Form_Contact.Show()
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Enabled = False
+        Disclaimer.ShowDialog()
+        If Disclaimer.DialogResult = DialogResult.Cancel Then
+            Me.Close()
+        Else
+            Me.Enabled = True
+        End If
+
         Me.Text = "EPREL Dataconverter " & My.Application.Info.Version.ToString
         Form2.Show()
         Form2.Hide()
@@ -281,12 +289,18 @@ Public Class Form1
         Dim xltab1 = book.Worksheets("PREREGISTRATION")
         Dim xlUP As Object = Excel.XlDirection.xlUp
         Dim lastentry As Object
+
+
         Try
             dummy = xltab1.Range("A" & xltab1.Rows.Count).End(xlUP).Row
 
             lastentry = xltab1.Range("A1:A" & dummy).Value
+            Parsing.Label4.Text = dummy - 1
+            Parsing.Show()
+
             ReDim items(dummy - 1)
             For i = 1 To dummy - 1
+                Parsing.Label2.Text = i
                 items(i - 1) = xltab1.Range("A" & i + 1).Value
             Next
         Catch ex As Exception
@@ -297,7 +311,7 @@ Public Class Form1
         xlApp.Workbooks.Close()
             xlApp.Quit()
         'PARSE_END
-
+        Parsing.Hide()
     End Sub
     Sub PARSE_REGISTER(ByVal quelle As String)
         Dim xlApp As New Excel.Application
@@ -368,7 +382,10 @@ Public Class Form1
             Dim dmy1 As Date
             Dim dmy2 As Double
 
+            Parsing.Label4.Text = dummy - 1
+            Parsing.Show()
             For i = 1 To dummy - 1
+                Parsing.Label2.Text = i
                 sheet = "REGISTER_PRODUCT_MODEL"
                 row = i + 1
                 col = "A"
@@ -402,12 +419,12 @@ Public Class Form1
                 col = "N"
                 _DIMMABLE(i - 1) = xltab1.Range("N" & i + 1).Value
                 col = "O"
-                _ENERGY_CONS_ON_MODE(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("O" & i + 1).Value))
+                _ENERGY_CONS_ON_MODE(i - 1) = Math.Ceiling(Convert.ToDecimal(xltab1.Range("O" & i + 1).Value))
                 col = "P"
                 '_ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
                 _ENERGY_CLASS(i - 1) = xltab1.Range("P" & i + 1).Value
                 col = "R"
-                _LUMINOUS_FLUX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("R" & i + 1).Value))
+                _LUMINOUS_FLUX(i - 1) = Math.Ceiling(Convert.ToDecimal(xltab1.Range("R" & i + 1).Value))
                 col = "S"
                 '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("S" & i + 1).Value
@@ -562,7 +579,7 @@ Public Class Form1
 
         book.Close(False)
         xlApp.Quit()
-
+        Parsing.Hide()
         'System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp)
         'xlApp = Nothing
     End Sub
@@ -638,7 +655,11 @@ Public Class Form1
             Dim dmy1 As Date
             Dim dmy2 As Double
 
+            Parsing.Label4.Text = dummy - 1
+            Parsing.Show()
+
             For i = 1 To dummy - 1
+                Parsing.Label2.Text = i
                 _EPREL_MODEL_REGISTRATION_NUMBER(i - 1) = xltab1.Range("A" & i + 1).Value
                 _MODEL_IDENTIFIER(i - 1) = xltab1.Range("B" & i + 1).Value
                 _CONSIDER_GENERATED_LABEL_AS_PROVIDED(i - 1) = xltab1.Range("C" & i + 1).Value
@@ -764,7 +785,7 @@ Public Class Form1
         End Try
         xlApp.ActiveWorkbook.Close(False)
         xlApp.Quit()
-
+        Parsing.Hide()
 
     End Sub
     Sub PARSE_DEOP(ByRef quelle As String)
@@ -786,8 +807,11 @@ Public Class Form1
             Dim provider As CultureInfo = New CultureInfo("en-EN")
             Dim dmy1 As Date
 
+            Parsing.Label4.Text = dummy - 1
+            Parsing.Show()
 
             For i = 1 To dummy - 1
+                Parsing.Label2.Text = i
                 _EPREL_MODEL_REGISTRATION_NUMBER(i - 1) = xltab1.Range("A" & i + 1).Value
                 _MODEL_IDENTIFIER(i - 1) = xltab1.Range("B" & i + 1).Value
                 dmy1 = xltab1.Range("C" & i + 1).Value
@@ -804,6 +828,7 @@ Public Class Form1
         End Try
         xlApp.ActiveWorkbook.Close(False)
         xlApp.Quit()
+        Parsing.Hide()
     End Sub
 
     '---Generating XML
@@ -821,7 +846,12 @@ Public Class Form1
             Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
             REQUEST_ID.Value = Txt_Request.Text
 
+            XML_Process.Label4.Text = dummy - 1
+            XML_Process.Show()
+
             For i = 0 To dummy - 2
+                XML_Process.Label2.Text = i + 1
+
                 '---product Operation
                 Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
                 REGISTRATION.Add(productOperation)
@@ -1373,7 +1403,7 @@ Public Class Form1
                     CLAIM_EQUIVALENT_POWER.Value = _CLAIM_EQUIVALENT_POWER(i)
                     PRODUCT_GROUP_DETAIL.Add(CLAIM_EQUIVALENT_POWER)
                 Else
-                    form2.LB_Log.Items.Add("Claim equivalent power for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
+                    Form2.LB_Log.Items.Add("Claim equivalent power for Modelidentifier " & _MODEL_IDENTIFIER(i) & " is missing!")
                     errorstate = True
                     Continue For
                 End If
@@ -1599,6 +1629,8 @@ Public Class Form1
             ErrorDlg("xml")
         End If
 
+        XML_Process.Hide()
+
     End Sub
     Public Sub UPDATE_PRODUCT()
         Try
@@ -1614,7 +1646,12 @@ Public Class Form1
             Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
             REQUEST_ID.Value = Txt_Request.Text
 
+            XML_Process.Label4.Text = dummy - 1
+            XML_Process.Show()
+
             For i = 0 To dummy - 2
+                XML_Process.Label2.Text = i + 1
+
                 '---product Operation
                 Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing" REASON_FOR_CHANGE="nothing"/>
                 REGISTRATION.Add(productOperation)
@@ -2405,7 +2442,7 @@ Public Class Form1
         If errorstate = True Then
             ErrorDlg("xml")
         End If
-
+        XML_Process.Hide()
 
     End Sub
     Public Sub PREREGISTRATION()
@@ -2421,7 +2458,12 @@ Public Class Form1
             Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
             REQUEST_ID.Value = Txt_Request.Text
 
+            XML_Process.Label4.Text = dummy - 1
+            XML_Process.Show()
+
             For i = 0 To dummy - 2
+                XML_Process.Label2.Text = i + 1
+
                 '---Product Operation
                 Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
                 REGISTRATION.Add(productOperation)
@@ -2441,8 +2483,8 @@ Public Class Form1
 
                 '---Supplier -M
                 Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
 
 
                 '---Delegated Act
@@ -2472,6 +2514,7 @@ Public Class Form1
             ErrorDlg("xml", ex)
         End Try
 
+        XML_Process.Hide()
 
     End Sub
     Public Sub DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET()
@@ -2488,7 +2531,12 @@ Public Class Form1
             Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
             REQUEST_ID.Value = Txt_Request.Text
 
+            XML_Process.Label4.Text = dummy - 2
+            XML_Process.Show()
+
             For i = 0 To dummy - 2
+                XML_Process.Label2.Text = i + 1
+
                 '---product Operation
                 Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
                 REGISTRATION.Add(productOperation)
@@ -2521,8 +2569,8 @@ Public Class Form1
                 '---Supplier -M
 
                 Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                    TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                    MODEL_VERSION.Add(TRADEMARK_REFERENCE)
+                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
+                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
 
 
                 '---Delegated Act -M
@@ -2567,6 +2615,9 @@ Public Class Form1
         If errorstate = True Then
             ErrorDlg("xml")
         End If
+
+        XML_Process.Hide()
+
     End Sub
 
     '---Output
@@ -2711,6 +2762,13 @@ Done:
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles BT_Tools.Click
         Form3.Show()
+    End Sub
+
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Dim dir As String = System.IO.Path.GetDirectoryName(Application.ExecutablePath)
+        dir += "/EPREL Dataconverter-Manual.pdf"
+
+        System.Diagnostics.Process.Start(dir)
     End Sub
 
 

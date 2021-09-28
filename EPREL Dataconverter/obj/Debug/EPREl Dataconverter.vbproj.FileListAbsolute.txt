@@ -83,3 +83,7 @@ C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\E
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\bin\Debug\de\EPREL Dataconverter.resources.dll
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Form1.de.resources
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\de\EPREL Dataconverter.resources.dll
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Disclaimer.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.DownloadProcess.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.Parsing.resources
+C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Debug\EPREL_Dataconverter.XML_Process.resources

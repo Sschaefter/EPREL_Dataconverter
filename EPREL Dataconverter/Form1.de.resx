@@ -136,9 +136,6 @@
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
@@ -165,6 +162,9 @@
   </data>
   <data name="CB_OperationType.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
