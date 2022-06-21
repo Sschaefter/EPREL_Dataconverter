@@ -1,7 +1,8 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Globalization
+Imports Microsoft.WindowsAPICodePack.Dialogs
 
-
+'Einbinden der Namespaces für die EPREL XML
 Imports <xmlns:ns3="http://eprel.ener.ec.europa.eu/services/productModelService/modelRegistrationService/v2">
 Imports <xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2">
 Imports <xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/EnergyLabelTypes/v2">
@@ -68,6 +69,7 @@ Public Class Form1
     Public col As String
     Public sheet As String
 
+    'Erzeugen der Struktu für die technische Dokumentation
     Structure _TECHNICAL_DOCUMENTATION
         Public _TD_MODEL_IDENTIFIER As String
         Public _TD_DESCRIPTION As String
@@ -81,14 +83,16 @@ Public Class Form1
         Public _TD_TESTING_CONDITIONS As Boolean
         Public _TD_FILE_NAME As String
     End Structure
+
     Public _TD() As _TECHNICAL_DOCUMENTATION
     Public dummy, dummy2 As Integer
-    'Public doc As XmlDocument = New XmlDocument()
     Public doc As XDocument = New XDocument()
     Public state As Boolean = False
     Public errorstate As Boolean = False
+
     '---Form & GUI
     Private Sub CB_OperationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CB_OperationType.SelectedIndexChanged
+        'Wenn im Dropdown UPDATE_PRODUCT_MODEL ausgewählt wird, muss der Nutzer einen Grund auswählen. 
         If CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
             CB_ReasonChange.Enabled = True
             CB_ReasonChange.SelectedIndex = 0
@@ -96,97 +100,97 @@ Public Class Form1
             CB_ReasonChange.Enabled = False
         End If
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Btn_Start_Click(sender As Object, e As EventArgs) Handles Btn_Start.Click
         '---steback of states
         errorstate = False
         state = False
-        'If CheckB_Log.Checked = True Then
-        '    Form2.Visible = True
-        'End If
 
 
+        'Start des Programms
+        'Der Ablauf ist immer identisch und wird nur bei dem ersten Fall kommentiert
         If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Then
+
+            'Hinweis
             Select Case MsgBox("Please make shure, that all attachments are named liked in the source table and are located in one folder!", vbOKCancel)
                 Case MsgBoxResult.Cancel
                     Exit Sub
                 Case MsgBoxResult.Ok
                     Exit Select
             End Select
+
             Form2.LB_Log.Items.Add("REGISTER_PRODUCT_MODEL")
+
+            'Auswahl der zu verabeitenden Datei
             SELECT_INPUT()
+
             If state = True Then
                 Exit Sub
             End If
+
+            'Erstellung der XML
             REGISTRATION()
+
             If state = True Then
                 Exit Sub
             End If
+
+            'Speichern
             OUTPUT()
-        ElseIf CB_OperationType.SelectedItem = "PREREGISTER_PRODUCT_MODEL" Then
-            Form2.LB_Log.Items.Add("PREREGISTER_PRODUCT_MODEL")
-            SELECT_INPUT()
-            If state = True Then
-                Exit Sub
-            End If
-            PREREGISTRATION()
-            If state = True Then
-                Exit Sub
-            End If
-            OUTPUT()
+
         ElseIf CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
+
             Select Case MsgBox("Please make shure, that all attachments are named liked in the source table and are located in one folder!", vbOKCancel)
                 Case MsgBoxResult.Cancel
                     Exit Sub
                 Case MsgBoxResult.Ok
                     Exit Select
             End Select
+
             Form2.LB_Log.Items.Add("UPDATE_PRODUCT_MODEL")
+
             SELECT_INPUT()
+
             If state = True Then
                 Exit Sub
             End If
+
             UPDATE_PRODUCT()
+
             If state = True Then
                 Exit Sub
             End If
+
             OUTPUT()
+
         ElseIf CB_OperationType.SelectedItem = "DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET" Then
             Form2.LB_Log.Items.Add("DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET")
+
             SELECT_INPUT()
+
             If state = True Then
                 Exit Sub
             End If
+
             DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET()
+
             If state = True Then
                 Exit Sub
+
             End If
+
             OUTPUT()
         End If
-
-
-
-            Select Case MsgBox("Validate Zip File?", vbYesNo)
-            Case MsgBoxResult.Yes
-                Validate_ZIP()
-            Case MsgBoxResult.No
-                Exit Select
-        End Select
 
         If CheckB_Log.Checked = True Then
             Save_Log_XML()
         End If
 
-        'Close()
     End Sub
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Validate_ZIP()
-    End Sub
+
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         System.Diagnostics.Process.Start("mailto:m.planeck@nimbus-group.com")
     End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Form_Contact.Show()
-    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Enabled = False
         Disclaimer.ShowDialog()
@@ -203,6 +207,7 @@ Public Class Form1
 
     End Sub
     Private Sub CheckB_Log_CheckedChanged(sender As Object, e As EventArgs) Handles CheckB_Log.CheckedChanged
+        'Darstellung des Log
         Select Case CheckB_Log.Checked
             Case True
                 Form2.Show()
@@ -211,7 +216,8 @@ Public Class Form1
         End Select
     End Sub
 
-    '---Input
+    '---Inputfile 
+    'In diesem Programmabschnitt sucht der Nutzer die Excel-Datei aus, die geladen werden soll. Eine aktuelle Vorlage befindet sich immer im Installationsverzeichnis!
     Public Sub SELECT_INPUT()
         '----------------------------Validierung, ob Felder befüllt
         If Txt_Request.TextLength = 0 Or Txt_TrademarkRef.TextLength = 0 Then
@@ -227,7 +233,6 @@ Public Class Form1
         End If
         '----------------------------Datei Auswählen und öffnen----------------------
 
-        'xlApp.Visible = False
         Dim quelle As New OpenFileDialog
         quelle.Title = "Please select the source file!"
         quelle.Filter = "Excel files (*.xlsx)|*.xlsx"
@@ -240,11 +245,10 @@ Public Class Form1
 
         Dim flname As String = quelle.FileName
 
+        'Je nach Auswahl der Opertation wird die Datei in die verschiedenen Abläufe Übertragen und die Jeweilige Datei eingelesen
         Select Case CB_OperationType.SelectedItem
             Case "UPDATE_PRODUCT_MODEL"
                 PARSE_UPDATE(flname)
-            Case "PREREGISTER_PRODUCT_MODEL"
-                PARSE_PREREGISTER(flname)
             Case "REGISTER_PRODUCT_MODEL"
                 PARSE_REGISTER(flname)
             Case "DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET"
@@ -252,68 +256,12 @@ Public Class Form1
                 Exit Sub
         End Select
 
-
-
-        'PARSE -DATA
-
-        'Dim book = xlApp.Workbooks.Open(quelle.FileName)
-
-        ''Dim book = xlApp.Workbooks.Open("C:\Users\User79\Desktop\EPREL_Datenkonvertierung_Python_20210201\quelle.xlsx")
-
-
-
-        'Dim xltab1 = book.Worksheets("Tabelle1")
-        ''Dim items() As String
-        'Dim xlUP As Object = Excel.XlDirection.xlUp
-        'Dim lastentry As Object
-        ''Dim dummy As Integer
-
-        'dummy = book.Sheets(1).Range("A" & xltab1.Rows.Count).End(xlUP).Row
-        'lastentry = xltab1.Range("A1:A" & dummy).Value
-        'ReDim items(dummy - 1)
-        'For i = 1 To dummy - 1
-        '    items(i - 1) = xltab1.Range("A" & i + 1).Value
-        'Next
-        'xlApp.Workbooks.Close()
-        'xlApp.Quit()
-        'PARSE_END
-
-
     End Sub
 
     '---Parsing
-    Sub PARSE_PREREGISTER(ByVal quelle As String)
-
-        Dim xlApp As New Excel.Application
-        Dim book = xlApp.Workbooks.Open(quelle)
-        Dim xltab1 = book.Worksheets("PREREGISTRATION")
-        Dim xlUP As Object = Excel.XlDirection.xlUp
-        Dim lastentry As Object
-
-
-        Try
-            dummy = xltab1.Range("A" & xltab1.Rows.Count).End(xlUP).Row
-
-            lastentry = xltab1.Range("A1:A" & dummy).Value
-            Parsing.Label4.Text = dummy - 1
-            Parsing.Show()
-
-            ReDim items(dummy - 1)
-            For i = 1 To dummy - 1
-                Parsing.Label2.Text = i
-                items(i - 1) = xltab1.Range("A" & i + 1).Value
-            Next
-        Catch ex As Exception
-            ErrorDlg("parse", ex)
-
-        End Try
-
-        xlApp.Workbooks.Close()
-            xlApp.Quit()
-        'PARSE_END
-        Parsing.Hide()
-    End Sub
+    'Der Programmablauf ist bei allen drei Varianten identisch daher wird nur der erste Fall kommentiert
     Sub PARSE_REGISTER(ByVal quelle As String)
+        'Erzeugen des Applikation und Laden der Ausgewählten Datei
         Dim xlApp As New Excel.Application
         Dim book = xlApp.Workbooks.Open(quelle)
         Dim xltab1 = book.Worksheets("REGISTER_PRODUCT_MODEL")
@@ -384,6 +332,7 @@ Public Class Form1
 
             Parsing.Label4.Text = dummy - 1
             Parsing.Show()
+
             For i = 1 To dummy - 1
                 Parsing.Label2.Text = i
                 sheet = "REGISTER_PRODUCT_MODEL"
@@ -421,12 +370,10 @@ Public Class Form1
                 col = "O"
                 _ENERGY_CONS_ON_MODE(i - 1) = Math.Ceiling(Convert.ToDecimal(xltab1.Range("O" & i + 1).Value))
                 col = "P"
-                '_ENERGY_CONS_ON_MODE(i - 1) = String.Format("{0000}", xltab1.Range("P" & i + 1).Value)
                 _ENERGY_CLASS(i - 1) = xltab1.Range("P" & i + 1).Value
                 col = "R"
                 _LUMINOUS_FLUX(i - 1) = Math.Ceiling(Convert.ToDecimal(xltab1.Range("R" & i + 1).Value))
                 col = "S"
-                '_LUMINOUS_FLUX(i - 1) = String.Format("{00000}", xltab1.Range("S" & i + 1).Value)
                 _BEAM_ANGLE_CORRESPONDENCE(i - 1) = xltab1.Range("S" & i + 1).Value
                 col = "T"
                 _CORRELATED_COLOUR_TEMP_TYPE(i - 1) = xltab1.Range("T" & i + 1).Value
@@ -512,8 +459,6 @@ Public Class Form1
                 ' R9
                 col = "AT"
                 _LED_R9_COLOUR_RENDERING_INDEX(i - 1) = Math.Round(Convert.ToDecimal(xltab1.Range("AT" & i + 1).Value))
-                'dmy2 = xltab1.Range("AU" & i + 1).Value
-                '_LED_R9_COLOUR_RENDERING_INDEX(i - 1) = String.Format(provider, "{0:###}", dmy2)
                 col = "AU"
                 dmy2 = xltab1.Range("AU" & i + 1).Value
                 _LED_SURVIVAL_FACTOR(i - 1) = String.Format(provider, "{0:0.00}", dmy2)
@@ -545,6 +490,8 @@ Public Class Form1
 
             dummy2 = dummy2 - 2
             ReDim _TD(dummy2)
+
+            'In diesem Abschnitt wird die technische Dokumentation übernommen
             For i = 0 To dummy2
                 sheet = "attachments"
                 row = i + 1
@@ -574,14 +521,12 @@ Public Class Form1
 
         Catch ex As Exception
             ErrorDlg("parse", ex, row, col, sheet)
+            xlApp.Quit()
         End Try
-
 
         book.Close(False)
         xlApp.Quit()
         Parsing.Hide()
-        'System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp)
-        'xlApp = Nothing
     End Sub
     Sub PARSE_UPDATE(ByVal quelle As String)
         Dim xlApp As New Excel.Application
@@ -832,6 +777,9 @@ Public Class Form1
     End Sub
 
     '---Generating XML
+    'In diesem Programmabschnitt wird die XML Datei erezugt. Das Schema ist identisch und wird nur bei dem ersten Fall kommentiert
+    'M - Mandatory
+    'O - Optional
     Public Sub REGISTRATION()
 
         Try
@@ -994,102 +942,13 @@ Public Class Form1
 
 
                 '---Kontakt
-                Select Case Form_Contact.CB_ContactDetails.Checked
-
-                    Case False
-                        '---Contact Details
-                        Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ContactByReference"/>
-                        '--- Contact Reference
-                        Dim CONTACT_REFERENCE As XElement = <CONTACT_REFERENCE/>
-                        CONTACT_REFERENCE.Value = Txt_ContactRef.Text
-                        CONTACT_DETAILS.Add(CONTACT_REFERENCE)
-                        MODEL_VERSION.Add(CONTACT_DETAILS)
-
-                    Case True
-                        '---Contact details
-                        Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ModelSpecificContactDetails"/>
-                        Dim CONTACT_NAME As XElement = <CONTACT_NAME/>
-                        CONTACT_NAME.Value = Form_Contact.TB_ContactName.Text
-                        CONTACT_DETAILS.Add(CONTACT_NAME)
-
-                        With Form_Contact
-                            If .TB_StreetName.Text <> "" Or .TB_Number.Text <> "" Or .TB_City.Text <> "" Or .TB_Municipality.Text <> "" Or .TB_Province.Text <> "" Or .TB_Postcode.Text <> "" Or .CBox_Country.SelectedItem <> "" Then
-                                Dim ADDRESS As XElement = <ADDRESS xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/baseTypes/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns5:DetailedAddress"/>
-
-                                If .TB_StreetName.Text <> "" Then
-                                    Dim STREET_NAME As XElement = <STREET_NAME/>
-                                    STREET_NAME.Value = .TB_StreetName.Text
-                                    ADDRESS.Add(STREET_NAME)
-                                End If
-
-                                If .TB_Number.Text <> "" Then
-                                    Dim STREET_NUMBER As XElement = <STREET_NUMBER/>
-                                    STREET_NUMBER.Value = .TB_Number.Text
-                                    ADDRESS.Add(STREET_NUMBER)
-                                End If
-
-                                If .TB_City.Text <> "" Then
-                                    Dim CITY As XElement = <CITY/>
-                                    CITY.Value = .TB_City.Text
-                                    ADDRESS.Add(CITY)
-                                End If
-
-                                If .TB_Municipality.Text <> "" Then
-                                    Dim MUNICIPALITY As XElement = <MUNICIPALITY/>
-                                    MUNICIPALITY.Value = .TB_Municipality.Text
-                                    ADDRESS.Add(MUNICIPALITY)
-                                End If
-
-                                If .TB_Province.Text <> "" Then
-                                    Dim PROVINCE As XElement = <PROVINCE/>
-                                    PROVINCE.Value = .TB_Province.Text
-                                    ADDRESS.Add(PROVINCE)
-                                End If
-
-                                If .TB_Postcode.Text <> "" Then
-                                    Dim POSTCODE As XElement = <POSTCODE/>
-                                    POSTCODE.Value = .TB_Postcode.Text
-                                    ADDRESS.Add(POSTCODE)
-                                End If
-
-                                If .CBox_Country.SelectedItem <> "" Then
-                                    Dim COUNTRY As XElement = <COUNTRY/>
-                                    COUNTRY.Value = .CBox_Country.SelectedItem
-                                    ADDRESS.Add(COUNTRY)
-                                End If
-                                CONTACT_DETAILS.Add(ADDRESS)
-                            End If
-                        End With
-
-                        Dim FIRST_NAME As XElement = <FIRST_NAME/>
-                        FIRST_NAME.Value = Form_Contact.TB_FirstName.Text
-                        CONTACT_DETAILS.Add(FIRST_NAME)
-
-                        Dim LAST_NAME As XElement = <LAST_NAME/>
-                        LAST_NAME.Value = Form_Contact.TB_LastName.Text
-                        CONTACT_DETAILS.Add(LAST_NAME)
-
-                        Dim PHONE_NUMBER As XElement = <PHONE_NUMBER/>
-                        PHONE_NUMBER.Value = Form_Contact.TB_PhoneNumber.Text
-                        CONTACT_DETAILS.Add(PHONE_NUMBER)
-
-                        If Form_Contact.TB_Email.Text <> "" Then
-                            Dim EMAIL_ADDRESS As XElement = <EMAIL_ADDRESS/>
-                            EMAIL_ADDRESS.Value = Form_Contact.TB_Email.Text
-                            CONTACT_DETAILS.Add(EMAIL_ADDRESS)
-                        End If
-
-                        If Form_Contact.TB_URL.Text <> "" Then
-                            Dim URL As XElement = <URL/>
-                            URL.Value = Form_Contact.TB_URL.Text
-                            CONTACT_DETAILS.Add(URL)
-                        End If
-
-
-                        MODEL_VERSION.Add(CONTACT_DETAILS)
-                End Select
-
-
+                '---Contact Details
+                Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ContactByReference"/>
+                '--- Contact Reference
+                Dim CONTACT_REFERENCE As XElement = <CONTACT_REFERENCE/>
+                CONTACT_REFERENCE.Value = Txt_ContactRef.Text
+                CONTACT_DETAILS.Add(CONTACT_REFERENCE)
+                MODEL_VERSION.Add(CONTACT_DETAILS)
 
 
                 '---Product Group Detail
@@ -1808,100 +1667,16 @@ Public Class Form1
 
 
                 '---Kontakt
-                Select Case Form_Contact.CB_ContactDetails.Checked
 
-                    Case False
-                        '---Contact Details
-                        Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ContactByReference"/>
-                        '--- Contact Reference
-                        Dim CONTACT_REFERENCE As XElement = <CONTACT_REFERENCE/>
-                        CONTACT_REFERENCE.Value = Txt_ContactRef.Text
-                        CONTACT_DETAILS.Add(CONTACT_REFERENCE)
-                        MODEL_VERSION.Add(CONTACT_DETAILS)
-
-                    Case True
-                        '---Contact details
-                        Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ModelSpecificContactDetails"/>
-                        Dim CONTACT_NAME As XElement = <CONTACT_NAME/>
-                        CONTACT_NAME.Value = Form_Contact.TB_ContactName.Text
-                        CONTACT_DETAILS.Add(CONTACT_NAME)
-
-                        With Form_Contact
-                            If .TB_StreetName.Text <> "" Or .TB_Number.Text <> "" Or .TB_City.Text <> "" Or .TB_Municipality.Text <> "" Or .TB_Province.Text <> "" Or .TB_Postcode.Text <> "" Or .CBox_Country.SelectedItem <> "" Then
-                                Dim ADDRESS As XElement = <ADDRESS xmlns:ns5="http://eprel.ener.ec.europa.eu/commonTypes/baseTypes/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns5:DetailedAddress"/>
-
-                                If .TB_StreetName.Text <> "" Then
-                                    Dim STREET_NAME As XElement = <STREET_NAME/>
-                                    STREET_NAME.Value = .TB_StreetName.Text
-                                    ADDRESS.Add(STREET_NAME)
-                                End If
-
-                                If .TB_Number.Text <> "" Then
-                                    Dim STREET_NUMBER As XElement = <STREET_NUMBER/>
-                                    STREET_NUMBER.Value = .TB_Number.Text
-                                    ADDRESS.Add(STREET_NUMBER)
-                                End If
-
-                                If .TB_City.Text <> "" Then
-                                    Dim CITY As XElement = <CITY/>
-                                    CITY.Value = .TB_City.Text
-                                    ADDRESS.Add(CITY)
-                                End If
-
-                                If .TB_Municipality.Text <> "" Then
-                                    Dim MUNICIPALITY As XElement = <MUNICIPALITY/>
-                                    MUNICIPALITY.Value = .TB_Municipality.Text
-                                    ADDRESS.Add(MUNICIPALITY)
-                                End If
-
-                                If .TB_Province.Text <> "" Then
-                                    Dim PROVINCE As XElement = <PROVINCE/>
-                                    PROVINCE.Value = .TB_Province.Text
-                                    ADDRESS.Add(PROVINCE)
-                                End If
-
-                                If .TB_Postcode.Text <> "" Then
-                                    Dim POSTCODE As XElement = <POSTCODE/>
-                                    POSTCODE.Value = .TB_Postcode.Text
-                                    ADDRESS.Add(POSTCODE)
-                                End If
-
-                                If .CBox_Country.SelectedItem <> "" Then
-                                    Dim COUNTRY As XElement = <COUNTRY/>
-                                    COUNTRY.Value = .CBox_Country.SelectedItem
-                                    ADDRESS.Add(COUNTRY)
-                                End If
-                                CONTACT_DETAILS.Add(ADDRESS)
-                            End If
-                        End With
-
-                        Dim FIRST_NAME As XElement = <FIRST_NAME/>
-                        FIRST_NAME.Value = Form_Contact.TB_FirstName.Text
-                        CONTACT_DETAILS.Add(FIRST_NAME)
-
-                        Dim LAST_NAME As XElement = <LAST_NAME/>
-                        LAST_NAME.Value = Form_Contact.TB_LastName.Text
-                        CONTACT_DETAILS.Add(LAST_NAME)
-
-                        Dim PHONE_NUMBER As XElement = <PHONE_NUMBER/>
-                        PHONE_NUMBER.Value = Form_Contact.TB_PhoneNumber.Text
-                        CONTACT_DETAILS.Add(PHONE_NUMBER)
-
-                        If Form_Contact.TB_Email.Text <> "" Then
-                            Dim EMAIL_ADDRESS As XElement = <EMAIL_ADDRESS/>
-                            EMAIL_ADDRESS.Value = Form_Contact.TB_Email.Text
-                            CONTACT_DETAILS.Add(EMAIL_ADDRESS)
-                        End If
-
-                        If Form_Contact.TB_URL.Text <> "" Then
-                            Dim URL As XElement = <URL/>
-                            URL.Value = Form_Contact.TB_URL.Text
-                            CONTACT_DETAILS.Add(URL)
-                        End If
+                '---Contact Details
+                Dim CONTACT_DETAILS As XElement = <CONTACT_DETAILS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:ContactByReference"/>
+                '--- Contact Reference
+                Dim CONTACT_REFERENCE As XElement = <CONTACT_REFERENCE/>
+                CONTACT_REFERENCE.Value = Txt_ContactRef.Text
+                CONTACT_DETAILS.Add(CONTACT_REFERENCE)
+                MODEL_VERSION.Add(CONTACT_DETAILS)
 
 
-                        MODEL_VERSION.Add(CONTACT_DETAILS)
-                End Select
 
 
 
@@ -2445,78 +2220,6 @@ Public Class Form1
         XML_Process.Hide()
 
     End Sub
-    Public Sub PREREGISTRATION()
-        Try
-            '---Declaration
-            Dim decl As XDeclaration = New XDeclaration(encoding:="UTF-8", standalone:="yes", version:="1.0")
-            doc.Declaration = decl
-
-            '---Registration
-            Dim REGISTRATION As XElement = <ns3:ProductModelRegistrationRequest xmlns:ns2="http://eprel.ener.ec.europa.eu/productModel/productCore/v2" REQUEST_ID="nothing"/>
-
-            '---Request ID
-            Dim REQUEST_ID As XAttribute = REGISTRATION.Attribute("REQUEST_ID")
-            REQUEST_ID.Value = Txt_Request.Text
-
-            XML_Process.Label4.Text = dummy - 1
-            XML_Process.Show()
-
-            For i = 0 To dummy - 2
-                XML_Process.Label2.Text = i + 1
-
-                '---Product Operation
-                Dim productOperation As XElement = <productOperation OPERATION_TYPE="nothing" OPERATION_ID="nothing"/>
-                REGISTRATION.Add(productOperation)
-                Dim OPERATION_TYPE As XAttribute = productOperation.Attribute("OPERATION_TYPE")
-                OPERATION_TYPE.Value = CB_OperationType.SelectedItem
-                Dim OPERATION_ID As XAttribute = productOperation.Attribute("OPERATION_ID")
-                OPERATION_ID.Value = i
-
-                '---Model Version
-                Dim MODEL_VERSION As XElement = <MODEL_VERSION/>
-                productOperation.Add(MODEL_VERSION)
-
-                '---Model Identifier
-                Dim MODEL_IDENTIFIER As XElement = <MODEL_IDENTIFIER/>
-                MODEL_IDENTIFIER.Value = items(i)
-                MODEL_VERSION.Add(MODEL_IDENTIFIER)
-
-                '---Supplier -M
-                Dim TRADEMARK_REFERENCE As XElement = <TRADEMARK_REFERENCE/>
-                TRADEMARK_REFERENCE.Value = Txt_TrademarkRef.Text
-                MODEL_VERSION.Add(TRADEMARK_REFERENCE)
-
-
-                '---Delegated Act
-                Dim DELEGATED_ACT As XElement = <DELEGATED_ACT/>
-                DELEGATED_ACT.Value = "EU_2019_2015"
-                MODEL_VERSION.Add(DELEGATED_ACT)
-
-                '---Product Group
-                Dim PRODUCT_GROUP As XElement = <PRODUCT_GROUP/>
-                PRODUCT_GROUP.Value = "LAMP"
-                MODEL_VERSION.Add(PRODUCT_GROUP)
-
-                Form2.LB_Log.Items.Add(MODEL_VERSION.Value + " - Success!")
-
-
-            Next
-
-            doc.Add(REGISTRATION)
-
-#If DEBUG Then
-            Console.WriteLine("Display the modified XML...")
-            Console.WriteLine(doc)
-            doc.Save(Console.Out)
-#End If
-
-        Catch ex As Exception
-            ErrorDlg("xml", ex)
-        End Try
-
-        XML_Process.Hide()
-
-    End Sub
     Public Sub DECLARE_END_DATE_OF_PLACEMENT_ON_MARKET()
         Try
 
@@ -2621,6 +2324,7 @@ Public Class Form1
     End Sub
 
     '---Output
+    'Speichern in die ZIP Datei 
     Public Sub OUTPUT()
 
 #If DEBUG Then
@@ -2652,27 +2356,27 @@ Public Class Form1
             File.Delete(ziel.FileName)
         End If
 
-
-
         If ziel.FileName = "" Then
             MsgBox("Error!")
             Exit Sub
         End If
 
         If CB_OperationType.SelectedItem = "REGISTER_PRODUCT_MODEL" Or CB_OperationType.SelectedItem = "UPDATE_PRODUCT_MODEL" Then
-Select_File:
-            Dim SPECTRAL As New FolderBrowserDialog
-            SPECTRAL.Description = "Please select folder with attachment data!"
+Select_Folder:
 
-            SPECTRAL.ShowDialog()
-            If SPECTRAL.SelectedPath = "" Then
+            Dim attachments As New CommonOpenFileDialog
+            attachments.IsFolderPicker = True
+            attachments.Multiselect = False
+            attachments.ShowDialog()
+
+            If CommonFileDialogResult.Cancel = True Or CommonFileDialogResult.None = True Then
                 Select Case MsgBox("Are you shure you do not want to upload any files?", MsgBoxStyle.YesNo)
                     Case MsgBoxResult.Yes
                         GoTo Done
                     Case MsgBoxResult.No
-                        GoTo Select_File
+                        GoTo Select_Folder
                     Case Else
-                        GoTo Select_File
+                        GoTo Select_Folder
                 End Select
             End If
 
@@ -2681,7 +2385,7 @@ Select_File:
             Dim fle As String
             Dim target As String = ""
 
-            For Each fle In Directory.GetFiles(SPECTRAL.SelectedPath)
+            For Each fle In Directory.GetFiles(attachments.FileName)
                 target = dir & "\Data\productModelRegistrationTable\attachments\" & Path.GetFileName(fle)
                 File.Copy(fle, target)
             Next
@@ -2701,49 +2405,6 @@ Done:
 
         MsgBox("Done!")
 
-    End Sub
-
-    '---Validation
-    Private Sub Validate_ZIP()
-        'Dim zip_File As File
-        Dim slct As New OpenFileDialog
-        slct.Filter = "EPREL Zip-File (*.zip)|*.zip"
-        slct.Title = "Select productModelRegistrationTable.zip for Validation"
-        slct.ShowDialog()
-
-        Dim valFile As String = ""
-
-        If slct.FileName <> "" Then
-            valFile = slct.FileName
-        End If
-
-#If DEBUG Then
-        Dim val As String = "cmd.exe /k java -jar ./EprelExchangeModel-2.7.10-SNAPSHOT.jar """
-        Dim strCMD As String
-        valFile = valFile + """"
-        strCMD = val & valFile
-        Dim p As New Process
-        Dim pi As New ProcessStartInfo
-        pi.FileName = "cmd.exe"
-        pi.CreateNoWindow = "false"
-        pi.Arguments = strCMD
-        p.StartInfo = pi
-        p.Start()
-        p.WaitForExit()
-#Else
-        Dim val As String = "cmd.exe /k java -jar ./EprelExchangeModel-2.7.10-SNAPSHOT.jar """
-        Dim strCMD As String
-        valFile = valFile + """"
-        strCMD = val & valFile
-        Dim p As New Process
-        Dim pi As New ProcessStartInfo
-        pi.FileName = "cmd.exe"
-        pi.CreateNoWindow = "false"
-        pi.Arguments = strCMD
-        p.StartInfo = pi
-        p.Start()
-        p.WaitForExit()
-#End If
     End Sub
 
     '---Errors

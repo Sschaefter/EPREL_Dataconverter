@@ -7,14 +7,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="EPREL Dataconverter.exe.manifest" size="7867">
+    <dependentAssembly dependencyType="install" codebase="EPREL Dataconverter.exe.manifest" size="7970">
       <assemblyIdentity name="EPREL Dataconverter.exe" version="1.1.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hk2yJM8swn1fcvY6PBJelyLXgPjk9EWs3yxZeyp0coU=</dsig:DigestValue>
+        <dsig:DigestValue>14X8GjW2tLaFKNoUC23If+DXfdhUNlNqCbA/4+aPgfs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

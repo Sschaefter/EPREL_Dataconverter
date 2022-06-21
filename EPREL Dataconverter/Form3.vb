@@ -1,12 +1,4 @@
 ﻿Imports System.Net
-Imports System.IO
-Imports System.Text
-Imports firefox = OpenQA.Selenium.Firefox
-Imports OpenQA.Selenium
-Imports OpenQA.Selenium.Support
-Imports OpenQA.Selenium.Support.UI
-Imports OpenQA.Selenium.Firefox
-Imports EC = SeleniumExtras.WaitHelpers.ExpectedConditions
 Imports EX = Microsoft.Office.Interop.Excel
 
 
@@ -59,13 +51,10 @@ Public Class Form3
 
 
         lastentry = xltab1.Range("B" & xltab1.Rows.Count).End(xlUp).Row
-        'lastentry = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
-        'lastentry = xltab1.Range("A1:A" & lastentry).Value
 
         DownloadProcess.Button1.Enabled = False
         DownloadProcess.Show()
 
-        'Dim process As Double = 100 / (lastentry - 1)
         DownloadProcess.Label4.Text = lastentry - 1
 
         Try
@@ -144,8 +133,6 @@ Public Class Form3
 
     Private Sub TB_Label_Folder_Click(sender As Object, e As EventArgs) Handles TB_Label_Folder.Click
         Dim folder As New FolderBrowserDialog()
-        'folder.ShowDialog()
-        'TB_Label_Folder.Text = folder.SelectedPath + "\"
 
         If folder.ShowDialog = DialogResult.Cancel Then
             MsgBox("Please select folder!")
@@ -179,8 +166,7 @@ Public Class Form3
         Dim add As String
 
         lastentry = xltab1.Range("B" & xltab1.Rows.Count).End(xlUp).Row
-        'lastentry = xltab1.Range("A" & xltab1.Rows.Count).End(xlUp).Row
-        'lastentry = xltab1.Range("A1:A" & lastentry).Value
+
 
         DownloadProcess.Button1.Enabled = False
         DownloadProcess.Label4.Text = lastentry - 1
@@ -244,4 +230,6 @@ Public Class Form3
         End If
 
     End Sub
+
+
 End Class

@@ -74,3 +74,42 @@ C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Disclaimer.resources
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Parsing.resources
 C:\Users\User79\source\repos\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.XML_Process.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\modelRegistrationService_v2.5.xsd
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\EPREL Dataconverter.exe.config
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\EPREL Dataconverter.exe.manifest
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\EPREL Dataconverter.application
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\EPREL Dataconverter.exe
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\EPREL Dataconverter.pdb
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\EPREL Dataconverter.xml
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\de\EPREL Dataconverter.resources.dll
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.dll
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.Shell.dll
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.pdb
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.xml
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.Shell.pdb
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.Shell.xml
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.ShellExtensions.pdb
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\bin\Release\Microsoft.WindowsAPICodePack.ShellExtensions.xml
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.AssemblyReference.cache
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.ResolveComReference.cache
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.DownloadProcess.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Form1.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Form2.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Form3.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Disclaimer.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Parsing.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Resources.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.XML_Process.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL_Dataconverter.Form1.de.resources
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.GenerateResource.cache
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.CoreCompileInputs.cache
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\de\EPREL Dataconverter.resources.dll
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.TrustInfo.xml
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.exe.manifest
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.application
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.CopyComplete
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.exe
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.xml
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.pdb
+T:\99 - Elektronikentwicklung\18-Software\VB.NET Software\EPREL_Dataconverter\EPREl Dataconverter\obj\Release\EPREL Dataconverter.vbproj.SuggestedBindingRedirects.cache
